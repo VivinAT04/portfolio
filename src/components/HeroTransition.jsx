@@ -48,6 +48,9 @@ export default function HeroTransition() {
     setSplit(Math.min(100, Math.max(0, percentage)));
   };
 
+  const leftOpacity = split <= 50 ? 1 : Math.max(0, 1 - (split - 50) / 18);
+  const rightOpacity = split >= 50 ? 1 : Math.max(0, split / 18);
+
   return (
     <>
       <section
@@ -55,7 +58,7 @@ export default function HeroTransition() {
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setSplit(50)}
       >
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-[450px] h-[450px] rounded-full overflow-hidden relative shadow-2xl">
             <div
               className="absolute inset-0"
@@ -85,15 +88,13 @@ export default function HeroTransition() {
           </div>
         </div>
 
-        <div className="relative z-10 grid grid-cols-2 h-full max-w-7xl mx-auto px-8">
+        <div className="relative z-10 grid grid-cols-[1fr_520px_1fr] h-full max-w-[1500px] mx-auto px-4">
           <div
-            className="flex flex-col justify-center"
-            style={{ opacity: 1 - split / 100 }}
+            className="flex flex-col justify-center pr-10 transition-opacity duration-300"
+            style={{ opacity: leftOpacity }}
           >
-            <h1 className="text-8xl font-black leading-none tracking-tight">
-              research
-              <br />
-              scientist
+            <h1 className="text-7xl xl:text-8xl font-black leading-none tracking-tight text-gray-950 whitespace-nowrap">
+              researcher
             </h1>
 
             <p className="mt-6 max-w-md text-xl text-gray-600">
@@ -101,18 +102,19 @@ export default function HeroTransition() {
             </p>
           </div>
 
+          <div />
+
           <div
-            className="flex flex-col justify-center items-end"
-            style={{ opacity: split / 100 }}
+            className="flex flex-col justify-center items-end pr-10 transition-opacity duration-300"
+            style={{ opacity: rightOpacity }}
           >
-            <h1 className="text-8xl font-black leading-none tracking-tight text-right">
-              backend
-              <br />
-              engineer
+            <h1 className="text-7xl xl:text-8xl font-black leading-none tracking-tight text-right text-gray-950 whitespace-nowrap">
+              {"<coder>"}
             </h1>
 
-            <p className="mt-6 max-w-md text-xl text-gray-600 text-right">
-              APIs, cloud infrastructure, distributed systems and data platforms.
+            <p className="mt-6 max-w-md text-xl text-right text-gray-600">
+              APIs, cloud infrastructure, distributed systems and data
+              platforms.
             </p>
           </div>
         </div>
