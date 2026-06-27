@@ -356,18 +356,32 @@ export default function Projects() {
           }
 
           .modal-close {
-            position: fixed;
-            top: 88px;
-            right: calc((100vw - min(980px, 100%)) / 2 + 42px);
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+
+            width: 44px;
+            height: 44px;
+
             border: none;
+            border-radius: 50%;
+
             background: #111;
-            color: white;
+            color: #fff;
+
             font-size: 24px;
             cursor: pointer;
-            z-index: 1000;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            transition: all 0.25s ease;
+          }
+
+          .modal-close:hover {
+            transform: scale(1.08);
+            background: #333;
           }
 
           .modal-label {
@@ -634,11 +648,14 @@ function ProjectCarousel({ title, projects, onProjectClick }) {
 function ProjectModal({ project, onClose }) {
   return (
     <div className="modal-backdrop" onClick={onClose}>
-      <button className="modal-close" onClick={onClose}>
-        ×
-      </button>
+      <div
+        className="project-modal"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="modal-close" onClick={onClose}>
+          ×
+        </button>
 
-      <div className="project-modal" onClick={(e) => e.stopPropagation()}>
         <p className="modal-label">{project.label}</p>
 
         <h1 className="modal-title">{project.title}</h1>
