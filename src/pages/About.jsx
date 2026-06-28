@@ -185,17 +185,23 @@ export default function About() {
           </div>
 
           <div>
-            <h2 className="text-5xl font-bold mb-10">Random Facts</h2>
-            <ul className="space-y-5 text-xl text-gray-600">
-              <li>I enjoy learning across multiple disciplines.</li>
-              <li>I try to contribute software to every field I explore.</li>
-              <li>I enjoy optimizing systems and workflows.</li>
-              <li>I spend time researching technology trends.</li>
-              <li>I enjoy backend engineering more than frontend.</li>
-              <li>I like connecting research ideas with real-world products.</li>
-              <li>My long-term goal is becoming a world-class engineer.</li>
-            </ul>
-          </div>
+  <h2 className="text-5xl font-bold mb-10">Random Facts</h2>
+
+  <p
+    className="text-xl text-gray-600 leading-10"
+    style={{
+      textAlign: "justify",
+      textJustify: "inter-word",
+      hyphens: "auto",
+    }}
+  >
+    I enjoy learning across multiple disciplines. I try to contribute software
+    to every field I explore. I enjoy optimizing systems and workflows. I spend
+    time researching technology trends. I enjoy backend engineering more than
+    frontend. I like connecting research ideas with real-world products. My
+    long-term goal is becoming a world-class engineer.
+  </p>
+  </div>
         </div>
       </section>
 
