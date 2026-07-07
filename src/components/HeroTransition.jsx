@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import researcherImg from "../../assets-images/researcher.jpg";
+import researcherImg from "../../assets-images/researcher1.png";
 import researcherBg from "../../assets-images/researcher-background.jpg";
-import coderImg from "../../assets-images/coder.jpg";
+import coderImg from "../../assets-images/coder1.png";
 import coderBg from "../../assets-images/coder-background.jpg";
 
 const cards = [
@@ -53,70 +53,87 @@ export default function HeroTransition() {
     setSplit(Math.min(100, Math.max(0, percentage)));
   };
 
-  const researcherPersonOpacity = Math.max(0, Math.min(1, (100 - split) / 50));
-  const coderPersonOpacity = Math.max(0, Math.min(1, split / 50));
-
-  const researcherBgOpacity = Math.max(0.45, researcherPersonOpacity);
-  const coderBgOpacity = Math.max(0.45, coderPersonOpacity);
-
   const leftTextOpacity = split <= 55 ? 1 : Math.max(0, 1 - (split - 55) / 20);
   const rightTextOpacity = split >= 45 ? 1 : Math.max(0, split / 20);
+
+  const researcherMove = (50 - split) * 0.12;
+  const coderMove = (split - 50) * 0.12;
 
   return (
     <>
       <section
-        className="relative h-[82vh] overflow-hidden bg-white"
+        className="relative h-[80vh] overflow-hidden bg-white"
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setSplit(50)}
       >
-        {/* Backgrounds behind shoulders */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <img
-            src={researcherBg}
-            alt=""
-            className="absolute bottom-[60px] left-[42%] w-[500px] max-w-none -translate-x-1/2 transition-opacity duration-500"
-            style={{
-              opacity: researcherBgOpacity,
-              transform: `translateX(calc(-50% + ${(50 - split) * 0.08}px))`,
-            }}
-          />
+<div className="absolute inset-0 z-0 pointer-events-none">
+  <div className="absolute bottom-0 left-1/2 h-full w-[1300px] -translate-x-1/2 overflow-visible">
+    {/* LEFT STATIC BACKGROUND */}
+    <div
+      className="absolute inset-0 z-10 overflow-visible"
+      style={{
+        clipPath: `inset(0 ${100 - split}% 0 0)`,
+      }}
+    >
+      <img
+        src={researcherBg}
+        alt=""
+        className="absolute bottom-[-65px] left-[130px] w-[560px] max-w-none opacity-100"
+      />
+    </div>
 
-          <img
-            src={coderBg}
-            alt=""
-            className="absolute bottom-[80px] left-[58%] w-[500px] max-w-none -translate-x-1/2 transition-opacity duration-500"
-            style={{
-              opacity: coderBgOpacity,
-              transform: `translateX(calc(-50% + ${(split - 50) * 0.08}px))`,
-            }}
-          />
-        </div>
+    {/* RIGHT STATIC BACKGROUND */}
+    <div
+      className="absolute inset-0 z-10 overflow-visible"
+      style={{
+        clipPath: `inset(0 0 0 ${split}%)`,
+      }}
+    >
+      <img
+        src={coderBg}
+        alt=""
+        className="absolute bottom-[-55px] right-[70px] w-[650px] max-w-none opacity-100"
+      />
+    </div>
 
-        {/* Person transition */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute bottom-0 left-1/2 h-[92vh] w-[820px] -translate-x-1/2 overflow-visible">
-            <img
-              src={researcherImg}
-              alt="Researcher"
-              className="absolute bottom-0 left-1/2 w-[820px] max-w-none -translate-x-1/2 transition-opacity duration-500"
-              style={{
-                opacity: researcherPersonOpacity,
-                clipPath: `inset(0 ${split}% 0 0)`,
-              }}
-            />
 
-            <img
-              src={coderImg}
-              alt="Coder"
-              className="absolute bottom-0 left-1/2 w-[820px] max-w-none -translate-x-1/2 transition-opacity duration-500"
-              style={{
-                opacity: coderPersonOpacity,
-                clipPath: `inset(0 0 0 ${100 - split}%)`,
-              }}
-            />
-
+            {/* LEFT PERSON */}
             <div
-              className="absolute top-0 bottom-0 w-[3px] bg-gray-900/80 shadow-xl transition-all duration-75"
+              className="absolute inset-0 z-20 overflow-visible"
+              style={{
+                clipPath: `inset(0 ${100 - split}% 0 0)`,
+              }}
+            >
+              <img
+                src={researcherImg}
+                alt="Researcher"
+                className="absolute bottom-0 left-1/2 w-[820px] max-w-none"
+                style={{
+                  transform: `translateX(calc(-50% + ${researcherMove}px))`,
+                }}
+              />
+            </div>
+
+            {/* RIGHT PERSON */}
+            <div
+              className="absolute inset-0 z-20 overflow-visible"
+              style={{
+                clipPath: `inset(0 0 0 ${split}%)`,
+              }}
+            >
+              <img
+                src={coderImg}
+                alt="Coder"
+                className="absolute bottom-0 left-1/2 w-[820px] max-w-none"
+                style={{
+                  transform: `translateX(calc(-50% + ${coderMove}px))`,
+                }}
+              />
+            </div>
+
+            {/* CENTER LINE */}
+            <div
+              className="absolute z-30 top-0 bottom-0 w-[3px] bg-gray-900/80 shadow-xl transition-all duration-75"
               style={{
                 left: `${split}%`,
                 transform: "translateX(-50%)",
@@ -125,8 +142,7 @@ export default function HeroTransition() {
           </div>
         </div>
 
-        {/* Text */}
-        <div className="relative z-10 grid grid-cols-[1fr_620px_1fr] h-full max-w-[1500px] mx-auto px-8 pt-14">
+        <div className="relative z-40 grid grid-cols-[1fr_620px_1fr] h-full max-w-[1500px] mx-auto px-8 pt-14">
           <div
             className="flex flex-col justify-center transition-opacity duration-300"
             style={{ opacity: leftTextOpacity }}
