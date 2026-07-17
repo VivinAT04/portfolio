@@ -53,49 +53,57 @@ export default function HeroTransition() {
     setSplit(Math.min(100, Math.max(0, percentage)));
   };
 
-  const leftTextOpacity = split <= 55 ? 1 : Math.max(0, 1 - (split - 55) / 20);
-  const rightTextOpacity = split >= 45 ? 1 : Math.max(0, split / 20);
+const leftTextOpacity =
+  split > 50 ? 1 : Math.max(0, 1 - (50 - split) / 15);
 
-  const researcherMove = (50 - split) * 0.12;
-  const coderMove = (split - 50) * 0.12;
+const rightTextOpacity =
+  split < 50 ? 1 : Math.max(0, 1 - (split - 50) / 15);
+
+  const personMove = (split - 50) * 2.2;
+  const bgMove = (split - 50) * 1.4;
 
   return (
     <>
       <section
-        className="relative h-[80vh] overflow-hidden bg-white"
+        className="relative h-[82.5vh] overflow-hidden bg-white"
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setSplit(50)}
       >
-<div className="absolute inset-0 z-0 pointer-events-none">
-  <div className="absolute bottom-0 left-1/2 h-full w-[1300px] -translate-x-1/2 overflow-visible">
-    {/* LEFT STATIC BACKGROUND */}
-    <div
-      className="absolute inset-0 z-10 overflow-visible"
-      style={{
-        clipPath: `inset(0 ${100 - split}% 0 0)`,
-      }}
-    >
-      <img
-        src={researcherBg}
-        alt=""
-        className="absolute bottom-[-65px] left-[130px] w-[560px] max-w-none opacity-100"
-      />
-    </div>
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute bottom-0 left-1/2 h-full w-[1300px] -translate-x-1/2 overflow-visible">
+            {/* LEFT BACKGROUND */}
+            <div
+              className="absolute inset-0 z-10 overflow-visible"
+              style={{
+                clipPath: `inset(0 ${100 - split}% 0 0)`,
+              }}
+            >
+              <img
+                src={researcherBg}
+                alt=""
+                className="absolute bottom-[-65px] left-[130px] w-[560px] max-w-none opacity-100"
+                style={{
+                  transform: `translateX(${bgMove}px)`,
+                }}
+              />
+            </div>
 
-    {/* RIGHT STATIC BACKGROUND */}
-    <div
-      className="absolute inset-0 z-10 overflow-visible"
-      style={{
-        clipPath: `inset(0 0 0 ${split}%)`,
-      }}
-    >
-      <img
-        src={coderBg}
-        alt=""
-        className="absolute bottom-[-55px] right-[70px] w-[650px] max-w-none opacity-100"
-      />
-    </div>
-
+            {/* RIGHT BACKGROUND */}
+            <div
+              className="absolute inset-0 z-10 overflow-visible"
+              style={{
+                clipPath: `inset(0 0 0 ${split}%)`,
+              }}
+            >
+              <img
+                src={coderBg}
+                alt=""
+                className="absolute bottom-[-55px] right-[70px] w-[650px] max-w-none opacity-100"
+                style={{
+                  transform: `translateX(${bgMove}px)`,
+                }}
+              />
+            </div>
 
             {/* LEFT PERSON */}
             <div
@@ -107,9 +115,9 @@ export default function HeroTransition() {
               <img
                 src={researcherImg}
                 alt="Researcher"
-                className="absolute bottom-0 left-1/2 w-[820px] max-w-none"
+                className="absolute bottom-[0px] left-1/2 w-[820px] max-w-none"
                 style={{
-                  transform: `translateX(calc(-50% + ${researcherMove}px))`,
+                  transform: `translateX(calc(-50% + ${personMove}px))`,
                 }}
               />
             </div>
@@ -124,21 +132,13 @@ export default function HeroTransition() {
               <img
                 src={coderImg}
                 alt="Coder"
-                className="absolute bottom-0 left-1/2 w-[820px] max-w-none"
+                className="absolute bottom-[0.5px] left-1/2 w-[820px] max-w-none"
                 style={{
-                  transform: `translateX(calc(-50% + ${coderMove}px))`,
+                  transform: `translateX(calc(-50% + ${personMove}px))`,
                 }}
               />
             </div>
 
-            {/* CENTER LINE */}
-            <div
-              className="absolute z-30 top-0 bottom-0 w-[3px] bg-gray-900/80 shadow-xl transition-all duration-75"
-              style={{
-                left: `${split}%`,
-                transform: "translateX(-50%)",
-              }}
-            />
           </div>
         </div>
 
@@ -174,7 +174,7 @@ export default function HeroTransition() {
         </div>
       </section>
 
-      <section className="bg-[#f7f7f7] border-y border-gray-200 px-8 py-24">
+      <section className="bg-[#f7f7f7] border-y border-gray-200 px-8 pt-12 pb-24">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-10 mb-12">
             <div className="h-px bg-gray-300 flex-1" />
