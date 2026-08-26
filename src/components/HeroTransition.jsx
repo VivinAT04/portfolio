@@ -65,7 +65,7 @@ const rightTextOpacity =
   return (
     <>
       <section
-        className="relative mt-[60px] h-[calc(82.5vh-60px)] overflow-hidden bg-white"
+        className="relative mt-[60px] h-[82.5vh] overflow-hidden bg-white"
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setSplit(50)}
       >
