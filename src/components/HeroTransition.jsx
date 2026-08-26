@@ -115,7 +115,7 @@ const rightTextOpacity =
               <img
                 src={researcherImg}
                 alt="Researcher"
-                className="absolute bottom-[0px] left-1/2 w-[820px] max-w-none"
+                className="absolute bottom-[-45px] left-1/2 w-[820px] max-w-none"
                 style={{
                   transform: `translateX(calc(-50% + ${personMove}px))`,
                 }}
@@ -132,7 +132,7 @@ const rightTextOpacity =
               <img
                 src={coderImg}
                 alt="Coder"
-                className="absolute bottom-[0.5px] left-1/2 w-[820px] max-w-none"
+                className="absolute bottom-[-45px] left-1/2 w-[820px] max-w-none"
                 style={{
                   transform: `translateX(calc(-50% + ${personMove}px))`,
                 }}
