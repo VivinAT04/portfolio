@@ -1,6 +1,6 @@
 import linkedinLogo from "../../assets-images/LinkedIn_logO.png";
 import prospectsLogo from "../../assets-images/Prospect_logo.png";
-import jstarLogo from "../../assets-images/jsart.png";
+import jstarLogo from "../../assets-images/JSART.png";
 import ieeeLogo from "../../assets-images/IEEE-Logo.jpg";
 import githubLogo from "../../assets-images/git_logo.png";
 
