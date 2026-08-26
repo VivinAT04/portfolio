@@ -1,3 +1,6 @@
+import { useEffect, useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
+
 import {
   FaLinkedinIn,
   FaInstagram,
@@ -5,137 +8,609 @@ import {
   FaEnvelope,
 } from "react-icons/fa";
 
-import contactPhoto from "../../assets-images/Vivin_AT.jpeg";
+import contactPhoto from "../../assets-images/contactimage.png";
 
 export default function Contact() {
+const formRef = useRef(null);
+const contactHeroRef = useRef(null);
+
+const [sending, setSending] = useState(false);
+const [status, setStatus] = useState("");
+const [showContactHero, setShowContactHero] = useState(false);
+
+/* ===================== */
+/* CONTACT HERO ANIMATION */
+/* ===================== */
+useEffect(() => {
+  const section = contactHeroRef.current;
+
+  if (!section) return;
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        setShowContactHero(true);
+        observer.unobserve(section);
+      }
+    },
+    {
+      threshold: 0.15,
+    }
+  );
+
+  observer.observe(section);
+
+  return () => observer.disconnect();
+}, []);
+
+/* ===================== */
+/* SEND EMAIL */
+/* ===================== */
+const sendEmail = async (e) => {
+  e.preventDefault();
+
+  setSending(true);
+  setStatus("");
+
+  try {
+    await emailjs.sendForm(
+      "service_652mt6s",
+      "template_g89zoeq",
+      formRef.current,
+      {
+        publicKey: "Qb957rFGSa9cKC1vl",
+      }
+    );
+
+    setStatus("success");
+    formRef.current.reset();
+  } catch (error) {
+    console.error("EmailJS error:", error);
+    setStatus("error");
+  } finally {
+    setSending(false);
+  }
+};
   return (
-    <div className="bg-[#f5f5f5]">
-      {/* Hero Section */}
-      <section className="max-w-7xl mx-auto min-h-[70vh] px-8 lg:px-16 py-24">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          {/* Left */}
-          <div>
-            <h1 className="text-7xl md:text-8xl font-black text-zinc-900 mb-6">
-              contact.
-            </h1>
+    <div
+      className="bg-white"
+      style={{
+        fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+      }}
+    >
+      {/* ================= HERO ================= */}
+<section
+  ref={contactHeroRef}
+  className="relative overflow-hidden border-b border-[#d9d9d9] bg-white"
+>
+  <div className="max-w-7xl mx-auto px-8 lg:px-16">
 
-            <p className="text-2xl text-zinc-500 leading-relaxed max-w-md mb-2">
-              Get in touch with me via social media or send me an email.
-            </p>
+    <div className="relative min-h-[620px] lg:min-h-[815px]">
 
-            <p className="text-base text-zinc-500 mb-16">
-              Let's build something together.
-            </p>
+      {/* ================= LEFT CONTENT ================= */}
+      {/* LEFT → CURRENT */}
+      <div
+        className={`
+          relative
+          z-20
+          pt-24
+          lg:pt-[190px]
+          lg:ml-[-40px]
+          max-w-[610px]
 
-            <div className="grid sm:grid-cols-2 gap-y-10 gap-x-16 max-w-lg">
-              <a
-                href="https://www.linkedin.com/in/vivinthambidurai/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 text-lg font-medium hover:opacity-80 transition"
-              >
-                <div className="w-14 h-14 rounded-full bg-[#0A66C2] flex items-center justify-center text-white text-2xl">
-                  <FaLinkedinIn />
-                </div>
+          transition-all
+          duration-[1800ms]
+          ease-[cubic-bezier(0.16,1,0.3,1)]
 
-                LinkedIn
-              </a>
+          ${
+            showContactHero
+              ? "translate-x-0 opacity-100"
+              : "-translate-x-[220px] opacity-0"
+          }
+        `}
+      >
 
-              <a
-                href="https://github.com/VivinAT04"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 text-lg font-medium hover:opacity-80 transition"
-              >
-                <div className="w-14 h-14 rounded-full bg-zinc-900 flex items-center justify-center text-white text-2xl">
-                  <FaGithub />
-                </div>
+        {/* ================= HEADING ================= */}
+        <h1
+          className="
+            flex
+            items-end
+            text-[90px]
+            md:text-[110px]
+            lg:text-[150px]
+            xl:text-[150px]
+            leading-[0.82]
+            tracking-[-0.07em]
+            font-[600]
+            text-[#303030]
+            mb-[36px]
+            whitespace-nowrap
+          "
+        >
+          <span>contact</span>
 
-                GitHub
-              </a>
+          <span
+            aria-hidden="true"
+            className="
+              block
+              shrink-0
+              w-[13px]
+              h-[13px]
+              md:w-[17px]
+              md:h-[17px]
+              lg:w-[22px]
+              lg:h-[22px]
+              xl:w-[22px]
+              xl:h-[22px]
+              rounded-full
+              bg-[#303030]
+              ml-[14px]
+              mb-[2px]
+              md:mb-[3px]
+              lg:mb-[4px]
+            "
+          />
+        </h1>
 
-              <a
-                href="mailto:vivinthambidurai@gmail.com"
-                className="flex items-center gap-4 text-lg font-medium hover:opacity-80 transition"
-              >
-                <div className="w-14 h-14 rounded-full bg-red-500 flex items-center justify-center text-white text-2xl">
-                  <FaEnvelope />
-                </div>
+        {/* ================= DESCRIPTION ================= */}
+        <p
+          className="
+            text-[22px]
+            md:text-[25px]
+            lg:text-[26px]
+            leading-[1.42]
+            font-[300]
+            tracking-[-0.02em]
+            text-[#8a8a8a]
+            max-w-[510px]
+          "
+        >
+          Get in touch with me via social media
+          <br className="hidden sm:block" />
+          or send me an email.
+        </p>
 
-                Email
-              </a>
+        {/* ================= SOCIAL LINKS ================= */}
+        <div
+          className="
+            grid
+            grid-cols-2
+            gap-x-[84px]
+            gap-y-[40px]
+            mt-[64px]
+            max-w-[600px]
+          "
+        >
 
-              <a
-                href="#"
-                className="flex items-center gap-4 text-lg font-medium hover:opacity-80 transition"
-              >
-                <div className="w-14 h-14 rounded-full bg-pink-500 flex items-center justify-center text-white text-2xl">
-                  <FaInstagram />
-                </div>
-
-                Instagram
-              </a>
-            </div>
-          </div>
-
-          {/* Right */}
-          <div className="flex justify-center lg:justify-end">
-            <div className="bg-white border border-zinc-200 rounded-3xl p-5">
-              <img
-                src={contactPhoto}
-                alt="Vivin Anitha Thambidurai"
-                className="w-[360px] h-[470px] rounded-2xl object-cover object-[center_18%]"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Form */}
-      <section className="bg-[#efefef] py-24">
-        <div className="max-w-6xl mx-auto px-8">
-          <h2 className="text-5xl font-light text-zinc-800 mb-12">
-            Send me an email
-          </h2>
-
-          <form className="grid lg:grid-cols-2 gap-10">
-            <div className="space-y-8">
-              <div>
-                <label className="block mb-2 text-lg">Name</label>
-
-                <input
-                  type="text"
-                  className="w-full border border-zinc-400 rounded-md px-4 py-4 bg-white outline-none focus:border-zinc-900"
-                />
-              </div>
-
-              <div>
-                <label className="block mb-2 text-lg">Email</label>
-
-                <input
-                  type="email"
-                  className="w-full border border-zinc-400 rounded-md px-4 py-4 bg-white outline-none focus:border-zinc-900"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block mb-2 text-lg">Message</label>
-
-              <textarea
-                rows={8}
-                className="w-full border border-zinc-400 rounded-md px-4 py-4 bg-white resize-none outline-none focus:border-zinc-900"
-              />
-            </div>
-          </form>
-
-          <div className="flex justify-end mt-8">
-            <button
-              className="bg-zinc-900 text-white px-10 py-4 rounded-lg hover:bg-zinc-800 transition"
-              type="submit"
+          {/* LinkedIn */}
+          <a
+            href="https://www.linkedin.com/in/vivinthambidurai/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-[20px] w-fit"
+          >
+            <div
+              className="
+                w-[70px]
+                h-[70px]
+                rounded-full
+                bg-[#169bd5]
+                flex
+                items-center
+                justify-center
+                text-white
+                text-[30px]
+                transition-transform
+                duration-300
+                group-hover:scale-105
+              "
             >
-              Send email
-            </button>
+              <FaLinkedinIn />
+            </div>
+
+            <span
+              className="
+                text-[20px]
+                font-[600]
+                tracking-[-0.01em]
+                text-[#169bd5]
+              "
+            >
+              LinkedIn
+            </span>
+          </a>
+
+          {/* GitHub */}
+          <a
+            href="https://github.com/VivinAT04"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-[20px] w-fit"
+          >
+            <div
+              className="
+                w-[70px]
+                h-[70px]
+                rounded-full
+                bg-[#343434]
+                flex
+                items-center
+                justify-center
+                text-white
+                text-[30px]
+                transition-transform
+                duration-300
+                group-hover:scale-105
+              "
+            >
+              <FaGithub />
+            </div>
+
+            <span
+              className="
+                text-[20px]
+                font-[600]
+                tracking-[-0.01em]
+                text-[#343434]
+              "
+            >
+              GitHub
+            </span>
+          </a>
+
+          {/* Email */}
+          <a
+            href="#email-form"
+            className="group flex items-center gap-[20px] w-fit"
+          >
+            <div
+              className="
+                w-[70px]
+                h-[70px]
+                rounded-full
+                bg-[#f25555]
+                flex
+                items-center
+                justify-center
+                text-white
+                text-[29px]
+                transition-transform
+                duration-300
+                group-hover:scale-105
+              "
+            >
+              <FaEnvelope />
+            </div>
+
+            <span
+              className="
+                text-[20px]
+                font-[600]
+                tracking-[-0.01em]
+                text-[#f25555]
+              "
+            >
+              Email
+            </span>
+          </a>
+
+          {/* Instagram */}
+          <a
+            href="#"
+            className="group flex items-center gap-[20px] w-fit"
+          >
+            <div
+              className="
+                w-[70px]
+                h-[70px]
+                rounded-full
+                bg-[#ef007c]
+                flex
+                items-center
+                justify-center
+                text-white
+                text-[30px]
+                transition-transform
+                duration-300
+                group-hover:scale-105
+              "
+            >
+              <FaInstagram />
+            </div>
+
+            <span
+              className="
+                text-[20px]
+                font-[600]
+                tracking-[-0.01em]
+                text-[#ef007c]
+              "
+            >
+              Instagram
+            </span>
+          </a>
+
+        </div>
+      </div>
+
+      {/* ================= RIGHT IMAGE ================= */}
+      {/* RIGHT → CURRENT */}
+      <div
+        className={`
+          hidden
+          lg:block
+          absolute
+          right-[10px]
+          bottom-[-60px]
+          z-10
+
+          transition-all
+          duration-[2000ms]
+          ease-[cubic-bezier(0.16,1,0.3,1)]
+          delay-[200ms]
+
+          ${
+            showContactHero
+              ? "translate-x-0 opacity-100"
+              : "translate-x-[260px] opacity-0"
+          }
+        `}
+      >
+        <img
+          src={contactPhoto}
+          alt="Vivin Anitha Thambidurai"
+          className="
+            w-[640px]
+            xl:w-[680px]
+            max-w-none
+            object-contain
+            object-bottom
+            select-none
+            pointer-events-none
+          "
+        />
+      </div>
+
+      {/* ================= MOBILE IMAGE ================= */}
+      <div
+        className={`
+          lg:hidden
+          flex
+          justify-center
+          mt-14
+
+          transition-all
+          duration-[1800ms]
+          ease-[cubic-bezier(0.16,1,0.3,1)]
+          delay-[200ms]
+
+          ${
+            showContactHero
+              ? "translate-x-0 opacity-100"
+              : "translate-x-[140px] opacity-0"
+          }
+        `}
+      >
+        <img
+          src={contactPhoto}
+          alt="Vivin Anitha Thambidurai"
+          className="
+            w-[420px]
+            max-w-full
+            object-contain
+            object-bottom
+          "
+        />
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+      {/* ================= EMAIL SECTION ================= */}
+      <section
+        id="email-form"
+        className="
+          bg-[#f7f7f7]
+          pt-[58px]
+          pb-24
+          lg:pb-28
+        "
+      >
+        <div className="max-w-7xl mx-auto px-8 lg:px-16">
+          <div className="lg:ml-[-40px]">
+            {/* ================= EMAIL HEADING ================= */}
+            <h2
+              className="
+                text-[40px]
+                md:text-[44px]
+                lg:text-[46px]
+                leading-[1.15]
+                font-[300]
+                tracking-[-0.035em]
+                text-[#444444]
+                mb-[34px]
+              "
+            >
+              Send me an email
+            </h2>
+
+            {/* ================= FORM ================= */}
+            <form
+              ref={formRef}
+              onSubmit={sendEmail}
+              className="grid lg:grid-cols-2 gap-x-[42px] gap-y-8"
+            >
+              {/* ================= LEFT COLUMN ================= */}
+              <div className="space-y-[27px]">
+                {/* NAME */}
+                <div>
+                  <label
+                    className="
+                      block
+                      mb-[7px]
+                      text-[15px]
+                      leading-none
+                      font-[400]
+                      text-[#4f4f4f]
+                    "
+                  >
+                    Name
+                  </label>
+
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    className="
+                      w-full
+                      h-[51px]
+                      rounded-[3px]
+                      border
+                      border-[#ababab]
+                      bg-white
+                      px-4
+                      text-[16px]
+                      font-[400]
+                      text-[#444444]
+                      outline-none
+                      transition-colors
+                      duration-200
+                      focus:border-[#6f6f6f]
+                    "
+                  />
+                </div>
+
+                {/* EMAIL */}
+                <div>
+                  <label
+                    className="
+                      block
+                      mb-[7px]
+                      text-[15px]
+                      leading-none
+                      font-[400]
+                      text-[#4f4f4f]
+                    "
+                  >
+                    Email
+                  </label>
+
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    className="
+                      w-full
+                      h-[51px]
+                      rounded-[3px]
+                      border
+                      border-[#ababab]
+                      bg-white
+                      px-4
+                      text-[16px]
+                      font-[400]
+                      text-[#444444]
+                      outline-none
+                      transition-colors
+                      duration-200
+                      focus:border-[#6f6f6f]
+                    "
+                  />
+                </div>
+              </div>
+
+              {/* ================= MESSAGE ================= */}
+              <div>
+                <label
+                  className="
+                    block
+                    mb-[7px]
+                    text-[15px]
+                    leading-none
+                    font-[400]
+                    text-[#4f4f4f]
+                  "
+                >
+                  Message
+                </label>
+
+                <textarea
+                  name="message"
+                  required
+                  rows={7}
+                  className="
+                    w-full
+                    min-h-[179px]
+                    rounded-[3px]
+                    border
+                    border-[#ababab]
+                    bg-white
+                    px-4
+                    py-3
+                    text-[16px]
+                    font-[400]
+                    text-[#444444]
+                    resize-none
+                    outline-none
+                    transition-colors
+                    duration-200
+                    focus:border-[#6f6f6f]
+                  "
+                />
+              </div>
+
+              {/* TIME FIELD FOR EMAILJS */}
+              <input
+                type="hidden"
+                name="time"
+                value={new Date().toLocaleString()}
+              />
+
+              {/* ================= STATUS + SEND BUTTON ================= */}
+              <div className="lg:col-span-2 flex flex-col sm:flex-row sm:items-center sm:justify-end gap-4 mt-[-4px]">
+                {status === "success" && (
+                  <p className="text-[16px] font-[500] text-green-600">
+                    ✓ Email sent successfully
+                  </p>
+                )}
+
+                {status === "error" && (
+                  <p className="text-[16px] font-[500] text-red-600">
+                    Failed to send email. Please try again.
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className="
+                    h-[64px]
+                    min-w-[200px]
+                    px-[40px]
+                    bg-[#3d3d3d]
+                    hover:bg-[#2f2f2f]
+                    text-white
+                    text-[20px]
+                    font-[600]
+                    tracking-[-0.01em]
+                    rounded-[6px]
+                    border
+                    border-[#353535]
+                    shadow-sm
+                    transition-all
+                    duration-200
+                    hover:translate-y-[-1px]
+                    disabled:opacity-50
+                    disabled:cursor-not-allowed
+                    disabled:hover:translate-y-0
+                  "
+                >
+                  {sending ? "Sending..." : "Send email"}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </section>

@@ -1,4 +1,5 @@
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -9,6 +10,7 @@ import Contact from "./pages/Contact";
 import Research from "./pages/Research";
 import Voluntary from "./pages/Voluntary";
 import Story from "./pages/Story";
+import Featured from "./pages/Featured";
 
 function App() {
   return (
@@ -24,7 +26,10 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/experience" element={<Experience />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/featured" element={<Featured />} />
       </Routes>
+
+      
     </>
   );
 }
