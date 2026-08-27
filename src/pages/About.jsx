@@ -208,7 +208,7 @@ useEffect(() => {
   id="about"
   className="bg-white px-4 md:px-6 pt-28 md:pt-32 pb-10 overflow-hidden"
 >
-  <div className="max-w-[1280px] mx-auto translate-x-4">
+  <div className="max-w-[1280px] mx-auto">
 
     {/* ===================== */}
     {/* MAIN ABOUT HERO */}
@@ -258,7 +258,6 @@ useEffect(() => {
         {/* RIGHT PORTRAIT */}
         {/* ===================== */}
         <div className="relative hidden md:block">
-
           <img
             src={aboutImg}
             alt="Vivin"
@@ -286,7 +285,6 @@ useEffect(() => {
               }
             `}
           />
-
         </div>
 
       </div>
@@ -298,8 +296,8 @@ useEffect(() => {
         className="
           absolute
           left-0
+          right-0
           bottom-0
-          w-[1360px]
           h-px
           bg-[#d9d9d9]
           z-20
@@ -310,7 +308,6 @@ useEffect(() => {
       {/* MOBILE PORTRAIT */}
       {/* ===================== */}
       <div className="md:hidden relative h-[430px] overflow-hidden">
-
         <img
           src={aboutImg}
           alt="Vivin"
@@ -334,24 +331,21 @@ useEffect(() => {
             }
           `}
         />
-
       </div>
 
     </div>
 
     {/* ===================== */}
     {/* BOTTOM IMAGE STRIP */}
-    {/* LEFT → RIGHT */}
     {/* ===================== */}
-    <div className="pt-10 overflow-visible">
+    <div className="pt-10 overflow-hidden">
 
-      <div className="grid grid-cols-6 gap-4 w-[1360px]">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 w-full">
 
-        {/* ===================== */}
-        {/* FLIGHT — 1 */}
-        {/* ===================== */}
+        {/* FLIGHT */}
         <div
           className={`
+            min-w-0
             bg-white
             rounded-[10px]
             border border-[#d4d4d4]
@@ -382,11 +376,10 @@ useEffect(() => {
           </div>
         </div>
 
-        {/* ===================== */}
-        {/* VIVI — 2 */}
-        {/* ===================== */}
+        {/* VIVI */}
         <div
           className={`
+            min-w-0
             bg-white
             rounded-[10px]
             border border-[#d4d4d4]
@@ -417,11 +410,10 @@ useEffect(() => {
           </div>
         </div>
 
-        {/* ===================== */}
-        {/* SHEFFIELD — 3 */}
-        {/* ===================== */}
+        {/* SHEFFIELD */}
         <div
           className={`
+            min-w-0
             bg-white
             rounded-[10px]
             border border-[#d4d4d4]
@@ -452,11 +444,10 @@ useEffect(() => {
           </div>
         </div>
 
-        {/* ===================== */}
-        {/* AMBASSADOR — 4 */}
-        {/* ===================== */}
+        {/* AMBASSADOR */}
         <div
           className={`
+            min-w-0
             bg-white
             rounded-[10px]
             border border-[#d4d4d4]
@@ -487,11 +478,10 @@ useEffect(() => {
           </div>
         </div>
 
-        {/* ===================== */}
-        {/* AWS — 5 */}
-        {/* ===================== */}
+        {/* AWS */}
         <div
           className={`
+            min-w-0
             bg-white
             rounded-[10px]
             border border-[#d4d4d4]
@@ -522,11 +512,10 @@ useEffect(() => {
           </div>
         </div>
 
-        {/* ===================== */}
-        {/* PLANT — 6 */}
-        {/* ===================== */}
+        {/* PLANT */}
         <div
           className={`
+            min-w-0
             bg-white
             rounded-[10px]
             border border-[#d4d4d4]
@@ -552,18 +541,15 @@ useEffect(() => {
           `}
         >
           <div className="h-[118px] overflow-hidden rounded-[7px] relative">
-
             <img
               src={pottImg}
               alt="Plant"
               className="w-full h-full object-cover object-center block"
             />
-
           </div>
         </div>
 
       </div>
-
     </div>
 
   </div>
