@@ -16,7 +16,6 @@ export default function Featured() {
         "Recommended by Sam Whitworth, Student Recruitment Marketing Officer at the University of Sheffield, recognising my work ethic, professionalism, enthusiasm and ability to contribute effectively both independently and within a team.",
       link: "https://www.linkedin.com/in/vivinthambidurai/details/recommendations/",
     },
-
     {
       logo: prospectsLogo,
       logoAlt: "Prospects",
@@ -25,7 +24,6 @@ export default function Featured() {
         "Featured by Prospects in its June 2026 guide, “Which Masters degree is right for me?”, sharing my experience of choosing an MSc, career opportunities, course content and student life in Sheffield.",
       link: "https://www.prospects.ac.uk/postgraduate-study/masters-degrees/which-masters-degree-is-right-for-me/",
     },
-
     {
       logo: jstarLogo,
       logoAlt: "JSTAR",
@@ -34,7 +32,6 @@ export default function Featured() {
         "First-authored the paper “Intelligent AI Personal Trainer: Advanced Posture Alignment & Exercise Companion,” published in the Journal of Science Technology and Research (JSTAR), presenting an AI-based fitness system for real-time posture correction and exercise recognition.",
       link: "https://journalstar.in/wp-content/uploads/2025/04/202561024.pdf",
     },
-
     {
       logo: ieeeLogo,
       logoAlt: "IEEE",
@@ -43,7 +40,6 @@ export default function Featured() {
         "Co-authored the paper “LoRa-Based Smart Energy Metering and Secure Billing System for Rural Areas,” published in the 2025 International Research Conference on Smart Computing and Systems Engineering and indexed in IEEE Xplore.",
       link: "https://ieeexplore.ieee.org/document/11031068",
     },
-
     {
       logo: githubLogo,
       logoAlt: "GitHub",
@@ -56,34 +52,34 @@ export default function Featured() {
 
   return (
     <main className="min-h-screen bg-white">
-
       {/* =========================================================
           FEATURED HERO
       ========================================================= */}
-      <section className="px-8 pt-33 pb-16 overflow-hidden">
+      <section className="px-4 md:px-6 pt-28 md:pt-32 pb-6 overflow-hidden">
         <div
           className="
-            max-w-7xl
+            max-w-[1280px]
             mx-auto
             grid
             md:grid-cols-[0.82fr_1.18fr]
             gap-8
-            items-center
+            lg:gap-12
+            items-start
           "
         >
           {/* LEFT */}
-          <div>
+          <div className="pt-4">
             <h1
               className="
-                text-[92px]
-                md:text-[118px]
-                lg:text-[132px]
-                font-semibold
-                tracking-[-0.055em]
-                leading-[0.95]
-                text-[#303030]
-                mb-12
-                pr-3
+                text-[76px]
+                sm:text-[88px]
+                md:text-[96px]
+                lg:text-[104px]
+                font-black
+                tracking-[-0.065em]
+                leading-[0.85]
+                text-[#282828]
+                mb-14
               "
             >
               featured.
@@ -91,25 +87,26 @@ export default function Featured() {
 
             <p
               className="
-                text-[28px]
-                md:text-[32px]
+                text-[26px]
+                md:text-[30px]
                 leading-[1.55]
                 font-light
                 text-[#7a7a7a]
-                max-w-[600px]
-                mb-12
+                max-w-[500px]
+                mb-14
               "
             >
-              Some of the places my work and contributions have been featured in.
+              Some of the places my work and contributions have been featured
+              in.
             </p>
 
             <p
               className="
-                text-[18px]
-                md:text-[20px]
-                leading-[1.75]
+                text-[17px]
+                md:text-[18px]
+                leading-[1.8]
                 text-[#3f3f3f]
-                max-w-[600px]
+                max-w-[500px]
               "
             >
               A selection of features, publications and recognition connected
@@ -117,26 +114,31 @@ export default function Featured() {
             </p>
           </div>
 
-          {/* RIGHT — FEATURE COLLAGE */}
+          {/* RIGHT — BIG FEATURE COLLAGE */}
           <div
             className="
+              relative
               flex
-              items-center
+              items-start
               justify-center
               md:justify-end
-              md:-translate-x-12
+              md:mt-4
+              lg:mt-8
             "
           >
             <img
               src={featuredCollage}
               alt="Featured work collage"
               className="
-                w-full
-                md:w-[720px]
-                lg:w-[1140px]
+                w-[680px]
+                md:w-[820px]
+                lg:w-[980px]
+                xl:w-[1040px]
                 max-w-none
                 h-auto
                 object-contain
+                object-top
+                md:translate-x-[20px]
               "
             />
           </div>
@@ -146,19 +148,19 @@ export default function Featured() {
       {/* =========================================================
           FEATURED ITEMS
       ========================================================= */}
-      <section className="px-8 pb-36">
-        <div className="max-w-7xl mx-auto">
-
+      <section className="px-4 md:px-6 pb-36">
+        <div className="max-w-[1280px] mx-auto">
           {features.map((feature, index) => (
             <div
               key={feature.title}
               className="
                 grid
-                md:grid-cols-[270px_1fr_120px]
+                grid-cols-1
+                md:grid-cols-[270px_minmax(0,1fr)_120px]
                 gap-10
                 md:gap-16
                 items-center
-                py-16
+                py-12
                 border-t
                 border-[#d8d8d8]
                 last:border-b
@@ -167,8 +169,9 @@ export default function Featured() {
               {/* LEFT — LOGO */}
               <div
                 className="
-                  w-[250px]
-                  h-[150px]
+                  w-full
+                  md:w-[250px]
+                  h-[130px]
                   flex
                   items-center
                   justify-center
@@ -179,21 +182,16 @@ export default function Featured() {
                   alt={feature.logoAlt}
                   className={`
                     object-contain
-
                     ${index === 0 ? "max-w-[130px] max-h-[105px]" : ""}
-
                     ${index === 1 ? "max-w-[210px] max-h-[100px]" : ""}
-
                     ${index === 2 ? "max-w-[145px] max-h-[125px]" : ""}
-
                     ${index === 3 ? "max-w-[210px] max-h-[100px]" : ""}
-
-                    ${index === 4 ? "max-w-[120px] max-h-[420px]" : ""}
+                    ${index === 4 ? "max-w-[120px] max-h-[120px]" : ""}
                   `}
                 />
               </div>
 
-              {/* CENTER — TITLE + DESCRIPTION */}
+              {/* CENTER */}
               <div className="max-w-[660px]">
                 <h2
                   className="
@@ -248,13 +246,10 @@ export default function Featured() {
                   <span className="text-[18px]">↗</span>
                 </a>
               </div>
-
             </div>
           ))}
-
         </div>
       </section>
-
     </main>
   );
 }

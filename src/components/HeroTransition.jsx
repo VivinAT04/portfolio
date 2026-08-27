@@ -50,14 +50,15 @@ export default function HeroTransition() {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const percentage = (x / rect.width) * 100;
+
     setSplit(Math.min(100, Math.max(0, percentage)));
   };
 
-const leftTextOpacity =
-  split > 50 ? 1 : Math.max(0, 1 - (50 - split) / 15);
+  const leftTextOpacity =
+    split > 50 ? 1 : Math.max(0, 1 - (50 - split) / 15);
 
-const rightTextOpacity =
-  split < 50 ? 1 : Math.max(0, 1 - (split - 50) / 15);
+  const rightTextOpacity =
+    split < 50 ? 1 : Math.max(0, 1 - (split - 50) / 15);
 
   const personMove = (split - 50) * 2.2;
   const bgMove = (split - 50) * 1.4;
@@ -69,8 +70,10 @@ const rightTextOpacity =
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setSplit(50)}
       >
+        {/* IMAGES */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div className="absolute bottom-0 left-1/2 h-full w-[1300px] -translate-x-1/2 overflow-visible">
+
             {/* LEFT BACKGROUND */}
             <div
               className="absolute inset-0 z-10 overflow-visible"
@@ -138,35 +141,108 @@ const rightTextOpacity =
                 }}
               />
             </div>
-
           </div>
         </div>
 
-        <div className="relative z-40 grid grid-cols-[1fr_620px_1fr] h-full max-w-[1500px] mx-auto px-8 pt-14">
+        {/* HERO TEXT */}
+        <div
+          className="
+            relative
+            z-40
+            grid
+            grid-cols-[1fr_620px_1fr]
+            h-full
+            max-w-[1280px]
+            mx-auto
+            px-4
+            md:px-6
+            pt-14
+          "
+        >
+          {/* LEFT */}
           <div
-            className="flex flex-col justify-center transition-opacity duration-300"
+            className="
+              flex
+              flex-col
+              justify-center
+              items-start
+              transition-opacity
+              duration-300
+            "
             style={{ opacity: leftTextOpacity }}
           >
-            <h1 className="text-7xl xl:text-8xl font-black leading-none tracking-tight text-gray-950 whitespace-nowrap">
+            <h1
+              className="
+                text-[48px]
+                lg:text-[54px]
+                xl:text-[60px]
+                font-bold
+                leading-none
+                tracking-[-0.045em]
+                text-[#3b3b3b]
+                whitespace-nowrap
+              "
+            >
               researcher
             </h1>
 
-            <p className="mt-6 max-w-md text-xl text-gray-600">
+            <p
+              className="
+                mt-5
+                max-w-[380px]
+                text-[16px]
+                lg:text-[17px]
+                leading-[1.55]
+                font-normal
+                text-[#8a8a8a]
+              "
+            >
               AI, BCI, machine learning and intelligent systems.
             </p>
           </div>
 
           <div />
 
+          {/* RIGHT */}
           <div
-            className="flex flex-col justify-center items-end transition-opacity duration-300"
+            className="
+              flex
+              flex-col
+              justify-center
+              items-end
+              transition-opacity
+              duration-300
+            "
             style={{ opacity: rightTextOpacity }}
           >
-            <h1 className="text-7xl xl:text-8xl font-black leading-none tracking-tight text-right text-gray-950 whitespace-nowrap">
+            <h1
+              className="
+                text-[48px]
+                lg:text-[54px]
+                xl:text-[60px]
+                font-bold
+                leading-none
+                tracking-[-0.045em]
+                text-right
+                text-[#3b3b3b]
+                whitespace-nowrap
+              "
+            >
               {"<coder>"}
             </h1>
 
-            <p className="mt-6 max-w-md text-xl text-right text-gray-600">
+            <p
+              className="
+                mt-5
+                max-w-[350px]
+                text-[16px]
+                lg:text-[17px]
+                leading-[1.55]
+                font-normal
+                text-right
+                text-[#8a8a8a]
+              "
+            >
               APIs, cloud infrastructure, distributed systems and data
               platforms.
             </p>
@@ -174,6 +250,7 @@ const rightTextOpacity =
         </div>
       </section>
 
+      {/* CURRENTLY EXPLORING */}
       <section className="bg-[#f7f7f7] border-y border-gray-200 px-8 pt-12 pb-24">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-10 mb-12">
@@ -193,6 +270,8 @@ const rightTextOpacity =
                 className="group h-[330px] [perspective:1200px]"
               >
                 <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+
+                  {/* FRONT */}
                   <div className="absolute inset-0 bg-white rounded-2xl border border-gray-200 p-8 shadow-sm flex flex-col [backface-visibility:hidden]">
                     <div className="flex items-center gap-4 mb-10">
                       <div className="w-14 h-14 rounded-2xl bg-gray-100 flex items-center justify-center text-3xl">
@@ -213,6 +292,7 @@ const rightTextOpacity =
                     </p>
                   </div>
 
+                  {/* BACK */}
                   <div className="absolute inset-0 bg-white rounded-2xl border border-gray-200 p-8 shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col justify-center">
                     <h4 className="text-3xl font-black text-gray-900 mb-5">
                       {card.backTitle}

@@ -1,5 +1,7 @@
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
+
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -15,6 +17,8 @@ import Featured from "./pages/Featured";
 function App() {
   return (
     <>
+      <ScrollToTop />
+
       <Navbar />
 
       <Routes>
@@ -28,8 +32,6 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/featured" element={<Featured />} />
       </Routes>
-
-      
     </>
   );
 }

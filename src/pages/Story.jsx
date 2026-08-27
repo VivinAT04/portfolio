@@ -1,9 +1,39 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import myStoryImg from "../../assets-images/mystory.png";
 import aboutImg from "../../assets-images/about.png";
 
 export default function MyStory() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.hash) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant",
+      });
+
+      return;
+    }
+
+    const id = location.hash.replace("#", "");
+
+    const timer = setTimeout(() => {
+      const element = document.getElementById(id);
+
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 80);
+
+    return () => clearTimeout(timer);
+  }, [location.pathname, location.hash]);
+
   const quickFacts = [
     {
       label: "Home town",
@@ -36,7 +66,6 @@ export default function MyStory() {
 
   return (
     <main className="bg-white text-[#343434]">
-
       {/* =========================================================
           HERO
       ========================================================= */}
@@ -52,7 +81,6 @@ export default function MyStory() {
         "
       >
         <div className="max-w-[1200px] mx-auto">
-
           {/* =====================================================
               HERO TEXT
           ===================================================== */}
@@ -63,7 +91,6 @@ export default function MyStory() {
               md:translate-x-[30px]
             "
           >
-            {/* TITLE */}
             <h1
               className="
                 text-[52px]
@@ -80,7 +107,6 @@ export default function MyStory() {
               engineer
             </h1>
 
-            {/* SUBTITLE */}
             <p
               className="
                 mt-7
@@ -95,9 +121,7 @@ export default function MyStory() {
               My career journey, key learnings and a bit more about me.
             </p>
 
-            {/* AUTHOR */}
             <div className="mt-9 flex items-center gap-5">
-
               <div
                 className="
                   w-[82px]
@@ -130,7 +154,6 @@ export default function MyStory() {
               >
                 Vivin Anitha Thambidurai
               </p>
-
             </div>
           </div>
 
@@ -187,11 +210,7 @@ export default function MyStory() {
               putting that journey in one place.
             </p>
 
-            {/* ===================================================
-                CONTENTS
-            =================================================== */}
             <div className="mt-10">
-
               <p
                 className="
                   text-[19px]
@@ -271,17 +290,12 @@ export default function MyStory() {
                   </a>
                 </li>
               </ul>
-
             </div>
 
-            {/* DIVIDER */}
             <div className="mt-14 border-t border-[#dddddd]" />
-
           </div>
-
         </div>
       </section>
-
 
       {/* =========================================================
           ME IN A NUTSHELL
@@ -296,7 +310,6 @@ export default function MyStory() {
         "
       >
         <div className="max-w-[820px] mx-auto md:translate-x-[30px]">
-
           <h2
             className="
               text-[38px]
@@ -327,10 +340,8 @@ export default function MyStory() {
           </p>
 
           <div className="mt-14 border-t border-[#dddddd]" />
-
         </div>
       </section>
-
 
       {/* =========================================================
           QUICK FACTS
@@ -345,7 +356,6 @@ export default function MyStory() {
         "
       >
         <div className="max-w-[820px] mx-auto md:translate-x-[30px]">
-
           <h2
             className="
               text-[38px]
@@ -360,10 +370,8 @@ export default function MyStory() {
           </h2>
 
           <div className="mt-10 space-y-9">
-
             {quickFacts.map((fact) => (
               <div key={fact.label}>
-
                 <h3
                   className="
                     text-[18px]
@@ -386,17 +394,13 @@ export default function MyStory() {
                 >
                   {fact.value}
                 </p>
-
               </div>
             ))}
-
           </div>
 
           <div className="mt-14 border-t border-[#dddddd]" />
-
         </div>
       </section>
-
 
       {/* =========================================================
           HOW I GOT INTO SOFTWARE ENGINEERING
@@ -411,7 +415,6 @@ export default function MyStory() {
         "
       >
         <div className="max-w-[820px] mx-auto md:translate-x-[30px]">
-
           <h2
             className="
               text-[38px]
@@ -457,10 +460,8 @@ export default function MyStory() {
           </p>
 
           <div className="mt-14 border-t border-[#dddddd]" />
-
         </div>
       </section>
-
 
       {/* =========================================================
           KEY THINGS I'VE LEARNED
@@ -476,7 +477,6 @@ export default function MyStory() {
         "
       >
         <div className="max-w-[820px] mx-auto md:translate-x-[30px]">
-
           <h2
             className="
               text-[38px]
@@ -491,7 +491,6 @@ export default function MyStory() {
           </h2>
 
           <div className="mt-10 space-y-10">
-
             <div>
               <h3 className="text-[24px] font-medium text-[#3d3d3d]">
                 Keep building
@@ -527,12 +526,9 @@ export default function MyStory() {
                 important as knowing any particular tool.
               </p>
             </div>
-
           </div>
-
         </div>
       </section>
-
     </main>
   );
 }
