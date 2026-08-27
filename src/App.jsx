@@ -9,7 +9,6 @@ import About from "./pages/About";
 import Projects from "./pages/Projects";
 import Experience from "./pages/Experience";
 import Contact from "./pages/Contact";
-import Research from "./pages/Research";
 import Voluntary from "./pages/Voluntary";
 import Story from "./pages/Story";
 import Featured from "./pages/Featured";
@@ -24,7 +23,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/research" element={<Research />} />
         <Route path="/voluntary" element={<Voluntary />} />
         <Route path="/story" element={<Story />} />
         <Route path="/projects" element={<Projects />} />

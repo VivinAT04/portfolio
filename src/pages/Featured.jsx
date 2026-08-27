@@ -51,35 +51,59 @@ export default function Featured() {
   ];
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white overflow-x-hidden">
       {/* =========================================================
           FEATURED HERO
       ========================================================= */}
-      <section className="px-4 md:px-6 pt-28 md:pt-32 pb-6 overflow-hidden">
+      <section
+        className="
+          px-4
+          sm:px-5
+          md:px-6
+
+          pt-[100px]
+          sm:pt-[110px]
+          md:pt-32
+
+          pb-8
+          md:pb-6
+
+          overflow-hidden
+        "
+      >
         <div
           className="
             max-w-[1280px]
             mx-auto
+
             grid
+            grid-cols-1
             md:grid-cols-[0.82fr_1.18fr]
+
             gap-8
+            md:gap-6
             lg:gap-12
+
             items-start
           "
         >
           {/* LEFT */}
-          <div className="pt-4">
+          <div className="pt-2 md:pt-4">
             <h1
               className="
-                text-[76px]
-                sm:text-[88px]
+                text-[54px]
+                sm:text-[66px]
                 md:text-[96px]
                 lg:text-[104px]
+
                 font-black
                 tracking-[-0.065em]
                 leading-[0.85]
                 text-[#282828]
-                mb-14
+
+                mb-7
+                sm:mb-9
+                md:mb-14
               "
             >
               featured.
@@ -87,13 +111,21 @@ export default function Featured() {
 
             <p
               className="
-                text-[26px]
+                text-[20px]
+                sm:text-[22px]
                 md:text-[30px]
-                leading-[1.55]
+
+                leading-[1.45]
+                md:leading-[1.55]
+
                 font-light
                 text-[#7a7a7a]
+
                 max-w-[500px]
-                mb-14
+
+                mb-6
+                sm:mb-8
+                md:mb-14
               "
             >
               Some of the places my work and contributions have been featured
@@ -102,10 +134,15 @@ export default function Featured() {
 
             <p
               className="
-                text-[17px]
+                text-[15px]
+                sm:text-[16px]
                 md:text-[18px]
-                leading-[1.8]
+
+                leading-[1.7]
+                md:leading-[1.8]
+
                 text-[#3f3f3f]
+
                 max-w-[500px]
               "
             >
@@ -114,31 +151,46 @@ export default function Featured() {
             </p>
           </div>
 
-          {/* RIGHT — BIG FEATURE COLLAGE */}
+          {/* RIGHT — FEATURE COLLAGE */}
           <div
             className="
               relative
+
               flex
               items-start
               justify-center
               md:justify-end
+
+              mt-2
+              sm:mt-4
               md:mt-4
               lg:mt-8
+
+              h-[300px]
+              sm:h-[390px]
+              md:h-auto
             "
           >
             <img
               src={featuredCollage}
               alt="Featured work collage"
               className="
-                w-[680px]
+                w-[520px]
+                sm:w-[650px]
                 md:w-[820px]
                 lg:w-[980px]
                 xl:w-[1040px]
+
                 max-w-none
+
                 h-auto
+
                 object-contain
                 object-top
-                md:translate-x-[20px]
+
+                -translate-x-[10px]
+                sm:-translate-x-[20px]
+                md:-translate-x-[70px]
               "
             />
           </div>
@@ -148,21 +200,42 @@ export default function Featured() {
       {/* =========================================================
           FEATURED ITEMS
       ========================================================= */}
-      <section className="px-4 md:px-6 pb-36">
+      <section
+        className="
+          px-4
+          sm:px-5
+          md:px-6
+
+          pb-20
+          sm:pb-24
+          lg:pb-36
+        "
+      >
         <div className="max-w-[1280px] mx-auto">
           {features.map((feature, index) => (
-            <div
+            <article
               key={feature.title}
               className="
                 grid
                 grid-cols-1
-                md:grid-cols-[270px_minmax(0,1fr)_120px]
-                gap-10
-                md:gap-16
+
+                md:grid-cols-[190px_minmax(0,1fr)_80px]
+                lg:grid-cols-[270px_minmax(0,1fr)_120px]
+
+                gap-5
+                sm:gap-6
+                md:gap-8
+                lg:gap-16
+
                 items-center
-                py-12
+
+                py-9
+                sm:py-10
+                md:py-12
+
                 border-t
                 border-[#d8d8d8]
+
                 last:border-b
               "
             >
@@ -170,11 +243,20 @@ export default function Featured() {
               <div
                 className="
                   w-full
-                  md:w-[250px]
-                  h-[130px]
+
+                  md:w-[180px]
+                  lg:w-[250px]
+
+                  h-[90px]
+                  sm:h-[105px]
+                  md:h-[120px]
+                  lg:h-[130px]
+
                   flex
                   items-center
-                  justify-center
+
+                  justify-start
+                  md:justify-center
                 "
               >
                 <img
@@ -182,26 +264,60 @@ export default function Featured() {
                   alt={feature.logoAlt}
                   className={`
                     object-contain
-                    ${index === 0 ? "max-w-[130px] max-h-[105px]" : ""}
-                    ${index === 1 ? "max-w-[210px] max-h-[100px]" : ""}
-                    ${index === 2 ? "max-w-[145px] max-h-[125px]" : ""}
-                    ${index === 3 ? "max-w-[210px] max-h-[100px]" : ""}
-                    ${index === 4 ? "max-w-[120px] max-h-[120px]" : ""}
+                    object-left
+                    md:object-center
+
+                    ${
+                      index === 0
+                        ? "max-w-[105px] max-h-[82px] sm:max-w-[115px] sm:max-h-[90px] lg:max-w-[130px] lg:max-h-[105px]"
+                        : ""
+                    }
+
+                    ${
+                      index === 1
+                        ? "max-w-[175px] max-h-[75px] sm:max-w-[190px] sm:max-h-[85px] lg:max-w-[210px] lg:max-h-[100px]"
+                        : ""
+                    }
+
+                    ${
+                      index === 2
+                        ? "max-w-[115px] max-h-[95px] sm:max-w-[125px] sm:max-h-[105px] lg:max-w-[145px] lg:max-h-[125px]"
+                        : ""
+                    }
+
+                    ${
+                      index === 3
+                        ? "max-w-[170px] max-h-[75px] sm:max-w-[190px] sm:max-h-[85px] lg:max-w-[210px] lg:max-h-[100px]"
+                        : ""
+                    }
+
+                    ${
+                      index === 4
+                        ? "max-w-[90px] max-h-[90px] sm:max-w-[105px] sm:max-h-[105px] lg:max-w-[120px] lg:max-h-[120px]"
+                        : ""
+                    }
                   `}
                 />
               </div>
 
               {/* CENTER */}
-              <div className="max-w-[660px]">
+              <div className="max-w-[660px] min-w-0">
                 <h2
                   className="
-                    text-[27px]
-                    md:text-[31px]
+                    text-[22px]
+                    sm:text-[24px]
+                    md:text-[27px]
+                    lg:text-[31px]
+
                     font-medium
+
                     tracking-[-0.025em]
                     leading-[1.2]
+
                     text-[#303030]
-                    mb-4
+
+                    mb-3
+                    md:mb-4
                   "
                 >
                   {feature.title}
@@ -209,10 +325,16 @@ export default function Featured() {
 
                 <p
                   className="
-                    text-[18px]
-                    md:text-[19px]
-                    leading-[1.7]
+                    text-[15px]
+                    sm:text-[16px]
+                    md:text-[17px]
+                    lg:text-[19px]
+
+                    leading-[1.65]
+                    md:leading-[1.7]
+
                     text-[#707070]
+
                     max-w-[640px]
                   "
                 >
@@ -230,23 +352,33 @@ export default function Featured() {
                   className="
                     inline-flex
                     items-center
+
                     gap-2
-                    text-[17px]
+
+                    text-[15px]
+                    sm:text-[16px]
+                    lg:text-[17px]
+
                     font-medium
+
                     text-[#303030]
+
                     border-b
                     border-[#303030]
+
                     pb-1
+
                     hover:opacity-50
+
                     transition-opacity
                     duration-300
                   "
                 >
                   View
-                  <span className="text-[18px]">↗</span>
+                  <span className="text-[17px] lg:text-[18px]">↗</span>
                 </a>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </section>

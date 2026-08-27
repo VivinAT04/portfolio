@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import myStoryImg from "../../assets-images/mystory.png";
 import aboutImg from "../../assets-images/about.png";
@@ -12,7 +12,7 @@ export default function MyStory() {
       window.scrollTo({
         top: 0,
         left: 0,
-        behavior: "instant",
+        behavior: "auto",
       });
 
       return;
@@ -29,7 +29,7 @@ export default function MyStory() {
           block: "start",
         });
       }
-    }, 80);
+    }, 100);
 
     return () => clearTimeout(timer);
   }, [location.pathname, location.hash]);
@@ -65,18 +65,26 @@ export default function MyStory() {
   ];
 
   return (
-    <main className="bg-white text-[#343434]">
+    <main className="bg-white text-[#343434] overflow-x-hidden">
       {/* =========================================================
           HERO
       ========================================================= */}
       <section
         className="
           bg-white
-          px-6
+
+          px-4
+          sm:px-5
           md:px-10
-          pt-36
+
+          pt-[105px]
+          sm:pt-[115px]
           md:pt-44
-          pb-20
+
+          pb-14
+          sm:pb-16
+          md:pb-20
+
           overflow-hidden
         "
       >
@@ -88,51 +96,84 @@ export default function MyStory() {
             className="
               max-w-[820px]
               mx-auto
+
               md:translate-x-[30px]
             "
           >
             <h1
               className="
-                text-[52px]
-                sm:text-[60px]
+                text-[39px]
+                xs:text-[43px]
+                sm:text-[52px]
                 md:text-[68px]
+
                 font-light
+
                 tracking-[-0.035em]
-                leading-[1.04]
+                leading-[1.05]
+
                 text-[#373737]
               "
             >
               How I became a software
               <br className="hidden sm:block" />
+              <span className="sm:hidden"> </span>
               engineer
             </h1>
 
             <p
               className="
-                mt-7
-                text-[20px]
+                mt-5
+                sm:mt-6
+                md:mt-7
+
+                text-[17px]
+                sm:text-[19px]
                 md:text-[24px]
+
                 font-light
                 tracking-[-0.015em]
+
                 leading-[1.5]
+
                 text-[#747474]
               "
             >
               My career journey, key learnings and a bit more about me.
             </p>
 
-            <div className="mt-9 flex items-center gap-5">
+            <div
+              className="
+                mt-7
+                sm:mt-8
+                md:mt-9
+
+                flex
+                items-center
+
+                gap-4
+                sm:gap-5
+              "
+            >
               <div
                 className="
-                  w-[82px]
-                  h-[82px]
+                  w-[64px]
+                  h-[64px]
+
+                  sm:w-[74px]
+                  sm:h-[74px]
+
                   md:w-[88px]
                   md:h-[88px]
+
                   rounded-full
+
                   border
                   border-[#dddddd]
+
                   overflow-hidden
                   flex-shrink-0
+
                   bg-[#f7f7f7]
                 "
               >
@@ -145,10 +186,13 @@ export default function MyStory() {
 
               <p
                 className="
-                  text-[17px]
+                  text-[15px]
+                  sm:text-[16px]
                   md:text-[18px]
+
                   font-normal
                   leading-[1.4]
+
                   text-[#454545]
                 "
               >
@@ -163,9 +207,13 @@ export default function MyStory() {
           <div
             className="
               mt-8
+              sm:mt-9
+
               w-full
               max-w-[1120px]
+
               mx-auto
+
               md:translate-x-[70px]
             "
           >
@@ -176,7 +224,9 @@ export default function MyStory() {
                 block
                 w-full
                 h-auto
+
                 object-cover
+
                 rounded-[2px]
               "
             />
@@ -189,15 +239,22 @@ export default function MyStory() {
             className="
               max-w-[820px]
               mx-auto
+
               md:translate-x-[30px]
-              mt-14
+
+              mt-9
+              sm:mt-11
+              md:mt-14
             "
           >
             <p
               className="
-                text-[19px]
+                text-[16px]
+                sm:text-[17px]
                 md:text-[21px]
+
                 leading-[1.75]
+
                 text-[#555555]
               "
             >
@@ -210,12 +267,21 @@ export default function MyStory() {
               putting that journey in one place.
             </p>
 
-            <div className="mt-10">
+            <div
+              className="
+                mt-8
+                sm:mt-9
+                md:mt-10
+              "
+            >
               <p
                 className="
-                  text-[19px]
+                  text-[16px]
+                  sm:text-[17px]
                   md:text-[21px]
+
                   leading-[1.7]
+
                   text-[#555555]
                 "
               >
@@ -224,13 +290,23 @@ export default function MyStory() {
 
               <ul
                 className="
-                  mt-6
-                  ml-6
+                  mt-5
+                  md:mt-6
+
+                  ml-5
+                  sm:ml-6
+
                   list-disc
-                  space-y-3
-                  text-[19px]
+
+                  space-y-2.5
+                  md:space-y-3
+
+                  text-[16px]
+                  sm:text-[17px]
                   md:text-[21px]
+
                   leading-[1.55]
+
                   text-[#444444]
                 "
               >
@@ -241,6 +317,7 @@ export default function MyStory() {
                       underline
                       underline-offset-4
                       decoration-[1px]
+
                       hover:text-black
                     "
                   >
@@ -255,6 +332,7 @@ export default function MyStory() {
                       underline
                       underline-offset-4
                       decoration-[1px]
+
                       hover:text-black
                     "
                   >
@@ -269,6 +347,7 @@ export default function MyStory() {
                       underline
                       underline-offset-4
                       decoration-[1px]
+
                       hover:text-black
                     "
                   >
@@ -283,6 +362,7 @@ export default function MyStory() {
                       underline
                       underline-offset-4
                       decoration-[1px]
+
                       hover:text-black
                     "
                   >
@@ -292,7 +372,16 @@ export default function MyStory() {
               </ul>
             </div>
 
-            <div className="mt-14 border-t border-[#dddddd]" />
+            <div
+              className="
+                mt-10
+                sm:mt-12
+                md:mt-14
+
+                border-t
+                border-[#dddddd]
+              "
+            />
           </div>
         </div>
       </section>
@@ -303,20 +392,30 @@ export default function MyStory() {
       <section
         id="me-in-a-nutshell"
         className="
-          scroll-mt-28
-          px-6
+          scroll-mt-[100px]
+          md:scroll-mt-28
+
+          px-4
+          sm:px-5
           md:px-10
-          py-20
+
+          py-14
+          sm:py-16
+          md:py-20
         "
       >
         <div className="max-w-[820px] mx-auto md:translate-x-[30px]">
           <h2
             className="
-              text-[38px]
+              text-[31px]
+              sm:text-[35px]
               md:text-[46px]
+
               font-light
+
               tracking-[-0.025em]
               leading-[1.1]
+
               text-[#373737]
             "
           >
@@ -325,21 +424,36 @@ export default function MyStory() {
 
           <p
             className="
-              mt-7
-              text-[19px]
+              mt-5
+              sm:mt-6
+              md:mt-7
+
+              text-[16px]
+              sm:text-[17px]
               md:text-[21px]
+
               leading-[1.75]
+
               text-[#555555]
             "
           >
-            I’m a software engineer with a background in computer science and
-            a strong interest in backend engineering, cloud systems,
-            artificial intelligence and intelligent technologies. I enjoy
-            building practical systems, understanding how things work beneath
-            the surface and turning ideas into working software.
+            I’m a software engineer with a background in computer science and a
+            strong interest in backend engineering, cloud systems, artificial
+            intelligence and intelligent technologies. I enjoy building
+            practical systems, understanding how things work beneath the
+            surface and turning ideas into working software.
           </p>
 
-          <div className="mt-14 border-t border-[#dddddd]" />
+          <div
+            className="
+              mt-10
+              sm:mt-12
+              md:mt-14
+
+              border-t
+              border-[#dddddd]
+            "
+          />
         </div>
       </section>
 
@@ -349,34 +463,57 @@ export default function MyStory() {
       <section
         id="quick-facts"
         className="
-          scroll-mt-28
-          px-6
+          scroll-mt-[100px]
+          md:scroll-mt-28
+
+          px-4
+          sm:px-5
           md:px-10
-          py-20
+
+          py-14
+          sm:py-16
+          md:py-20
         "
       >
         <div className="max-w-[820px] mx-auto md:translate-x-[30px]">
           <h2
             className="
-              text-[38px]
+              text-[31px]
+              sm:text-[35px]
               md:text-[46px]
+
               font-light
+
               tracking-[-0.025em]
               leading-[1.1]
+
               text-[#373737]
             "
           >
             Quick facts
           </h2>
 
-          <div className="mt-10 space-y-9">
+          <div
+            className="
+              mt-8
+              sm:mt-9
+              md:mt-10
+
+              space-y-7
+              sm:space-y-8
+              md:space-y-9
+            "
+          >
             {quickFacts.map((fact) => (
               <div key={fact.label}>
                 <h3
                   className="
-                    text-[18px]
+                    text-[16px]
+                    sm:text-[17px]
                     md:text-[19px]
+
                     font-semibold
+
                     text-[#3d3d3d]
                   "
                 >
@@ -386,9 +523,13 @@ export default function MyStory() {
                 <p
                   className="
                     mt-1
-                    text-[18px]
+
+                    text-[16px]
+                    sm:text-[17px]
                     md:text-[20px]
+
                     leading-[1.65]
+
                     text-[#5f5f5f]
                   "
                 >
@@ -398,30 +539,49 @@ export default function MyStory() {
             ))}
           </div>
 
-          <div className="mt-14 border-t border-[#dddddd]" />
+          <div
+            className="
+              mt-10
+              sm:mt-12
+              md:mt-14
+
+              border-t
+              border-[#dddddd]
+            "
+          />
         </div>
       </section>
 
       {/* =========================================================
-          HOW I GOT INTO SOFTWARE ENGINEERING
+          SOFTWARE ENGINEERING
       ========================================================= */}
       <section
         id="software-engineering"
         className="
-          scroll-mt-28
-          px-6
+          scroll-mt-[100px]
+          md:scroll-mt-28
+
+          px-4
+          sm:px-5
           md:px-10
-          py-20
+
+          py-14
+          sm:py-16
+          md:py-20
         "
       >
         <div className="max-w-[820px] mx-auto md:translate-x-[30px]">
           <h2
             className="
-              text-[38px]
+              text-[31px]
+              sm:text-[35px]
               md:text-[46px]
+
               font-light
+
               tracking-[-0.025em]
-              leading-[1.1]
+              leading-[1.12]
+
               text-[#373737]
             "
           >
@@ -430,26 +590,38 @@ export default function MyStory() {
 
           <p
             className="
-              mt-7
-              text-[19px]
+              mt-5
+              sm:mt-6
+              md:mt-7
+
+              text-[16px]
+              sm:text-[17px]
               md:text-[21px]
+
               leading-[1.75]
+
               text-[#555555]
             "
           >
             My interest in software engineering grew from learning computer
             science and gradually discovering how much I enjoyed building
             things from scratch. What began with programming developed into an
-            interest in backend systems, APIs, cloud infrastructure,
-            artificial intelligence and solving larger engineering problems.
+            interest in backend systems, APIs, cloud infrastructure, artificial
+            intelligence and solving larger engineering problems.
           </p>
 
           <p
             className="
-              mt-7
-              text-[19px]
+              mt-5
+              sm:mt-6
+              md:mt-7
+
+              text-[16px]
+              sm:text-[17px]
               md:text-[21px]
+
               leading-[1.75]
+
               text-[#555555]
             "
           >
@@ -459,7 +631,16 @@ export default function MyStory() {
             experience has shaped the kind of engineer I want to become.
           </p>
 
-          <div className="mt-14 border-t border-[#dddddd]" />
+          <div
+            className="
+              mt-10
+              sm:mt-12
+              md:mt-14
+
+              border-t
+              border-[#dddddd]
+            "
+          />
         </div>
       </section>
 
@@ -469,34 +650,80 @@ export default function MyStory() {
       <section
         id="key-learnings"
         className="
-          scroll-mt-28
-          px-6
+          scroll-mt-[100px]
+          md:scroll-mt-28
+
+          px-4
+          sm:px-5
           md:px-10
-          pt-20
-          pb-32
+
+          pt-14
+          sm:pt-16
+          md:pt-20
+
+          pb-20
+          sm:pb-24
+          md:pb-32
         "
       >
         <div className="max-w-[820px] mx-auto md:translate-x-[30px]">
           <h2
             className="
-              text-[38px]
+              text-[31px]
+              sm:text-[35px]
               md:text-[46px]
+
               font-light
+
               tracking-[-0.025em]
               leading-[1.1]
+
               text-[#373737]
             "
           >
             Key things I’ve learned
           </h2>
 
-          <div className="mt-10 space-y-10">
+          <div
+            className="
+              mt-8
+              sm:mt-9
+              md:mt-10
+
+              space-y-8
+              sm:space-y-9
+              md:space-y-10
+            "
+          >
             <div>
-              <h3 className="text-[24px] font-medium text-[#3d3d3d]">
+              <h3
+                className="
+                  text-[21px]
+                  sm:text-[22px]
+                  md:text-[24px]
+
+                  font-medium
+
+                  text-[#3d3d3d]
+                "
+              >
                 Keep building
               </h3>
 
-              <p className="mt-4 text-[19px] md:text-[21px] leading-[1.75] text-[#555555]">
+              <p
+                className="
+                  mt-3
+                  md:mt-4
+
+                  text-[16px]
+                  sm:text-[17px]
+                  md:text-[21px]
+
+                  leading-[1.75]
+
+                  text-[#555555]
+                "
+              >
                 The best way I’ve found to understand technology is to build
                 with it. Projects turn concepts into real problems and force
                 you to understand what actually works.
@@ -504,11 +731,34 @@ export default function MyStory() {
             </div>
 
             <div>
-              <h3 className="text-[24px] font-medium text-[#3d3d3d]">
+              <h3
+                className="
+                  text-[21px]
+                  sm:text-[22px]
+                  md:text-[24px]
+
+                  font-medium
+
+                  text-[#3d3d3d]
+                "
+              >
                 Learn from what doesn’t work
               </h3>
 
-              <p className="mt-4 text-[19px] md:text-[21px] leading-[1.75] text-[#555555]">
+              <p
+                className="
+                  mt-3
+                  md:mt-4
+
+                  text-[16px]
+                  sm:text-[17px]
+                  md:text-[21px]
+
+                  leading-[1.75]
+
+                  text-[#555555]
+                "
+              >
                 Debugging, failed experiments and unexpected results have often
                 taught me more than getting something right on the first
                 attempt.
@@ -516,11 +766,34 @@ export default function MyStory() {
             </div>
 
             <div>
-              <h3 className="text-[24px] font-medium text-[#3d3d3d]">
+              <h3
+                className="
+                  text-[21px]
+                  sm:text-[22px]
+                  md:text-[24px]
+
+                  font-medium
+
+                  text-[#3d3d3d]
+                "
+              >
                 Stay curious
               </h3>
 
-              <p className="mt-4 text-[19px] md:text-[21px] leading-[1.75] text-[#555555]">
+              <p
+                className="
+                  mt-3
+                  md:mt-4
+
+                  text-[16px]
+                  sm:text-[17px]
+                  md:text-[21px]
+
+                  leading-[1.75]
+
+                  text-[#555555]
+                "
+              >
                 Software engineering changes constantly. Staying curious and
                 being willing to learn new technologies has become just as
                 important as knowing any particular tool.

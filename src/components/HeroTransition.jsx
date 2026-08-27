@@ -47,6 +47,8 @@ export default function HeroTransition() {
   const [split, setSplit] = useState(50);
 
   const handleMouseMove = (e) => {
+    if (window.innerWidth < 768) return;
+
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const percentage = (x / rect.width) * 100;
@@ -65,240 +67,619 @@ export default function HeroTransition() {
 
   return (
     <>
+      {/* =========================================================
+          HERO
+      ========================================================= */}
       <section
-        className="relative mt-[60px] h-[82.5vh] overflow-hidden bg-white"
+        className="
+          relative
+          mt-[78px]
+          h-[650px]
+          overflow-hidden
+          bg-white
+
+          sm:h-[700px]
+
+          md:mt-[60px]
+          md:h-[760px]
+
+          lg:h-[82.5vh]
+          lg:min-h-[680px]
+        "
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setSplit(50)}
       >
-        {/* IMAGES */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute bottom-0 left-1/2 h-full w-[1300px] -translate-x-1/2 overflow-visible">
+        {/* =========================================================
+            MOBILE HERO
+        ========================================================= */}
+        <div className="relative h-full md:hidden">
+          {/* BACKGROUND */}
+          <div className="absolute inset-0 overflow-hidden">
+            <img
+              src={researcherBg}
+              alt=""
+              className="
+                absolute
+                left-[-90px]
+                bottom-[20px]
+                w-[340px]
+                max-w-none
+                opacity-90
+              "
+            />
 
-            {/* LEFT BACKGROUND */}
-            <div
-              className="absolute inset-0 z-10 overflow-visible"
-              style={{
-                clipPath: `inset(0 ${100 - split}% 0 0)`,
-              }}
-            >
-              <img
-                src={researcherBg}
-                alt=""
-                className="absolute bottom-[-65px] left-[130px] w-[560px] max-w-none opacity-100"
-                style={{
-                  transform: `translateX(${bgMove}px)`,
-                }}
-              />
+            <img
+              src={coderBg}
+              alt=""
+              className="
+                absolute
+                right-[-110px]
+                bottom-[10px]
+                w-[380px]
+                max-w-none
+                opacity-90
+              "
+            />
+          </div>
+
+          {/* PEOPLE */}
+          <div className="absolute inset-0 z-10 overflow-hidden">
+            <img
+              src={researcherImg}
+              alt="Researcher"
+              className="
+                absolute
+                left-1/2
+                bottom-[-10px]
+                w-[540px]
+                max-w-none
+                -translate-x-1/2
+              "
+            />
+          </div>
+
+          {/* MOBILE TEXT */}
+          <div
+            className="
+              relative
+              z-30
+              h-full
+              px-5
+              pt-10
+              flex
+              flex-col
+              justify-between
+              pointer-events-none
+            "
+          >
+            <div>
+              <h1
+                className="
+                  text-[36px]
+                  sm:text-[42px]
+                  font-bold
+                  leading-none
+                  tracking-[-0.045em]
+                  text-[#3b3b3b]
+                "
+              >
+                researcher
+              </h1>
+
+              <p
+                className="
+                  mt-3
+                  max-w-[230px]
+                  text-[14px]
+                  sm:text-[15px]
+                  leading-[1.5]
+                  text-[#8a8a8a]
+                "
+              >
+                AI, BCI, machine learning and intelligent systems.
+              </p>
             </div>
 
-            {/* RIGHT BACKGROUND */}
-            <div
-              className="absolute inset-0 z-10 overflow-visible"
-              style={{
-                clipPath: `inset(0 0 0 ${split}%)`,
-              }}
-            >
-              <img
-                src={coderBg}
-                alt=""
-                className="absolute bottom-[-55px] right-[70px] w-[650px] max-w-none opacity-100"
-                style={{
-                  transform: `translateX(${bgMove}px)`,
-                }}
-              />
-            </div>
+            <div className="pb-8 ml-auto text-right">
+              <h1
+                className="
+                  text-[36px]
+                  sm:text-[42px]
+                  font-bold
+                  leading-none
+                  tracking-[-0.045em]
+                  text-[#3b3b3b]
+                "
+              >
+                {"<coder>"}
+              </h1>
 
-            {/* LEFT PERSON */}
-            <div
-              className="absolute inset-0 z-20 overflow-visible"
-              style={{
-                clipPath: `inset(0 ${100 - split}% 0 0)`,
-              }}
-            >
-              <img
-                src={researcherImg}
-                alt="Researcher"
-                className="absolute bottom-[-45px] left-1/2 w-[820px] max-w-none"
-                style={{
-                  transform: `translateX(calc(-50% + ${personMove}px))`,
-                }}
-              />
-            </div>
-
-            {/* RIGHT PERSON */}
-            <div
-              className="absolute inset-0 z-20 overflow-visible"
-              style={{
-                clipPath: `inset(0 0 0 ${split}%)`,
-              }}
-            >
-              <img
-                src={coderImg}
-                alt="Coder"
-                className="absolute bottom-[-45px] left-1/2 w-[820px] max-w-none"
-                style={{
-                  transform: `translateX(calc(-50% + ${personMove}px))`,
-                }}
-              />
+              <p
+                className="
+                  mt-3
+                  ml-auto
+                  max-w-[230px]
+                  text-[14px]
+                  sm:text-[15px]
+                  leading-[1.5]
+                  text-[#8a8a8a]
+                "
+              >
+                APIs, cloud infrastructure, distributed systems and data
+                platforms.
+              </p>
             </div>
           </div>
         </div>
 
-        {/* HERO TEXT */}
-        <div
-          className="
-            relative
-            z-40
-            grid
-            grid-cols-[1fr_620px_1fr]
-            h-full
-            max-w-[1280px]
-            mx-auto
-            px-4
-            md:px-6
-            pt-14
-          "
-        >
-          {/* LEFT */}
-          <div
-            className="
-              flex
-              flex-col
-              justify-center
-              items-start
-              transition-opacity
-              duration-300
-            "
-            style={{ opacity: leftTextOpacity }}
-          >
-            <h1
+        {/* =========================================================
+            TABLET + DESKTOP HERO
+        ========================================================= */}
+        <div className="hidden md:block h-full">
+          {/* IMAGES */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <div
               className="
-                text-[48px]
-                lg:text-[54px]
-                xl:text-[60px]
-                font-bold
-                leading-none
-                tracking-[-0.045em]
-                text-[#3b3b3b]
-                whitespace-nowrap
+                absolute
+                bottom-0
+                left-1/2
+                h-full
+                w-[1000px]
+                lg:w-[1300px]
+                -translate-x-1/2
+                overflow-visible
               "
             >
-              researcher
-            </h1>
+              {/* LEFT BACKGROUND */}
+              <div
+                className="absolute inset-0 z-10 overflow-visible"
+                style={{
+                  clipPath: `inset(0 ${100 - split}% 0 0)`,
+                }}
+              >
+                <img
+                  src={researcherBg}
+                  alt=""
+                  className="
+                    absolute
+                    bottom-[-35px]
+                    left-[70px]
+                    w-[430px]
+                    max-w-none
 
-            <p
-              className="
-                mt-5
-                max-w-[380px]
-                text-[16px]
-                lg:text-[17px]
-                leading-[1.55]
-                font-normal
-                text-[#8a8a8a]
-              "
-            >
-              AI, BCI, machine learning and intelligent systems.
-            </p>
+                    lg:bottom-[-65px]
+                    lg:left-[130px]
+                    lg:w-[560px]
+                  "
+                  style={{
+                    transform: `translateX(${bgMove}px)`,
+                  }}
+                />
+              </div>
+
+              {/* RIGHT BACKGROUND */}
+              <div
+                className="absolute inset-0 z-10 overflow-visible"
+                style={{
+                  clipPath: `inset(0 0 0 ${split}%)`,
+                }}
+              >
+                <img
+                  src={coderBg}
+                  alt=""
+                  className="
+                    absolute
+                    bottom-[-30px]
+                    right-[30px]
+                    w-[500px]
+                    max-w-none
+
+                    lg:bottom-[-55px]
+                    lg:right-[70px]
+                    lg:w-[650px]
+                  "
+                  style={{
+                    transform: `translateX(${bgMove}px)`,
+                  }}
+                />
+              </div>
+
+              {/* LEFT PERSON */}
+              <div
+                className="absolute inset-0 z-20 overflow-visible"
+                style={{
+                  clipPath: `inset(0 ${100 - split}% 0 0)`,
+                }}
+              >
+                <img
+                  src={researcherImg}
+                  alt="Researcher"
+                  className="
+                    absolute
+                    bottom-[-25px]
+                    left-1/2
+                    w-[650px]
+                    max-w-none
+
+                    lg:bottom-[-45px]
+                    lg:w-[820px]
+                  "
+                  style={{
+                    transform: `translateX(calc(-50% + ${personMove}px))`,
+                  }}
+                />
+              </div>
+
+              {/* RIGHT PERSON */}
+              <div
+                className="absolute inset-0 z-20 overflow-visible"
+                style={{
+                  clipPath: `inset(0 0 0 ${split}%)`,
+                }}
+              >
+                <img
+                  src={coderImg}
+                  alt="Coder"
+                  className="
+                    absolute
+                    bottom-[-25px]
+                    left-1/2
+                    w-[650px]
+                    max-w-none
+
+                    lg:bottom-[-45px]
+                    lg:w-[820px]
+                  "
+                  style={{
+                    transform: `translateX(calc(-50% + ${personMove}px))`,
+                  }}
+                />
+              </div>
+            </div>
           </div>
 
-          <div />
-
-          {/* RIGHT */}
+          {/* HERO TEXT */}
           <div
             className="
-              flex
-              flex-col
-              justify-center
-              items-end
-              transition-opacity
-              duration-300
-            "
-            style={{ opacity: rightTextOpacity }}
-          >
-            <h1
-              className="
-                text-[48px]
-                lg:text-[54px]
-                xl:text-[60px]
-                font-bold
-                leading-none
-                tracking-[-0.045em]
-                text-right
-                text-[#3b3b3b]
-                whitespace-nowrap
-              "
-            >
-              {"<coder>"}
-            </h1>
+              relative
+              z-40
+              grid
+              grid-cols-[1fr_440px_1fr]
 
-            <p
+              lg:grid-cols-[1fr_620px_1fr]
+
+              h-full
+              max-w-[1280px]
+              mx-auto
+              px-6
+              lg:px-6
+              pt-10
+              lg:pt-14
+            "
+          >
+            {/* LEFT */}
+            <div
               className="
-                mt-5
-                max-w-[350px]
-                text-[16px]
-                lg:text-[17px]
-                leading-[1.55]
-                font-normal
-                text-right
-                text-[#8a8a8a]
+                flex
+                flex-col
+                justify-center
+                items-start
+                transition-opacity
+                duration-300
               "
+              style={{ opacity: leftTextOpacity }}
             >
-              APIs, cloud infrastructure, distributed systems and data
-              platforms.
-            </p>
+              <h1
+                className="
+                  text-[40px]
+                  lg:text-[54px]
+                  xl:text-[60px]
+                  font-bold
+                  leading-none
+                  tracking-[-0.045em]
+                  text-[#3b3b3b]
+                  whitespace-nowrap
+                "
+              >
+                researcher
+              </h1>
+
+              <p
+                className="
+                  mt-4
+                  max-w-[280px]
+                  lg:max-w-[380px]
+                  text-[14px]
+                  lg:text-[17px]
+                  leading-[1.55]
+                  text-[#8a8a8a]
+                "
+              >
+                AI, BCI, machine learning and intelligent systems.
+              </p>
+            </div>
+
+            <div />
+
+            {/* RIGHT */}
+            <div
+              className="
+                flex
+                flex-col
+                justify-center
+                items-end
+                transition-opacity
+                duration-300
+              "
+              style={{ opacity: rightTextOpacity }}
+            >
+              <h1
+                className="
+                  text-[40px]
+                  lg:text-[54px]
+                  xl:text-[60px]
+                  font-bold
+                  leading-none
+                  tracking-[-0.045em]
+                  text-right
+                  text-[#3b3b3b]
+                  whitespace-nowrap
+                "
+              >
+                {"<coder>"}
+              </h1>
+
+              <p
+                className="
+                  mt-4
+                  max-w-[270px]
+                  lg:max-w-[350px]
+                  text-[14px]
+                  lg:text-[17px]
+                  leading-[1.55]
+                  text-right
+                  text-[#8a8a8a]
+                "
+              >
+                APIs, cloud infrastructure, distributed systems and data
+                platforms.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CURRENTLY EXPLORING */}
-      <section className="bg-[#f7f7f7] border-y border-gray-200 px-8 pt-12 pb-24">
+      {/* =========================================================
+          CURRENTLY EXPLORING
+      ========================================================= */}
+      <section
+        className="
+          bg-[#f7f7f7]
+          border-y
+          border-gray-200
+          px-4
+          sm:px-6
+          lg:px-8
+          pt-10
+          sm:pt-12
+          pb-14
+          sm:pb-20
+          lg:pb-24
+        "
+      >
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-10 mb-12">
+          {/* SECTION TITLE */}
+          <div
+            className="
+              flex
+              items-center
+              gap-4
+              sm:gap-6
+              lg:gap-10
+              mb-8
+              sm:mb-10
+              lg:mb-12
+            "
+          >
             <div className="h-px bg-gray-300 flex-1" />
 
-            <h2 className="text-[18px] tracking-[0.45em] font-bold text-gray-600">
+            <h2
+              className="
+                text-[11px]
+                sm:text-[13px]
+                md:text-[15px]
+                lg:text-[18px]
+                tracking-[0.2em]
+                sm:tracking-[0.3em]
+                lg:tracking-[0.45em]
+                font-bold
+                text-gray-600
+                whitespace-nowrap
+              "
+            >
               CURRENTLY EXPLORING
             </h2>
 
             <div className="h-px bg-gray-300 flex-1" />
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          {/* CARDS */}
+          <div
+            className="
+              grid
+              grid-cols-1
+              md:grid-cols-2
+              lg:grid-cols-3
+              gap-5
+              sm:gap-6
+              lg:gap-8
+            "
+          >
             {cards.map((card) => (
               <div
                 key={card.title}
-                className="group h-[330px] [perspective:1200px]"
+                className="
+                  group
+                  h-[285px]
+                  sm:h-[300px]
+                  lg:h-[330px]
+                  [perspective:1200px]
+                "
               >
-                <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                <div
+                  className="
+                    relative
+                    h-full
+                    w-full
+                    transition-transform
+                    duration-700
+                    [transform-style:preserve-3d]
 
+                    lg:group-hover:[transform:rotateY(180deg)]
+                  "
+                >
                   {/* FRONT */}
-                  <div className="absolute inset-0 bg-white rounded-2xl border border-gray-200 p-8 shadow-sm flex flex-col [backface-visibility:hidden]">
-                    <div className="flex items-center gap-4 mb-10">
-                      <div className="w-14 h-14 rounded-2xl bg-gray-100 flex items-center justify-center text-3xl">
+                  <div
+                    className="
+                      absolute
+                      inset-0
+                      bg-white
+                      rounded-xl
+                      sm:rounded-2xl
+                      border
+                      border-gray-200
+                      p-5
+                      sm:p-6
+                      lg:p-8
+                      shadow-sm
+                      flex
+                      flex-col
+                      [backface-visibility:hidden]
+                    "
+                  >
+                    <div
+                      className="
+                        flex
+                        items-center
+                        gap-3
+                        sm:gap-4
+                        mb-6
+                        sm:mb-8
+                        lg:mb-10
+                      "
+                    >
+                      <div
+                        className="
+                          w-11
+                          h-11
+                          sm:w-12
+                          sm:h-12
+                          lg:w-14
+                          lg:h-14
+                          rounded-xl
+                          sm:rounded-2xl
+                          bg-gray-100
+                          flex
+                          items-center
+                          justify-center
+                          text-[22px]
+                          sm:text-2xl
+                          lg:text-3xl
+                        "
+                      >
                         {card.icon}
                       </div>
 
-                      <p className="text-xs font-bold tracking-[0.25em] text-gray-500">
+                      <p
+                        className="
+                          text-[10px]
+                          sm:text-[11px]
+                          lg:text-xs
+                          font-bold
+                          tracking-[0.18em]
+                          sm:tracking-[0.22em]
+                          lg:tracking-[0.25em]
+                          text-gray-500
+                        "
+                      >
                         {card.label}
                       </p>
                     </div>
 
-                    <h3 className="text-2xl font-black text-gray-900 mb-6">
+                    <h3
+                      className="
+                        text-[19px]
+                        sm:text-[21px]
+                        lg:text-2xl
+                        font-black
+                        text-gray-900
+                        mb-4
+                        lg:mb-6
+                      "
+                    >
                       {card.title}
                     </h3>
 
-                    <p className="text-lg leading-8 text-gray-600 text-justify">
+                    <p
+                      className="
+                        text-[14px]
+                        sm:text-[15px]
+                        lg:text-lg
+                        leading-6
+                        sm:leading-7
+                        lg:leading-8
+                        text-gray-600
+                      "
+                    >
                       {card.description}
                     </p>
+
+                    {/* MOBILE LINK */}
+                    {card.link && (
+                      <a
+                        href={card.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="
+                          lg:hidden
+                          mt-auto
+                          pt-4
+                          text-[14px]
+                          font-semibold
+                          text-gray-900
+                          underline
+                          underline-offset-4
+                        "
+                      >
+                        {card.linkText}
+                      </a>
+                    )}
                   </div>
 
-                  {/* BACK */}
-                  <div className="absolute inset-0 bg-white rounded-2xl border border-gray-200 p-8 shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col justify-center">
+                  {/* BACK — DESKTOP */}
+                  <div
+                    className="
+                      hidden
+                      lg:flex
+                      absolute
+                      inset-0
+                      bg-white
+                      rounded-2xl
+                      border
+                      border-gray-200
+                      p-8
+                      shadow-xl
+                      [backface-visibility:hidden]
+                      [transform:rotateY(180deg)]
+                      flex-col
+                      justify-center
+                    "
+                  >
                     <h4 className="text-3xl font-black text-gray-900 mb-5">
                       {card.backTitle}
                     </h4>
 
-                    <p className="text-lg leading-8 text-gray-600 text-justify mb-8">
+                    <p className="text-lg leading-8 text-gray-600 mb-8">
                       {card.backText}
                     </p>
 
@@ -307,7 +688,13 @@ export default function HeroTransition() {
                         href={card.link}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-lg font-semibold text-gray-900 underline underline-offset-4"
+                        className="
+                          text-lg
+                          font-semibold
+                          text-gray-900
+                          underline
+                          underline-offset-4
+                        "
                       >
                         {card.linkText}
                       </a>

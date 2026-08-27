@@ -17,7 +17,7 @@ export default function ScrollToTop() {
             block: "start",
           });
         }
-      }, 50);
+      }, 100);
 
       return () => clearTimeout(timer);
     }
@@ -25,7 +25,7 @@ export default function ScrollToTop() {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: "instant",
+      behavior: "auto",
     });
   }, [pathname, hash]);
 

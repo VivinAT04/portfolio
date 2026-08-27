@@ -31,7 +31,7 @@ export default function Contact() {
         }
       },
       {
-        threshold: 0.15,
+        threshold: 0.1,
       }
     );
 
@@ -68,7 +68,7 @@ export default function Contact() {
 
   return (
     <div
-      className="bg-white"
+      className="bg-white overflow-x-hidden"
       style={{
         fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
       }}
@@ -76,19 +76,47 @@ export default function Contact() {
       {/* ================= HERO ================= */}
       <section
         ref={contactHeroRef}
-        className="relative overflow-hidden border-b border-[#d9d9d9] bg-white"
+        className="
+          relative
+          overflow-hidden
+          border-b
+          border-[#d9d9d9]
+          bg-white
+        "
       >
-        <div className="max-w-7xl mx-auto px-8 lg:px-16">
-          {/* REDUCED FROM 815px -> 745px */}
-          <div className="relative min-h-[600px] lg:min-h-[745px]">
+        <div
+          className="
+            max-w-[1280px]
+            mx-auto
+
+            px-4
+            sm:px-5
+            md:px-6
+            lg:px-16
+          "
+        >
+          <div
+            className="
+              relative
+
+              min-h-0
+              lg:min-h-[745px]
+
+              pt-[96px]
+              sm:pt-[105px]
+              md:pt-[120px]
+              lg:pt-0
+            "
+          >
             {/* ================= LEFT CONTENT ================= */}
             <div
               className={`
                 relative
                 z-20
-                pt-20
+
                 lg:pt-[135px]
                 lg:ml-[-40px]
+
                 max-w-[610px]
 
                 transition-all
@@ -98,7 +126,7 @@ export default function Contact() {
                 ${
                   showContactHero
                     ? "translate-x-0 opacity-100"
-                    : "-translate-x-[220px] opacity-0"
+                    : "-translate-x-[90px] lg:-translate-x-[220px] opacity-0"
                 }
               `}
             >
@@ -107,15 +135,21 @@ export default function Contact() {
                 className="
                   flex
                   items-end
-                  text-[90px]
-                  md:text-[110px]
+
+                  text-[58px]
+                  sm:text-[72px]
+                  md:text-[100px]
                   lg:text-[150px]
-                  xl:text-[150px]
+
                   leading-[0.82]
                   tracking-[-0.07em]
                   font-[600]
                   text-[#303030]
-                  mb-[36px]
+
+                  mb-[24px]
+                  sm:mb-[28px]
+                  lg:mb-[36px]
+
                   whitespace-nowrap
                 "
               >
@@ -126,18 +160,27 @@ export default function Contact() {
                   className="
                     block
                     shrink-0
-                    w-[13px]
-                    h-[13px]
-                    md:w-[17px]
-                    md:h-[17px]
+
+                    w-[9px]
+                    h-[9px]
+
+                    sm:w-[11px]
+                    sm:h-[11px]
+
+                    md:w-[16px]
+                    md:h-[16px]
+
                     lg:w-[22px]
                     lg:h-[22px]
-                    xl:w-[22px]
-                    xl:h-[22px]
+
                     rounded-full
                     bg-[#303030]
-                    ml-[14px]
-                    mb-[2px]
+
+                    ml-[8px]
+                    sm:ml-[10px]
+                    lg:ml-[14px]
+
+                    mb-[1px]
                     md:mb-[3px]
                     lg:mb-[4px]
                   "
@@ -147,13 +190,18 @@ export default function Contact() {
               {/* DESCRIPTION */}
               <p
                 className="
-                  text-[22px]
-                  md:text-[25px]
+                  text-[18px]
+                  sm:text-[20px]
+                  md:text-[23px]
                   lg:text-[26px]
-                  leading-[1.42]
+
+                  leading-[1.45]
+                  lg:leading-[1.42]
+
                   font-[300]
                   tracking-[-0.02em]
                   text-[#8a8a8a]
+
                   max-w-[510px]
                 "
               >
@@ -167,9 +215,23 @@ export default function Contact() {
                 className="
                   grid
                   grid-cols-2
-                  gap-x-[84px]
-                  gap-y-[40px]
-                  mt-[58px]
+
+                  gap-x-4
+                  gap-y-5
+
+                  sm:gap-x-8
+                  sm:gap-y-6
+
+                  md:gap-x-[50px]
+                  md:gap-y-[30px]
+
+                  lg:gap-x-[84px]
+                  lg:gap-y-[40px]
+
+                  mt-[36px]
+                  sm:mt-[42px]
+                  lg:mt-[58px]
+
                   max-w-[600px]
                 "
               >
@@ -178,28 +240,67 @@ export default function Contact() {
                   href="https://www.linkedin.com/in/vivinthambidurai/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-[20px] w-fit"
+                  className="
+                    group
+                    flex
+                    items-center
+
+                    gap-[10px]
+                    sm:gap-[14px]
+                    lg:gap-[20px]
+
+                    w-fit
+                  "
                 >
                   <div
                     className="
-                      w-[70px]
-                      h-[70px]
+                      w-[48px]
+                      h-[48px]
+
+                      sm:w-[56px]
+                      sm:h-[56px]
+
+                      md:w-[62px]
+                      md:h-[62px]
+
+                      lg:w-[70px]
+                      lg:h-[70px]
+
                       rounded-full
                       bg-[#169bd5]
+
                       flex
                       items-center
                       justify-center
+
                       text-white
-                      text-[30px]
+
+                      text-[21px]
+                      sm:text-[24px]
+                      lg:text-[30px]
+
                       transition-transform
                       duration-300
+
                       group-hover:scale-105
                     "
                   >
                     <FaLinkedinIn />
                   </div>
 
-                  <span className="text-[20px] font-[600] text-[#169bd5]">
+                  <span
+                    className="
+                      hidden
+                      xs:inline
+
+                      text-[14px]
+                      sm:text-[16px]
+                      lg:text-[20px]
+
+                      font-[600]
+                      text-[#169bd5]
+                    "
+                  >
                     LinkedIn
                   </span>
                 </a>
@@ -209,28 +310,64 @@ export default function Contact() {
                   href="https://github.com/VivinAT04"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-[20px] w-fit"
+                  className="
+                    group
+                    flex
+                    items-center
+
+                    gap-[10px]
+                    sm:gap-[14px]
+                    lg:gap-[20px]
+
+                    w-fit
+                  "
                 >
                   <div
                     className="
-                      w-[70px]
-                      h-[70px]
+                      w-[48px]
+                      h-[48px]
+
+                      sm:w-[56px]
+                      sm:h-[56px]
+
+                      md:w-[62px]
+                      md:h-[62px]
+
+                      lg:w-[70px]
+                      lg:h-[70px]
+
                       rounded-full
                       bg-[#343434]
+
                       flex
                       items-center
                       justify-center
+
                       text-white
-                      text-[30px]
+
+                      text-[21px]
+                      sm:text-[24px]
+                      lg:text-[30px]
+
                       transition-transform
                       duration-300
+
                       group-hover:scale-105
                     "
                   >
                     <FaGithub />
                   </div>
 
-                  <span className="text-[20px] font-[600] text-[#343434]">
+                  <span
+                    className="
+                      text-[14px]
+                      sm:text-[16px]
+                      lg:text-[20px]
+
+                      font-[600]
+                      text-[#343434]
+                    "
+                  >
                     GitHub
                   </span>
                 </a>
@@ -238,28 +375,64 @@ export default function Contact() {
                 {/* Email */}
                 <a
                   href="#email-form"
-                  className="group flex items-center gap-[20px] w-fit"
+                  className="
+                    group
+                    flex
+                    items-center
+
+                    gap-[10px]
+                    sm:gap-[14px]
+                    lg:gap-[20px]
+
+                    w-fit
+                  "
                 >
                   <div
                     className="
-                      w-[70px]
-                      h-[70px]
+                      w-[48px]
+                      h-[48px]
+
+                      sm:w-[56px]
+                      sm:h-[56px]
+
+                      md:w-[62px]
+                      md:h-[62px]
+
+                      lg:w-[70px]
+                      lg:h-[70px]
+
                       rounded-full
                       bg-[#f25555]
+
                       flex
                       items-center
                       justify-center
+
                       text-white
-                      text-[29px]
+
+                      text-[20px]
+                      sm:text-[23px]
+                      lg:text-[29px]
+
                       transition-transform
                       duration-300
+
                       group-hover:scale-105
                     "
                   >
                     <FaEnvelope />
                   </div>
 
-                  <span className="text-[20px] font-[600] text-[#f25555]">
+                  <span
+                    className="
+                      text-[14px]
+                      sm:text-[16px]
+                      lg:text-[20px]
+
+                      font-[600]
+                      text-[#f25555]
+                    "
+                  >
                     Email
                   </span>
                 </a>
@@ -267,42 +440,83 @@ export default function Contact() {
                 {/* Instagram */}
                 <a
                   href="https://www.instagram.com/vivin.x_/"
-                  className="group flex items-center gap-[20px] w-fit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    group
+                    flex
+                    items-center
+
+                    gap-[10px]
+                    sm:gap-[14px]
+                    lg:gap-[20px]
+
+                    w-fit
+                  "
                 >
                   <div
                     className="
-                      w-[70px]
-                      h-[70px]
+                      w-[48px]
+                      h-[48px]
+
+                      sm:w-[56px]
+                      sm:h-[56px]
+
+                      md:w-[62px]
+                      md:h-[62px]
+
+                      lg:w-[70px]
+                      lg:h-[70px]
+
                       rounded-full
                       bg-[#ef007c]
+
                       flex
                       items-center
                       justify-center
+
                       text-white
-                      text-[30px]
+
+                      text-[21px]
+                      sm:text-[24px]
+                      lg:text-[30px]
+
                       transition-transform
                       duration-300
+
                       group-hover:scale-105
                     "
                   >
                     <FaInstagram />
                   </div>
 
-                  <span className="text-[20px] font-[600] text-[#ef007c]">
+                  <span
+                    className="
+                      text-[14px]
+                      sm:text-[16px]
+                      lg:text-[20px]
+
+                      font-[600]
+                      text-[#ef007c]
+                    "
+                  >
                     Instagram
                   </span>
                 </a>
               </div>
             </div>
 
-            {/* ================= RIGHT IMAGE ================= */}
+            {/* ================= DESKTOP IMAGE ================= */}
             <div
               className={`
                 hidden
                 lg:block
+
                 absolute
+
                 right-[10px]
                 bottom-[-60px]
+
                 z-10
 
                 transition-all
@@ -323,22 +537,37 @@ export default function Contact() {
                 className="
                   w-[640px]
                   xl:w-[680px]
+
                   max-w-none
+
                   object-contain
                   object-bottom
+
                   select-none
                   pointer-events-none
                 "
               />
             </div>
 
-            {/* MOBILE IMAGE */}
+            {/* ================= MOBILE / TABLET IMAGE ================= */}
             <div
               className={`
                 lg:hidden
+
+                relative
+
                 flex
                 justify-center
-                mt-10
+                items-end
+
+                h-[330px]
+                sm:h-[400px]
+                md:h-[470px]
+
+                mt-5
+                sm:mt-7
+
+                overflow-hidden
 
                 transition-all
                 duration-[1800ms]
@@ -348,7 +577,7 @@ export default function Contact() {
                 ${
                   showContactHero
                     ? "translate-x-0 opacity-100"
-                    : "translate-x-[140px] opacity-0"
+                    : "translate-x-[90px] opacity-0"
                 }
               `}
             >
@@ -356,10 +585,20 @@ export default function Contact() {
                 src={contactPhoto}
                 alt="Vivin Anitha Thambidurai"
                 className="
-                  w-[420px]
-                  max-w-full
+                  absolute
+                  bottom-[-30px]
+
+                  w-[360px]
+                  sm:w-[460px]
+                  md:w-[550px]
+
+                  max-w-none
+
                   object-contain
                   object-bottom
+
+                  select-none
+                  pointer-events-none
                 "
               />
             </div>
@@ -372,23 +611,46 @@ export default function Contact() {
         id="email-form"
         className="
           bg-[#f7f7f7]
-          pt-[58px]
-          pb-24
+
+          pt-[42px]
+          sm:pt-[50px]
+          lg:pt-[58px]
+
+          pb-16
+          sm:pb-20
           lg:pb-28
+
+          scroll-mt-[90px]
+          md:scroll-mt-[120px]
         "
       >
-        <div className="max-w-7xl mx-auto px-8 lg:px-16">
+        <div
+          className="
+            max-w-[1280px]
+            mx-auto
+
+            px-4
+            sm:px-5
+            md:px-6
+            lg:px-16
+          "
+        >
           <div className="lg:ml-[-40px]">
             <h2
               className="
-                text-[40px]
-                md:text-[44px]
+                text-[32px]
+                sm:text-[36px]
+                md:text-[42px]
                 lg:text-[46px]
+
                 leading-[1.15]
                 font-[300]
                 tracking-[-0.035em]
                 text-[#444444]
-                mb-[34px]
+
+                mb-[26px]
+                sm:mb-[30px]
+                lg:mb-[34px]
               "
             >
               Send me an email
@@ -397,11 +659,32 @@ export default function Contact() {
             <form
               ref={formRef}
               onSubmit={sendEmail}
-              className="grid lg:grid-cols-2 gap-x-[42px] gap-y-8"
+              className="
+                grid
+                grid-cols-1
+                lg:grid-cols-2
+
+                gap-x-[42px]
+                gap-y-6
+                sm:gap-y-8
+              "
             >
-              <div className="space-y-[27px]">
+              <div className="space-y-[22px] sm:space-y-[27px]">
+                {/* NAME */}
                 <div>
-                  <label className="block mb-[7px] text-[15px] leading-none font-[400] text-[#4f4f4f]">
+                  <label
+                    className="
+                      block
+                      mb-[7px]
+
+                      text-[14px]
+                      sm:text-[15px]
+
+                      leading-none
+                      font-[400]
+                      text-[#4f4f4f]
+                    "
+                  >
                     Name
                   </label>
 
@@ -411,22 +694,44 @@ export default function Contact() {
                     required
                     className="
                       w-full
-                      h-[51px]
+
+                      h-[48px]
+                      sm:h-[51px]
+
                       rounded-[3px]
+
                       border
                       border-[#ababab]
+
                       bg-white
+
                       px-4
+
                       text-[16px]
                       text-[#444444]
+
                       outline-none
+
                       focus:border-[#6f6f6f]
                     "
                   />
                 </div>
 
+                {/* EMAIL */}
                 <div>
-                  <label className="block mb-[7px] text-[15px] leading-none font-[400] text-[#4f4f4f]">
+                  <label
+                    className="
+                      block
+                      mb-[7px]
+
+                      text-[14px]
+                      sm:text-[15px]
+
+                      leading-none
+                      font-[400]
+                      text-[#4f4f4f]
+                    "
+                  >
                     Email
                   </label>
 
@@ -436,23 +741,45 @@ export default function Contact() {
                     required
                     className="
                       w-full
-                      h-[51px]
+
+                      h-[48px]
+                      sm:h-[51px]
+
                       rounded-[3px]
+
                       border
                       border-[#ababab]
+
                       bg-white
+
                       px-4
+
                       text-[16px]
                       text-[#444444]
+
                       outline-none
+
                       focus:border-[#6f6f6f]
                     "
                   />
                 </div>
               </div>
 
+              {/* MESSAGE */}
               <div>
-                <label className="block mb-[7px] text-[15px] leading-none font-[400] text-[#4f4f4f]">
+                <label
+                  className="
+                    block
+                    mb-[7px]
+
+                    text-[14px]
+                    sm:text-[15px]
+
+                    leading-none
+                    font-[400]
+                    text-[#4f4f4f]
+                  "
+                >
                   Message
                 </label>
 
@@ -462,17 +789,26 @@ export default function Contact() {
                   rows={7}
                   className="
                     w-full
-                    min-h-[179px]
+
+                    min-h-[170px]
+                    sm:min-h-[179px]
+
                     rounded-[3px]
+
                     border
                     border-[#ababab]
+
                     bg-white
+
                     px-4
                     py-3
+
                     text-[16px]
                     text-[#444444]
+
                     resize-none
                     outline-none
+
                     focus:border-[#6f6f6f]
                   "
                 />
@@ -484,15 +820,32 @@ export default function Contact() {
                 value={new Date().toLocaleString()}
               />
 
-              <div className="lg:col-span-2 flex flex-col sm:flex-row sm:items-center sm:justify-end gap-4 mt-[-4px]">
+              {/* SUBMIT */}
+              <div
+                className="
+                  lg:col-span-2
+
+                  flex
+                  flex-col
+
+                  sm:flex-row
+                  sm:items-center
+                  sm:justify-end
+
+                  gap-4
+
+                  mt-0
+                  lg:mt-[-4px]
+                "
+              >
                 {status === "success" && (
-                  <p className="text-[16px] font-[500] text-green-600">
+                  <p className="text-[14px] sm:text-[16px] font-[500] text-green-600">
                     ✓ Email sent successfully
                   </p>
                 )}
 
                 {status === "error" && (
-                  <p className="text-[16px] font-[500] text-red-600">
+                  <p className="text-[14px] sm:text-[16px] font-[500] text-red-600">
                     Failed to send email. Please try again.
                   </p>
                 )}
@@ -501,21 +854,43 @@ export default function Contact() {
                   type="submit"
                   disabled={sending}
                   className="
-                    h-[64px]
-                    min-w-[200px]
-                    px-[40px]
+                    w-full
+                    sm:w-auto
+
+                    h-[56px]
+                    sm:h-[60px]
+                    lg:h-[64px]
+
+                    sm:min-w-[190px]
+                    lg:min-w-[200px]
+
+                    px-[28px]
+                    sm:px-[36px]
+                    lg:px-[40px]
+
                     bg-[#3d3d3d]
                     hover:bg-[#2f2f2f]
+
                     text-white
-                    text-[20px]
+
+                    text-[17px]
+                    sm:text-[18px]
+                    lg:text-[20px]
+
                     font-[600]
+
                     rounded-[6px]
+
                     border
                     border-[#353535]
+
                     shadow-sm
+
                     transition-all
                     duration-200
+
                     hover:translate-y-[-1px]
+
                     disabled:opacity-50
                     disabled:cursor-not-allowed
                   "
@@ -529,4 +904,4 @@ export default function Contact() {
       </section>
     </div>
   );
-} 
+}

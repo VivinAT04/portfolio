@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+
 import aboutImg from "../../assets-images/about.png";
 import octoImg from "../../assets-images/Octo.png";
 import storyImg from "../../assets-images/backmac.png";
@@ -7,7 +8,6 @@ import profileImg from "../../assets-images/short.png";
 import sheffieldImg from "../../assets-images/sheffield.jpg";
 import ambassadorImg from "../../assets-images/ambass.jpg";
 import awsImg from "../../assets-images/image.png";
-import paperImg from "../../assets-images/JSART.png";
 import volunteerImg from "../../assets-images/voluteer.jpg";
 import circleImg from "../../assets-images/circel-2.png";
 import horiImg from "../../assets-images/hori1.png";
@@ -16,1183 +16,1548 @@ import flightImg from "../../assets-images/flight.jpg";
 import viviImg from "../../assets-images/Vivii.png";
 import pottImg from "../../assets-images/pott.jpg";
 import myUniPhoto from "../../assets-images/myUniPhoto.jpg";
+
 export default function About() {
-const cards = [
-  "🎓 Sheffield",
-  "🧠 Research",
-  "💻 GitHub",
-  "🏆 Ambassador",
-  "☁️ AWS",
-  "📚 Papers",
-];
+  const [animateAbout, setAnimateAbout] = useState(false);
+  const [showCircle, setShowCircle] = useState(false);
+  const [showRandomFacts, setShowRandomFacts] = useState(false);
+  const [showSkills, setShowSkills] = useState(false);
+  const [showFeatured, setShowFeatured] = useState(false);
+  const [showVolunteer, setShowVolunteer] = useState(false);
+  const [showStory, setShowStory] = useState(false);
 
-const [animateAbout, setAnimateAbout] = useState(false);
-const [showCircle, setShowCircle] = useState(false);
-const [showRandomFacts, setShowRandomFacts] = useState(false);
-const [showSkills, setShowSkills] = useState(false);
-const [showFeatured, setShowFeatured] = useState(false);
-const [showVolunteer, setShowVolunteer] = useState(false);
-const [showStory, setShowStory] = useState(false);
+  const circleSectionRef = useRef(null);
+  const randomFactsRef = useRef(null);
+  const skillsSectionRef = useRef(null);
+  const featuredSectionRef = useRef(null);
+  const volunteerSectionRef = useRef(null);
+  const storySectionRef = useRef(null);
 
-const circleSectionRef = useRef(null);
-const randomFactsRef = useRef(null);
-const skillsSectionRef = useRef(null);
-const featuredSectionRef = useRef(null);
-const volunteerSectionRef = useRef(null);
-const storySectionRef = useRef(null);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAnimateAbout(true);
+    }, 80);
 
-/* ===================== */
-/* ABOUT PAGE ANIMATION */
-/* ===================== */
-useEffect(() => {
-  const timer = setTimeout(() => {
-    setAnimateAbout(true);
-  }, 80);
+    return () => clearTimeout(timer);
+  }, []);
 
-  return () => clearTimeout(timer);
-}, []);
+  useEffect(() => {
+    const sections = [
+      [circleSectionRef, setShowCircle],
+      [randomFactsRef, setShowRandomFacts],
+      [skillsSectionRef, setShowSkills],
+      [featuredSectionRef, setShowFeatured],
+      [volunteerSectionRef, setShowVolunteer],
+      [storySectionRef, setShowStory],
+    ];
 
-/* ===================== */
-/* CIRCLE SCROLL ANIMATION */
-/* ===================== */
-useEffect(() => {
-  const section = circleSectionRef.current;
+    const observers = sections.map(([ref, setter]) => {
+      const section = ref.current;
 
-  if (!section) return;
+      if (!section) return null;
 
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setShowCircle(true);
-        observer.unobserve(section);
-      }
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setter(true);
+            observer.unobserve(section);
+          }
+        },
+        {
+          threshold: 0.12,
+        }
+      );
+
+      observer.observe(section);
+
+      return observer;
+    });
+
+    return () => {
+      observers.forEach((observer) => observer?.disconnect());
+    };
+  }, []);
+
+  const imageCards = [
+    {
+      src: flightImg,
+      alt: "Flight",
+      objectClass: "object-cover",
     },
     {
-      threshold: 0.2,
-    }
-  );
-
-  observer.observe(section);
-
-  return () => observer.disconnect();
-}, []);
-
-/* ===================== */
-/* RANDOM FACTS SCROLL ANIMATION */
-/* ===================== */
-useEffect(() => {
-  const section = randomFactsRef.current;
-
-  if (!section) return;
-
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setShowRandomFacts(true);
-        observer.unobserve(section);
-      }
+      src: viviImg,
+      alt: "Vivin",
+      objectClass: "object-cover object-center",
     },
     {
-      threshold: 0.2,
-    }
-  );
-
-  observer.observe(section);
-
-  return () => observer.disconnect();
-}, []);
-
-/* ===================== */
-/* SKILLS SCROLL ANIMATION */
-/* ===================== */
-useEffect(() => {
-  const section = skillsSectionRef.current;
-
-  if (!section) return;
-
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setShowSkills(true);
-        observer.unobserve(section);
-      }
+      src: sheffieldImg,
+      alt: "Sheffield",
+      objectClass: "object-cover",
     },
     {
-      threshold: 0.2,
-    }
-  );
-
-  observer.observe(section);
-
-  return () => observer.disconnect();
-}, []);
-
-/* ===================== */
-/* FEATURED SCROLL ANIMATION */
-/* ===================== */
-useEffect(() => {
-  const section = featuredSectionRef.current;
-
-  if (!section) return;
-
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setShowFeatured(true);
-        observer.unobserve(section);
-      }
+      src: myUniPhoto,
+      alt: "Student Ambassador",
+      objectClass: "object-cover",
     },
     {
-      threshold: 0.2,
-    }
-  );
-
-  observer.observe(section);
-
-  return () => observer.disconnect();
-}, []);
-
-/* ===================== */
-/* VOLUNTEER SCROLL ANIMATION */
-/* ===================== */
-useEffect(() => {
-  const section = volunteerSectionRef.current;
-
-  if (!section) return;
-
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setShowVolunteer(true);
-        observer.unobserve(section);
-      }
+      src: awsImg,
+      alt: "AWS",
+      objectClass: "object-cover",
     },
     {
-      threshold: 0.2,
-    }
-  );
+      src: pottImg,
+      alt: "Plant",
+      objectClass: "object-cover object-center",
+    },
+  ];
 
-  observer.observe(section);
-
-  return () => observer.disconnect();
-}, []);
-
-/* ===================== */
-/* STORY SCROLL ANIMATION */
-/* ===================== */
-useEffect(() => {
-  const section = storySectionRef.current;
-
-  if (!section) return;
-
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setShowStory(true);
-        observer.unobserve(section);
-      }
+  const skills = [
+    {
+      skill: "Python",
+      level: 95,
+      color: "bg-[#62b8ad]",
+      delay: 0,
     },
     {
-      threshold: 0.2,
-    }
-  );
+      skill: "Backend",
+      level: 90,
+      color: "bg-[#e5b1a5]",
+      delay: 300,
+    },
+    {
+      skill: "AWS",
+      level: 95,
+      color: "bg-[#e7b52d]",
+      delay: 600,
+    },
+    {
+      skill: "Research",
+      level: 75,
+      color: "bg-[#c79a5d]",
+      delay: 900,
+    },
+    {
+      skill: "Gym",
+      level: 40,
+      color: "bg-[#d84242]",
+      delay: 1200,
+    },
+  ];
 
-  observer.observe(section);
-
-  return () => observer.disconnect();
-}, []);
   return (
-    <main className="bg-white text-[#0f172a]">
-    {/* ====================================================== */}
-    {/* ABOUT */}
-    {/* ====================================================== */}
-    <section
-      id="about"
-      className="bg-white px-4 md:px-6 pt-28 md:pt-32 pb-10 overflow-hidden"
-    >
-      <div className="max-w-[1280px] mx-auto">
+    <main className="bg-white text-[#0f172a] overflow-x-hidden">
+      {/* ====================================================== */}
+      {/* ABOUT */}
+      {/* ====================================================== */}
+      <section
+        id="about"
+        className="
+          bg-white
+          px-4
+          sm:px-5
+          md:px-6
+          pt-[90px]
+          sm:pt-[100px]
+          md:pt-32
+          pb-8
+          md:pb-10
+          overflow-hidden
+        "
+      >
+        <div className="max-w-[1280px] mx-auto">
+          {/* MAIN ABOUT HERO */}
+          <div
+            className="
+              relative
+              mt-3
+              sm:mt-5
+              md:mt-10
+              min-h-0
+              md:min-h-[560px]
+              overflow-visible
+            "
+          >
+            <div className="grid md:grid-cols-[0.95fr_1.05fr] h-full">
+              {/* LEFT CONTENT */}
+              <div
+                className={`
+                  relative
+                  z-20
 
-        {/* MAIN ABOUT HERO */}
-        <div className="relative mt-10 min-h-[540px] md:min-h-[560px] overflow-visible">
+                  pt-8
+                  sm:pt-10
+                  md:pt-20
 
-          <div className="grid md:grid-cols-[0.95fr_1.05fr] h-full">
+                  pb-8
+                  sm:pb-10
+                  md:pb-16
 
-            {/* LEFT CONTENT */}
-            <div
-              className={`
-                relative z-20
-                pt-16 md:pt-20 pb-16 pl-0
+                  transition-all
+                  duration-[900ms]
+                  ease-[cubic-bezier(0.22,1,0.36,1)]
+                  delay-[200ms]
+                  md:delay-[450ms]
 
-                transition-all
-                duration-[900ms]
-                ease-[cubic-bezier(0.22,1,0.36,1)]
-                delay-[450ms]
+                  ${
+                    animateAbout
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 -translate-x-[70px] md:-translate-x-[140px]"
+                  }
+                `}
+              >
+                <h1
+                  className="
+                    text-[54px]
+                    sm:text-[66px]
+                    md:text-[96px]
+                    lg:text-[104px]
 
-                ${
-                  animateAbout
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 -translate-x-[140px]"
-                }
-              `}
-            >
-              <h1 className="text-[76px] sm:text-[88px] md:text-[96px] lg:text-[104px] font-black tracking-[-0.065em] leading-[0.85] text-[#282828] mb-7">
-                about.
-              </h1>
+                    font-black
+                    tracking-[-0.065em]
+                    leading-[0.85]
+                    text-[#282828]
 
-              <p className="text-[24px] md:text-[27px] leading-[1.35] font-light text-[#8a8a8a] max-w-[500px] mb-8">
-                I'm a postgraduate at the University of Sheffield,
-                United Kingdom.
-              </p>
+                    mb-5
+                    md:mb-7
+                  "
+                >
+                  about.
+                </h1>
 
-              <p className="text-[17px] md:text-[18px] leading-[1.7] text-[#4c4c4c] font-normal max-w-[500px]">
-                Since 2021, I've enjoyed turning complex problems into simple,
-                elegant software solutions. When I'm not developing something,
-                you'll find me exploring my cooking skills, reading books, or
-                working out in the gym.
-              </p>
+                <p
+                  className="
+                    text-[20px]
+                    sm:text-[22px]
+                    md:text-[27px]
+
+                    leading-[1.4]
+                    md:leading-[1.35]
+
+                    font-light
+                    text-[#8a8a8a]
+
+                    max-w-[500px]
+
+                    mb-5
+                    md:mb-8
+                  "
+                >
+                  I'm a postgraduate at the University of Sheffield, United
+                  Kingdom.
+                </p>
+
+                <p
+                  className="
+                    text-[15px]
+                    sm:text-[16px]
+                    md:text-[18px]
+
+                    leading-[1.7]
+                    text-[#4c4c4c]
+                    font-normal
+
+                    max-w-[500px]
+                  "
+                >
+                  Since 2021, I've enjoyed turning complex problems into simple,
+                  elegant software solutions. When I'm not developing
+                  something, you'll find me exploring my cooking skills,
+                  reading books, or working out in the gym.
+                </p>
+              </div>
+
+              {/* DESKTOP PORTRAIT */}
+              <div className="relative hidden md:block">
+                <img
+                  src={aboutImg}
+                  alt="Vivin"
+                  className={`
+                    absolute
+                    left-[48%]
+                    bottom-[-74px]
+
+                    w-[650px]
+                    lg:w-[780px]
+                    xl:w-[820px]
+
+                    max-w-none
+                    object-contain
+                    z-10
+
+                    transition-all
+                    duration-[1100ms]
+                    ease-[cubic-bezier(0.22,1,0.36,1)]
+
+                    ${
+                      animateAbout
+                        ? "opacity-100 -translate-x-1/2"
+                        : "opacity-0 translate-x-[180px]"
+                    }
+                  `}
+                />
+              </div>
             </div>
 
-            {/* RIGHT PORTRAIT */}
-            <div className="relative hidden md:block">
+            {/* MOBILE PORTRAIT */}
+            <div
+              className="
+                md:hidden
+                relative
+                h-[330px]
+                sm:h-[390px]
+                overflow-hidden
+              "
+            >
               <img
                 src={aboutImg}
                 alt="Vivin"
                 className={`
                   absolute
-                  left-[48%]
-                  bottom-[-74px]
 
-                  w-[720px]
-                  lg:w-[780px]
-                  xl:w-[820px]
+                  bottom-[-40px]
+                  sm:bottom-[-50px]
+
+                  left-1/2
+
+                  w-[390px]
+                  sm:w-[470px]
 
                   max-w-none
                   object-contain
-                  z-10
 
                   transition-all
-                  duration-[1100ms]
+                  duration-[1000ms]
                   ease-[cubic-bezier(0.22,1,0.36,1)]
 
                   ${
                     animateAbout
                       ? "opacity-100 -translate-x-1/2"
-                      : "opacity-0 translate-x-[180px]"
+                      : "opacity-0 translate-x-[80px]"
                   }
                 `}
               />
             </div>
 
+            {/* HORIZONTAL LINE */}
+            <div className="absolute left-0 right-0 bottom-0 h-px bg-[#d9d9d9] z-20" />
           </div>
 
-          {/* HORIZONTAL LINE */}
+          {/* BOTTOM IMAGE STRIP */}
+          <div className="pt-7 sm:pt-8 md:pt-10 overflow-hidden">
+            <div
+              className="
+                grid
+                grid-cols-2
+                sm:grid-cols-3
+                lg:grid-cols-6
+
+                gap-2.5
+                sm:gap-3
+                md:gap-4
+
+                w-full
+              "
+            >
+              {imageCards.map((item, index) => (
+                <div
+                  key={item.alt}
+                  className={`
+                    min-w-0
+                    bg-white
+
+                    rounded-[8px]
+                    md:rounded-[10px]
+
+                    border
+                    border-[#d4d4d4]
+
+                    p-[4px]
+                    md:p-[5px]
+
+                    shadow-[0_2px_8px_rgba(0,0,0,0.10)]
+
+                    transition-all
+                    duration-[900ms]
+                    md:duration-[1100ms]
+
+                    ease-[cubic-bezier(0.22,1,0.36,1)]
+
+                    hover:-translate-y-2
+                    md:hover:-translate-y-5
+                    hover:shadow-lg
+
+                    ${
+                      animateAbout
+                        ? "opacity-100 translate-x-0 -translate-y-1 md:-translate-y-2"
+                        : "opacity-0 -translate-x-[35px]"
+                    }
+                  `}
+                  style={{
+                    transitionDelay: `${400 + index * 180}ms`,
+                  }}
+                >
+                  <div
+                    className="
+                      h-[82px]
+                      sm:h-[100px]
+                      md:h-[118px]
+                      overflow-hidden
+                      rounded-[6px]
+                      md:rounded-[7px]
+                    "
+                  >
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className={`w-full h-full ${item.objectClass}`}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ====================================================== */}
+      {/* PART ENGINEER / PART RESEARCHER */}
+      {/* ====================================================== */}
+      <section
+        ref={circleSectionRef}
+        className="
+          border-t
+          border-gray-200
+          bg-[#f5f5f5]
+
+          px-4
+          sm:px-5
+          md:px-6
+
+          py-14
+          sm:py-16
+          lg:py-20
+
+          overflow-hidden
+        "
+      >
+        <div className="max-w-[1280px] mx-auto">
           <div
             className="
-              absolute
-              left-0
-              right-0
-              bottom-0
-              h-px
-              bg-[#d9d9d9]
-              z-20
+              grid
+              grid-cols-1
+              lg:grid-cols-[1fr_560px_1fr]
+
+              items-center
+
+              gap-10
+              lg:gap-8
             "
-          />
+          >
+            {/* LEFT */}
+            <div className="justify-self-start w-full">
+              <h2
+                className="
+                  text-[32px]
+                  sm:text-[36px]
+                  lg:text-[44px]
 
-          {/* MOBILE PORTRAIT */}
-          <div className="md:hidden relative h-[430px] overflow-hidden">
-            <img
-              src={aboutImg}
-              alt="Vivin"
-              className={`
-                absolute
-                bottom-[-55px]
-                left-1/2
-                w-[500px]
-                max-w-none
-                object-contain
+                  font-light
+                  leading-none
+                  text-[#3f4652]
 
-                transition-all
-                duration-[1000ms]
-                ease-[cubic-bezier(0.22,1,0.36,1)]
+                  mb-5
+                  lg:mb-8
+                "
+              >
+                Part Engineer
+              </h2>
 
-                ${
-                  animateAbout
-                    ? "opacity-100 -translate-x-1/2"
-                    : "opacity-0 translate-x-[100px]"
-                }
-              `}
-            />
-          </div>
+              <div className="w-12 sm:w-14 lg:w-16 h-[2px] bg-[#3f4652] mb-5 lg:mb-8" />
 
-        </div>
+              <ul
+                className="
+                  space-y-2.5
+                  sm:space-y-3
+                  lg:space-y-4
 
-        {/* BOTTOM IMAGE STRIP */}
-        <div className="pt-10 overflow-hidden">
+                  text-[16px]
+                  sm:text-[17px]
+                  lg:text-[18px]
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 w-full">
-
-            {/* FLIGHT */}
-            <div
-              className={`
-                min-w-0
-                bg-white
-                rounded-[10px]
-                border border-[#d4d4d4]
-                p-[5px]
-                shadow-[0_2px_8px_rgba(0,0,0,0.10)]
-
-                transition-all
-                duration-[1100ms]
-                ease-[cubic-bezier(0.22,1,0.36,1)]
-                delay-[900ms]
-
-                hover:-translate-y-5
-                hover:shadow-lg
-
-                ${
-                  animateAbout
-                    ? "opacity-100 -translate-y-2 translate-x-0"
-                    : "opacity-0 -translate-y-2 -translate-x-[60px]"
-                }
-              `}
-            >
-              <div className="h-[118px] overflow-hidden rounded-[7px]">
-                <img
-                  src={flightImg}
-                  alt="Flight"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+                  leading-relaxed
+                  text-[#5b6470]
+                "
+              >
+                <li>Software Development</li>
+                <li>Backend Engineering</li>
+                <li>Python Programming</li>
+                <li>Cloud Computing</li>
+                <li>System Design</li>
+              </ul>
             </div>
 
-            {/* VIVI */}
+            {/* CENTER */}
             <div
-              className={`
-                min-w-0
-                bg-white
-                rounded-[10px]
-                border border-[#d4d4d4]
-                p-[5px]
-                shadow-[0_2px_8px_rgba(0,0,0,0.10)]
+              className="
+                flex
+                items-center
+                justify-center
 
-                transition-all
-                duration-[1100ms]
-                ease-[cubic-bezier(0.22,1,0.36,1)]
-                delay-[1150ms]
-
-                hover:-translate-y-5
-                hover:shadow-lg
-
-                ${
-                  animateAbout
-                    ? "opacity-100 -translate-y-2 translate-x-0"
-                    : "opacity-0 -translate-y-2 -translate-x-[60px]"
-                }
-              `}
+                order-first
+                lg:order-none
+              "
             >
-              <div className="h-[118px] overflow-hidden rounded-[7px]">
-                <img
-                  src={viviImg}
-                  alt="Vivin"
-                  className="w-full h-full object-cover object-center"
-                />
-              </div>
+              <img
+                src={circleImg}
+                alt="Coder and Researcher"
+                className={`
+                  w-[300px]
+                  sm:w-[390px]
+                  md:w-[470px]
+                  lg:w-full
+
+                  max-w-[560px]
+
+                  h-auto
+                  object-contain
+                  drop-shadow-2xl
+
+                  transition-all
+                  duration-[1400ms]
+                  ease-[cubic-bezier(0.16,1,0.3,1)]
+                  will-change-transform
+
+                  ${
+                    showCircle
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-[250px] lg:translate-y-[650px] opacity-0"
+                  }
+                `}
+              />
             </div>
 
-            {/* SHEFFIELD */}
-            <div
-              className={`
-                min-w-0
-                bg-white
-                rounded-[10px]
-                border border-[#d4d4d4]
-                p-[5px]
-                shadow-[0_2px_8px_rgba(0,0,0,0.10)]
+            {/* RIGHT */}
+            <div className="justify-self-start lg:justify-self-end text-left w-full">
+              <h2
+                className="
+                  text-[32px]
+                  sm:text-[36px]
+                  lg:text-[44px]
 
-                transition-all
-                duration-[1100ms]
-                ease-[cubic-bezier(0.22,1,0.36,1)]
-                delay-[1400ms]
+                  font-light
+                  leading-none
+                  text-[#3f4652]
 
-                hover:-translate-y-5
-                hover:shadow-lg
+                  mb-5
+                  lg:mb-8
+                "
+              >
+                Part Researcher
+              </h2>
 
-                ${
-                  animateAbout
-                    ? "opacity-100 -translate-y-2 translate-x-0"
-                    : "opacity-0 -translate-y-2 -translate-x-[60px]"
-                }
-              `}
-            >
-              <div className="h-[118px] overflow-hidden rounded-[7px]">
-                <img
-                  src={sheffieldImg}
-                  alt="Sheffield"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+              <div className="w-12 sm:w-14 lg:w-16 h-[2px] bg-[#3f4652] mb-5 lg:mb-8" />
+
+              <ul
+                className="
+                  space-y-2.5
+                  sm:space-y-3
+                  lg:space-y-4
+
+                  text-[16px]
+                  sm:text-[17px]
+                  lg:text-[18px]
+
+                  leading-relaxed
+                  text-[#5b6470]
+                "
+              >
+                <li>Machine Learning</li>
+                <li>Artificial Intelligence</li>
+                <li>Brain Computer Interfaces</li>
+                <li>Signal Processing</li>
+                <li>Scientific Research</li>
+              </ul>
             </div>
-
-            {/* AMBASSADOR */}
-            <div
-              className={`
-                min-w-0
-                bg-white
-                rounded-[10px]
-                border border-[#d4d4d4]
-                p-[5px]
-                shadow-[0_2px_8px_rgba(0,0,0,0.10)]
-
-                transition-all
-                duration-[1100ms]
-                ease-[cubic-bezier(0.22,1,0.36,1)]
-                delay-[1650ms]
-
-                hover:-translate-y-5
-                hover:shadow-lg
-
-                ${
-                  animateAbout
-                    ? "opacity-100 -translate-y-2 translate-x-0"
-                    : "opacity-0 -translate-y-2 -translate-x-[60px]"
-                }
-              `}
-            >
-              <div className="h-[118px] overflow-hidden rounded-[7px]">
-                <img
-                  src={myUniPhoto}
-                  alt="Student Ambassador"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-
-            {/* AWS */}
-            <div
-              className={`
-                min-w-0
-                bg-white
-                rounded-[10px]
-                border border-[#d4d4d4]
-                p-[5px]
-                shadow-[0_2px_8px_rgba(0,0,0,0.10)]
-
-                transition-all
-                duration-[1100ms]
-                ease-[cubic-bezier(0.22,1,0.36,1)]
-                delay-[1900ms]
-
-                hover:-translate-y-5
-                hover:shadow-lg
-
-                ${
-                  animateAbout
-                    ? "opacity-100 -translate-y-2 translate-x-0"
-                    : "opacity-0 -translate-y-2 -translate-x-[60px]"
-                }
-              `}
-            >
-              <div className="h-[118px] overflow-hidden rounded-[7px]">
-                <img
-                  src={awsImg}
-                  alt="AWS"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-
-            {/* PLANT */}
-            <div
-              className={`
-                min-w-0
-                bg-white
-                rounded-[10px]
-                border border-[#d4d4d4]
-                p-[5px]
-                shadow-[0_2px_8px_rgba(0,0,0,0.10)]
-
-                transition-all
-                duration-[1100ms]
-                ease-[cubic-bezier(0.22,1,0.36,1)]
-                delay-[2150ms]
-
-                hover:-translate-y-5
-                hover:shadow-lg
-
-                [&_button]:hidden
-                [&_a]:hidden
-
-                ${
-                  animateAbout
-                    ? "opacity-100 -translate-y-2 translate-x-0"
-                    : "opacity-0 -translate-y-2 -translate-x-[60px]"
-                }
-              `}
-            >
-              <div className="h-[118px] overflow-hidden rounded-[7px] relative">
-                <img
-                  src={pottImg}
-                  alt="Plant"
-                  className="w-full h-full object-cover object-center block"
-                />
-              </div>
-            </div>
-
           </div>
         </div>
+      </section>
 
-      </div>
-    </section>
+      {/* ====================================================== */}
+      {/* RANDOM FACTS */}
+      {/* ====================================================== */}
+      <section
+        ref={randomFactsRef}
+        className="
+          border-t
+          bg-white
 
+          px-4
+          sm:px-5
+          md:px-6
 
-    {/* ====================================================== */}
-    {/* PART ENGINEER / PART RESEARCHER */}
-    {/* ====================================================== */}
-    <section
-      ref={circleSectionRef}
-      className="border-t border-gray-200 bg-[#f5f5f5] px-4 md:px-6 py-20 overflow-hidden"
-    >
-      <div className="max-w-[1280px] mx-auto">
+          py-14
+          sm:py-16
+          lg:py-20
 
-        <div className="grid lg:grid-cols-[1fr_560px_1fr] items-center gap-8">
+          overflow-hidden
+        "
+      >
+        <div className="max-w-[1280px] mx-auto">
+          <div
+            className="
+              grid
+              grid-cols-1
+              lg:grid-cols-[620px_1fr]
 
-          {/* LEFT */}
-          <div className="justify-self-start">
-            <h2 className="text-[40px] lg:text-[44px] font-light leading-none text-[#3f4652] mb-8 whitespace-nowrap">
-              Part Engineer
-            </h2>
+              items-center
 
-            <div className="w-16 h-[2px] bg-[#3f4652] mb-8" />
-
-            <ul className="space-y-4 text-[18px] leading-relaxed text-[#5b6470]">
-              <li>Software Development</li>
-              <li>Backend Engineering</li>
-              <li>Python Programming</li>
-              <li>Cloud Computing</li>
-              <li>System Design</li>
-            </ul>
-          </div>
-
-          {/* CENTER */}
-          <div className="flex items-center justify-center">
-            <img
-              src={circleImg}
-              alt="Coder and Researcher"
+              gap-4
+              sm:gap-8
+              lg:gap-16
+            "
+          >
+            {/* OCTOPUS */}
+            <div
               className={`
-                w-full
-                max-w-[560px]
-                h-auto
-                object-contain
-                drop-shadow-2xl
+                flex
+                items-center
+                justify-center
+                lg:justify-start
 
                 transition-all
-                duration-[1400ms]
+                duration-[1800ms]
+                lg:duration-[5000ms]
+
                 ease-[cubic-bezier(0.16,1,0.3,1)]
                 will-change-transform
 
                 ${
-                  showCircle
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-[650px] opacity-0"
+                  showRandomFacts
+                    ? "translate-x-0 opacity-100"
+                    : "-translate-x-[120px] lg:-translate-x-[300px] opacity-0"
                 }
               `}
-            />
-          </div>
+            >
+              <img
+                src={octoImg}
+                alt="Octopus coming out of a monitor"
+                className="
+                  w-[330px]
+                  sm:w-[430px]
+                  md:w-[520px]
 
-          {/* RIGHT */}
-          <div className="justify-self-start lg:justify-self-end text-left">
-            <h2 className="text-[40px] lg:text-[44px] font-light leading-none text-[#3f4652] mb-8 whitespace-nowrap">
-              Part Researcher
-            </h2>
+                  lg:w-[760px]
+                  xl:w-[800px]
 
-            <div className="w-16 h-[2px] bg-[#3f4652] mb-8" />
+                  max-w-none
+                  h-auto
+                  object-contain
 
-            <ul className="space-y-4 text-[18px] leading-relaxed text-[#5b6470]">
-              <li>Machine Learning</li>
-              <li>Artificial Intelligence</li>
-              <li>Brain Computer Interfaces</li>
-              <li>Signal Processing</li>
-              <li>Scientific Research</li>
-            </ul>
-          </div>
+                  lg:-ml-[90px]
 
-        </div>
+                  translate-y-[20px]
+                  lg:translate-y-[70px]
+                "
+              />
+            </div>
 
-      </div>
-    </section>
+            {/* FACTS */}
+            <div
+              className={`
+                justify-self-start
+                lg:justify-self-end
 
+                transition-all
+                duration-[1100ms]
+                ease-[cubic-bezier(0.16,1,0.3,1)]
+                delay-[200ms]
+                lg:delay-[450ms]
 
-    {/* ====================================================== */}
-    {/* RANDOM FACTS */}
-    {/* ====================================================== */}
-    <section
-      ref={randomFactsRef}
-      className="border-t bg-white px-4 md:px-6 py-20 overflow-hidden"
-    >
-      <div className="max-w-[1280px] mx-auto">
+                ${
+                  showRandomFacts
+                    ? "translate-x-0 opacity-100"
+                    : "-translate-x-[60px] lg:-translate-x-[120px] opacity-0"
+                }
+              `}
+            >
+              <h2
+                className="
+                  text-[36px]
+                  sm:text-[40px]
+                  lg:text-[46px]
 
-        <div className="grid lg:grid-cols-[620px_1fr] items-center gap-12 lg:gap-16">
+                  font-light
+                  leading-none
+                  text-[#3f3f3f]
 
-          {/* LEFT — OCTOPUS */}
-          <div
-            className={`
-              flex items-center justify-start
+                  mb-6
+                  lg:mb-8
+                "
+              >
+                Random facts
+              </h2>
 
-              transition-all
-              duration-[5000ms]
-              ease-[cubic-bezier(0.16,1,0.3,1)]
-              will-change-transform
+              <ul
+                className="
+                  space-y-[10px]
+                  sm:space-y-[12px]
+                  lg:space-y-[14px]
 
-              ${
-                showRandomFacts
-                  ? "translate-x-0 opacity-100"
-                  : "-translate-x-[300px] opacity-0"
-              }
-            `}
-          >
-            <img
-              src={octoImg}
-              alt="Octopus coming out of a monitor"
-              className="
-                w-full
-                lg:w-[760px]
-                xl:w-[800px]
-                max-w-none
-                h-auto
-                object-contain
-                lg:-ml-[90px]
-                translate-y-[70px]
-              "
-            />
-          </div>
+                  text-[16px]
+                  sm:text-[17px]
+                  lg:text-[19px]
 
-          {/* RIGHT — RANDOM FACTS */}
-          <div
-            className={`
-              justify-self-start lg:justify-self-end
-              -translate-y-[5px]
+                  leading-[1.5]
+                  lg:leading-[1.45]
 
-              transition-all
-              duration-[1100ms]
-              ease-[cubic-bezier(0.16,1,0.3,1)]
-              delay-[450ms]
-
-              ${
-                showRandomFacts
-                  ? "translate-x-0 opacity-100"
-                  : "-translate-x-[120px] opacity-0"
-              }
-            `}
-          >
-            <h2 className="text-[46px] font-light leading-none text-[#3f3f3f] mb-8">
-              Random facts
-            </h2>
-
-            <ul className="space-y-[14px] text-[19px] leading-[1.45] font-normal text-[#555555]">
-              <li>
-                I'm slightly addicted to{" "}
-                <a
-                  href="https://www.linkedin.com/in/vivinthambidurai"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline underline-offset-2 hover:text-black"
-                >
-                  social media
-                </a>
-              </li>
-
-              <li>Building things from scratch is my thing</li>
-              <li>Can't say no to a triple chocolate muffin</li>
-              <li>Complex problems are oddly satisfying</li>
-              <li>Always curious about how things work</li>
-              <li>Learning goes beyond coursework</li>
-              <li>Coffee keeps me going</li>
-              <li>I love to cook (and eat)</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    {/* ====================================================== */}
-    {/* MY SKILLS */}
-    {/* ====================================================== */}
-    <section
-      ref={skillsSectionRef}
-      className="border-t bg-[#f5f5f5] px-4 md:px-6 py-28 overflow-hidden"
-    >
-      <div className="max-w-[1280px] mx-auto">
-
-        <div className="grid md:grid-cols-[180px_1fr] gap-6 items-end">
-
-          {/* LEFT LABELS */}
-          <div className="hidden md:flex flex-col justify-between h-[430px] pb-24 text-gray-500 font-bold text-lg">
-            <span>Jedi</span>
-            <span>Ninja</span>
-            <span>Geek</span>
-            <span>Newbie</span>
-          </div>
-
-          <div className="min-w-0">
-
-            <h2 className="text-[44px] font-light text-gray-700 text-right mb-8">
-              My skills
-            </h2>
-
-            <div className="relative h-[430px] border-l border-b border-gray-300">
-
-              {/* GRID */}
-              <div className="absolute inset-0 flex flex-col justify-between pb-24">
-                <div className="border-t border-gray-200" />
-                <div className="border-t border-gray-200" />
-                <div className="border-t border-gray-200" />
-                <div className="border-t border-gray-200" />
-              </div>
-
-              {/* BARS */}
-              <div className="relative z-10 h-full flex items-end gap-4 lg:gap-8 px-4 lg:px-8">
-
-                {[
-                  {
-                    skill: "Python",
-                    level: 95,
-                    color: "bg-[#62b8ad]",
-                    delay: 0,
-                  },
-                  {
-                    skill: "Backend",
-                    level: 90,
-                    color: "bg-[#e5b1a5]",
-                    delay: 300,
-                  },
-                  {
-                    skill: "AWS",
-                    level: 95,
-                    color: "bg-[#e7b52d]",
-                    delay: 600,
-                  },
-                  {
-                    skill: "Research",
-                    level: 75,
-                    color: "bg-[#c79a5d]",
-                    delay: 900,
-                  },
-                  {
-                    skill: "Gym",
-                    level: 40,
-                    color: "bg-[#d84242]",
-                    delay: 1200,
-                  },
-                ].map((item) => (
-
-                  <div
-                    key={item.skill}
-                    className={`
-                      ${item.color}
-
-                      flex-1
-                      min-w-0
-                      max-w-[180px]
-
-                      rounded-t-lg
-                      shadow-md
-
-                      flex
-                      flex-col
-                      justify-end
-                      items-center
-
-                      pb-8
-                      text-white
-
-                      transition-all
-                      duration-[1600ms]
-                      ease-[cubic-bezier(0.16,1,0.3,1)]
-                      origin-bottom
-                    `}
-                    style={{
-                      height: showSkills ? `${item.level}%` : "0%",
-                      opacity: showSkills ? 1 : 0,
-                      transitionDelay: `${item.delay}ms`,
-                    }}
+                  font-normal
+                  text-[#555555]
+                "
+              >
+                <li>
+                  I'm slightly addicted to{" "}
+                  <a
+                    href="https://www.linkedin.com/in/vivinthambidurai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-2 hover:text-black"
                   >
+                    social media
+                  </a>
+                </li>
 
-                    <div
-                      className={`
-                        text-[40px]
-                        lg:text-[54px]
-                        font-bold
-                        leading-none
-                        drop-shadow
+                <li>Building things from scratch is my thing</li>
+                <li>Can't say no to a triple chocolate muffin</li>
+                <li>Complex problems are oddly satisfying</li>
+                <li>Always curious about how things work</li>
+                <li>Learning goes beyond coursework</li>
+                <li>Coffee keeps me going</li>
+                <li>I love to cook (and eat)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                        transition-opacity
-                        duration-500
+      {/* ====================================================== */}
+      {/* MY SKILLS */}
+      {/* ====================================================== */}
+      <section
+        ref={skillsSectionRef}
+        className="
+          border-t
+          bg-[#f5f5f5]
 
-                        ${
-                          showSkills
-                            ? "opacity-100"
-                            : "opacity-0"
-                        }
-                      `}
-                      style={{
-                        transitionDelay: `${item.delay + 600}ms`,
-                      }}
-                    >
-                      {item.level}
-                      <span className="text-xl lg:text-2xl ml-1">%</span>
+          px-4
+          sm:px-5
+          md:px-6
+
+          py-16
+          sm:py-20
+          lg:py-28
+
+          overflow-hidden
+        "
+      >
+        <div className="max-w-[1280px] mx-auto">
+          <div className="grid md:grid-cols-[110px_1fr] lg:grid-cols-[180px_1fr] gap-3 md:gap-6 items-end">
+            {/* LEFT LABELS */}
+            <div
+              className="
+                hidden
+                md:flex
+                flex-col
+                justify-between
+
+                h-[360px]
+                lg:h-[430px]
+
+                pb-20
+                lg:pb-24
+
+                text-gray-500
+                font-bold
+
+                text-[14px]
+                lg:text-lg
+              "
+            >
+              <span>Jedi</span>
+              <span>Ninja</span>
+              <span>Geek</span>
+              <span>Newbie</span>
+            </div>
+
+            <div className="min-w-0">
+              <h2
+                className="
+                  text-[36px]
+                  sm:text-[40px]
+                  lg:text-[44px]
+
+                  font-light
+                  text-gray-700
+
+                  text-left
+                  md:text-right
+
+                  mb-7
+                  lg:mb-8
+                "
+              >
+                My skills
+              </h2>
+
+              {/* MOBILE SKILLS */}
+              <div className="md:hidden space-y-5">
+                {skills.map((item) => (
+                  <div key={item.skill}>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-[15px] font-semibold text-gray-600">
+                        {item.skill}
+                      </span>
+
+                      <span className="text-[15px] font-bold text-gray-600">
+                        {item.level}%
+                      </span>
                     </div>
 
-                    <p
+                    <div className="h-[14px] bg-white rounded-full overflow-hidden border border-gray-200">
+                      <div
+                        className={`
+                          ${item.color}
+                          h-full
+                          rounded-full
+
+                          transition-all
+                          duration-[1400ms]
+                          ease-[cubic-bezier(0.16,1,0.3,1)]
+                        `}
+                        style={{
+                          width: showSkills ? `${item.level}%` : "0%",
+                          transitionDelay: `${item.delay}ms`,
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* TABLET / DESKTOP SKILLS */}
+              <div
+                className="
+                  hidden
+                  md:block
+
+                  relative
+                  h-[360px]
+                  lg:h-[430px]
+
+                  border-l
+                  border-b
+                  border-gray-300
+                "
+              >
+                {/* GRID */}
+                <div className="absolute inset-0 flex flex-col justify-between pb-20 lg:pb-24">
+                  <div className="border-t border-gray-200" />
+                  <div className="border-t border-gray-200" />
+                  <div className="border-t border-gray-200" />
+                  <div className="border-t border-gray-200" />
+                </div>
+
+                {/* BARS */}
+                <div
+                  className="
+                    relative
+                    z-10
+                    h-full
+
+                    flex
+                    items-end
+
+                    gap-2
+                    lg:gap-8
+
+                    px-2
+                    lg:px-8
+                  "
+                >
+                  {skills.map((item) => (
+                    <div
+                      key={item.skill}
                       className={`
-                        mt-5
-                        text-sm
-                        lg:text-lg
-                        font-bold
+                        ${item.color}
 
-                        transition-opacity
-                        duration-500
+                        flex-1
+                        min-w-0
+                        max-w-[180px]
 
-                        ${
-                          showSkills
-                            ? "opacity-100"
-                            : "opacity-0"
-                        }
+                        rounded-t-lg
+                        shadow-md
+
+                        flex
+                        flex-col
+                        justify-end
+                        items-center
+
+                        pb-5
+                        lg:pb-8
+
+                        text-white
+
+                        transition-all
+                        duration-[1600ms]
+                        ease-[cubic-bezier(0.16,1,0.3,1)]
+                        origin-bottom
                       `}
                       style={{
-                        transitionDelay: `${item.delay + 700}ms`,
+                        height: showSkills ? `${item.level}%` : "0%",
+                        opacity: showSkills ? 1 : 0,
+                        transitionDelay: `${item.delay}ms`,
                       }}
                     >
-                      {item.skill}
-                    </p>
+                      <div
+                        className={`
+                          text-[28px]
+                          lg:text-[54px]
 
-                  </div>
+                          font-bold
+                          leading-none
+                          drop-shadow
 
-                ))}
+                          transition-opacity
+                          duration-500
 
+                          ${showSkills ? "opacity-100" : "opacity-0"}
+                        `}
+                        style={{
+                          transitionDelay: `${item.delay + 600}ms`,
+                        }}
+                      >
+                        {item.level}
+                        <span className="text-[14px] lg:text-2xl ml-1">%</span>
+                      </div>
+
+                      <p
+                        className={`
+                          mt-3
+                          lg:mt-5
+
+                          text-[11px]
+                          lg:text-lg
+
+                          font-bold
+
+                          transition-opacity
+                          duration-500
+
+                          ${showSkills ? "opacity-100" : "opacity-0"}
+                        `}
+                        style={{
+                          transitionDelay: `${item.delay + 700}ms`,
+                        }}
+                      >
+                        {item.skill}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-
         </div>
-      </div>
-    </section>
+      </section>
 
+      {/* ====================================================== */}
+      {/* FEATURED */}
+      {/* ====================================================== */}
+      <section
+        ref={featuredSectionRef}
+        className="
+          border-y
+          border-gray-300
+          bg-white
 
-    {/* ====================================================== */}
-    {/* FEATURED */}
-    {/* ====================================================== */}
-    <section
-      ref={featuredSectionRef}
-      className="border-y border-gray-300 bg-white px-4 md:px-6 py-32 overflow-hidden"
-    >
-      <div className="max-w-[1280px] mx-auto grid md:grid-cols-[0.9fr_1.1fr] gap-16 items-center">
+          px-4
+          sm:px-5
+          md:px-6
 
-        {/* LEFT */}
+          py-16
+          sm:py-20
+          lg:py-32
+
+          overflow-hidden
+        "
+      >
         <div
-          className={`
-            flex flex-col justify-center
+          className="
+            max-w-[1280px]
+            mx-auto
 
-            transition-all
-            duration-[1600ms]
-            ease-[cubic-bezier(0.16,1,0.3,1)]
+            grid
+            grid-cols-1
+            md:grid-cols-[0.9fr_1.1fr]
 
-            ${
-              showFeatured
-                ? "translate-x-0 opacity-100"
-                : "-translate-x-[380px] opacity-0"
-            }
-          `}
+            gap-10
+            md:gap-8
+            lg:gap-16
+
+            items-center
+          "
         >
-
-          <h2 className="text-[44px] lg:text-[52px] font-light leading-none tracking-[-0.035em] text-[#333333] mb-8">
-            Featured here & there
-          </h2>
-
-          <p className="max-w-[520px] text-[20px] leading-[1.65] text-[#555555] mb-10">
-            My work has been recognised through research publications,
-            international websites, university representation, and selected
-            student features. These milestones reflect my journey as a software
-            engineer, researcher, and MSc Advanced Computer Science student.
-          </p>
-
-          <Link
-            to="/featured"
-            className="inline-flex w-fit items-center text-[18px] font-normal text-[#333333] border-b border-[#333333] pb-1"
-          >
-            View featured work
-          </Link>
-
-        </div>
-
-        {/* RIGHT COLLAGE */}
-        <div
-          className={`
-            relative
-            h-[440px]
-            min-w-0
-
-            transition-all
-            duration-[2800ms]
-            ease-[cubic-bezier(0.16,1,0.3,1)]
-            delay-[250ms]
-
-            ${
-              showFeatured
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-[220px]"
-            }
-          `}
-        >
-
-          {/* HORIZONTAL IMAGE */}
+          {/* LEFT */}
           <div
-            className="
-              absolute
-              left-0
-              top-[125px]
+            className={`
+              flex
+              flex-col
+              justify-center
 
-              w-[320px]
-              lg:w-[340px]
-              h-[245px]
+              transition-all
+              duration-[1600ms]
+              ease-[cubic-bezier(0.16,1,0.3,1)]
 
-              rotate-[-5deg]
-              z-10
-            "
+              ${
+                showFeatured
+                  ? "translate-x-0 opacity-100"
+                  : "-translate-x-[120px] lg:-translate-x-[380px] opacity-0"
+              }
+            `}
           >
-            <img
-              src={horiImg}
-              alt="Researcher and coder"
+            <h2
               className="
-                w-full
-                h-full
-                object-contain
-                drop-shadow-[0_10px_20px_rgba(0,0,0,0.13)]
+                text-[36px]
+                sm:text-[40px]
+                lg:text-[52px]
+
+                font-light
+                leading-[1.05]
+                tracking-[-0.035em]
+                text-[#333333]
+
+                mb-6
+                lg:mb-8
               "
-            />
+            >
+              Featured here & there
+            </h2>
+
+            <p
+              className="
+                max-w-[520px]
+
+                text-[16px]
+                sm:text-[17px]
+                lg:text-[20px]
+
+                leading-[1.65]
+                text-[#555555]
+
+                mb-7
+                lg:mb-10
+              "
+            >
+              My work has been recognised through research publications,
+              international websites, university representation, and selected
+              student features. These milestones reflect my journey as a
+              software engineer, researcher, and MSc Advanced Computer Science
+              student.
+            </p>
+
+            <Link
+              to="/featured"
+              className="
+                inline-flex
+                w-fit
+                items-center
+
+                text-[16px]
+                lg:text-[18px]
+
+                font-normal
+                text-[#333333]
+
+                border-b
+                border-[#333333]
+                pb-1
+              "
+            >
+              View featured work
+            </Link>
           </div>
 
-          {/* PROSPECT */}
+          {/* COLLAGE */}
           <div
-            className="
-              absolute
-              left-[210px]
-              lg:left-[250px]
-              top-[25px]
+            className={`
+              relative
 
-              w-[230px]
-              lg:w-[250px]
-              h-[365px]
+              h-[300px]
+              sm:h-[370px]
+              md:h-[400px]
+              lg:h-[440px]
 
-              rotate-[-6deg]
-              z-20
-            "
+              min-w-0
+
+              transition-all
+              duration-[2000ms]
+              lg:duration-[2800ms]
+
+              ease-[cubic-bezier(0.16,1,0.3,1)]
+              delay-[200ms]
+
+              ${
+                showFeatured
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 translate-x-[100px] lg:translate-x-[220px]"
+              }
+            `}
           >
-            <img
-              src={prospectImg}
-              alt="Prospects magazine"
+            {/* HORIZONTAL */}
+            <div
               className="
-                w-full
-                h-full
-                object-contain
-                scale-[1.12]
+                absolute
 
-                drop-shadow-[0_12px_22px_rgba(0,0,0,0.18)]
+                left-[-15px]
+                sm:left-[5%]
+                md:left-0
+
+                top-[95px]
+                sm:top-[110px]
+                lg:top-[125px]
+
+                w-[190px]
+                sm:w-[250px]
+                md:w-[250px]
+                lg:w-[340px]
+
+                h-[155px]
+                sm:h-[200px]
+                lg:h-[245px]
+
+                rotate-[-5deg]
+                z-10
               "
-            />
+            >
+              <img
+                src={horiImg}
+                alt="Researcher and coder"
+                className="w-full h-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.13)]"
+              />
+            </div>
+
+            {/* PROSPECT */}
+            <div
+              className="
+                absolute
+
+                left-[30%]
+                sm:left-[34%]
+                md:left-[170px]
+                lg:left-[250px]
+
+                top-[15px]
+                sm:top-[20px]
+                lg:top-[25px]
+
+                w-[145px]
+                sm:w-[190px]
+                md:w-[200px]
+                lg:w-[250px]
+
+                h-[240px]
+                sm:h-[300px]
+                lg:h-[365px]
+
+                rotate-[-6deg]
+                z-20
+              "
+            >
+              <img
+                src={prospectImg}
+                alt="Prospects magazine"
+                className="w-full h-full object-contain scale-[1.08] lg:scale-[1.12] drop-shadow-[0_12px_22px_rgba(0,0,0,0.18)]"
+              />
+            </div>
+
+            {/* UNIVERSITY */}
+            <div
+              className="
+                absolute
+
+                right-[-10px]
+                sm:right-[2%]
+                md:right-0
+
+                top-[55px]
+                sm:top-[60px]
+                lg:top-[70px]
+
+                w-[125px]
+                sm:w-[165px]
+                md:w-[170px]
+                lg:w-[230px]
+
+                h-[215px]
+                sm:h-[285px]
+                md:h-[300px]
+                lg:h-[350px]
+
+                bg-white
+
+                shadow-[0_12px_32px_rgba(0,0,0,0.15)]
+
+                rotate-[7deg]
+                overflow-hidden
+                z-30
+              "
+            >
+              <img
+                src={ambassadorImg}
+                alt="University of Sheffield"
+                className="w-full h-full object-cover"
+                style={{
+                  objectPosition: "center center",
+                }}
+              />
+            </div>
           </div>
+        </div>
+      </section>
 
-          {/* UNIVERSITY IMAGE */}
+      {/* ====================================================== */}
+      {/* VOLUNTARY */}
+      {/* ====================================================== */}
+      <section
+        ref={volunteerSectionRef}
+        className="
+          border-t
+          bg-[#f5f5f5]
+
+          px-4
+          sm:px-5
+          md:px-6
+
+          py-16
+          sm:py-20
+          lg:py-32
+
+          overflow-hidden
+        "
+      >
+        <div
+          className="
+            max-w-[1280px]
+            mx-auto
+
+            grid
+            grid-cols-1
+            md:grid-cols-2
+
+            gap-9
+            md:gap-10
+            lg:gap-16
+
+            items-center
+          "
+        >
+          {/* IMAGE */}
           <div
-            className="
-              absolute
-              right-0
-              top-[70px]
-
-              w-[210px]
-              lg:w-[230px]
-              h-[350px]
-
-              bg-white
-              shadow-[0_12px_32px_rgba(0,0,0,0.15)]
-
-              rotate-[7deg]
+            className={`
+              rounded-xl
               overflow-hidden
-              z-30
-            "
+              shadow-sm
+
+              transition-all
+              duration-[1700ms]
+              ease-[cubic-bezier(0.16,1,0.3,1)]
+
+              ${
+                showVolunteer
+                  ? "translate-x-0 opacity-100"
+                  : "-translate-x-[100px] lg:-translate-x-[220px] opacity-0"
+              }
+            `}
           >
             <img
-              src={ambassadorImg}
-              alt="University of Sheffield"
-              className="w-full h-full object-cover"
-              style={{
-                objectPosition: "center center",
-              }}
+              src={volunteerImg}
+              alt="Volunteer Work"
+              className="
+                w-full
+
+                h-[230px]
+                sm:h-[280px]
+                md:h-[300px]
+                lg:h-80
+
+                object-cover
+              "
             />
           </div>
 
-        </div>
+          {/* CONTENT */}
+          <div
+            className={`
+              md:pl-4
+              lg:pl-12
 
-      </div>
-    </section>
+              transition-all
+              duration-[1700ms]
+              ease-[cubic-bezier(0.16,1,0.3,1)]
+              delay-[200ms]
 
-
-    {/* ====================================================== */}
-    {/* VOLUNTARY WORKS */}
-    {/* ====================================================== */}
-    <section
-      ref={volunteerSectionRef}
-      className="border-t bg-[#f5f5f5] px-4 md:px-6 py-32 overflow-hidden"
-    >
-      <div className="max-w-[1280px] mx-auto grid md:grid-cols-2 gap-16 items-center">
-
-        {/* LEFT IMAGE */}
-        <div
-          className={`
-            rounded-xl
-            overflow-hidden
-            shadow-sm
-
-            transition-all
-            duration-[1700ms]
-            ease-[cubic-bezier(0.16,1,0.3,1)]
-
-            ${
-              showVolunteer
-                ? "translate-x-0 opacity-100"
-                : "-translate-x-[220px] opacity-0"
-            }
-          `}
-        >
-          <img
-            src={volunteerImg}
-            alt="Volunteer Work"
-            className="w-full h-80 object-cover"
-          />
-        </div>
-
-        {/* RIGHT CONTENT */}
-        <div
-          className={`
-            md:pl-12
-
-            transition-all
-            duration-[1700ms]
-            ease-[cubic-bezier(0.16,1,0.3,1)]
-            delay-[250ms]
-
-            ${
-              showVolunteer
-                ? "translate-x-0 opacity-100"
-                : "translate-x-[180px] opacity-0"
-            }
-          `}
-        >
-
-          <h2 className="text-[48px] md:text-[56px] font-light tracking-[-0.03em] leading-[1.05] text-[#2f2f2f] mb-7">
-            Voluntary works
-          </h2>
-
-          <p className="text-[18px] leading-[1.7] text-[#525965] max-w-[560px] mb-8">
-            I have contributed as a Python programming mentor, robotics lab
-            advisory member and student leader, supporting education,
-            technology and community initiatives.
-          </p>
-
-          <Link
-            to="/voluntary"
-            className="inline-block w-fit text-[17px] text-[#2f2f2f] border-b border-[#2f2f2f] pb-1 hover:opacity-60 transition-opacity"
+              ${
+                showVolunteer
+                  ? "translate-x-0 opacity-100"
+                  : "translate-x-[80px] lg:translate-x-[180px] opacity-0"
+              }
+            `}
           >
-            View voluntary works
-          </Link>
+            <h2
+              className="
+                text-[38px]
+                sm:text-[44px]
+                md:text-[48px]
+                lg:text-[56px]
 
-        </div>
+                font-light
+                tracking-[-0.03em]
+                leading-[1.05]
+                text-[#2f2f2f]
 
-      </div>
-    </section>
+                mb-5
+                lg:mb-7
+              "
+            >
+              Voluntary works
+            </h2>
 
+            <p
+              className="
+                text-[16px]
+                sm:text-[17px]
+                lg:text-[18px]
 
-    {/* ====================================================== */}
-    {/* MY STORY */}
-    {/* ====================================================== */}
-    <section
-      ref={storySectionRef}
-      className="border-t bg-white px-4 md:px-6 py-28 overflow-hidden"
-    >
-      <div className="max-w-[1280px] mx-auto grid lg:grid-cols-[1.15fr_0.9fr] gap-20 items-center">
+                leading-[1.7]
+                text-[#525965]
 
-        {/* LEFT */}
-        <div
-          className={`
-            relative
+                max-w-[560px]
 
-            transition-all
-            duration-[1800ms]
-            ease-[cubic-bezier(0.16,1,0.3,1)]
+                mb-6
+                lg:mb-8
+              "
+            >
+              I have contributed as a Python programming mentor, robotics lab
+              advisory member and student leader, supporting education,
+              technology and community initiatives.
+            </p>
 
-            ${
-              showStory
-                ? "translate-x-0 opacity-100"
-                : "-translate-x-[240px] opacity-0"
-            }
-          `}
-        >
-          <div className="rounded-2xl overflow-hidden shadow-xl border border-gray-200">
-            <img
-              src={storyImg}
-              alt="Workspace"
-              className="w-full h-[430px] object-cover"
-            />
-          </div>
+            <Link
+              to="/voluntary"
+              className="
+                inline-block
+                w-fit
 
-          <div className="absolute left-0 md:left-[-35px] top-8 w-44 h-44 rounded-full bg-white p-[6px] shadow-2xl">
-            <img
-              src={profileImg}
-              alt="Vivin"
-              className="w-full h-full rounded-full object-cover"
-            />
+                text-[16px]
+                lg:text-[17px]
+
+                text-[#2f2f2f]
+
+                border-b
+                border-[#2f2f2f]
+                pb-1
+
+                hover:opacity-60
+                transition-opacity
+              "
+            >
+              View voluntary works
+            </Link>
           </div>
         </div>
+      </section>
 
-        {/* RIGHT */}
+      {/* ====================================================== */}
+      {/* MY STORY */}
+      {/* ====================================================== */}
+      <section
+        ref={storySectionRef}
+        className="
+          border-t
+          bg-white
+
+          px-4
+          sm:px-5
+          md:px-6
+
+          py-16
+          sm:py-20
+          lg:py-28
+
+          overflow-hidden
+        "
+      >
         <div
-          className={`
-            transition-all
-            duration-[1800ms]
-            ease-[cubic-bezier(0.16,1,0.3,1)]
-            delay-[300ms]
+          className="
+            max-w-[1280px]
+            mx-auto
 
-            ${
-              showStory
-                ? "translate-x-0 opacity-100"
-                : "translate-x-[200px] opacity-0"
-            }
-          `}
+            grid
+            grid-cols-1
+            lg:grid-cols-[1.15fr_0.9fr]
+
+            gap-10
+            sm:gap-12
+            lg:gap-20
+
+            items-center
+          "
         >
+          {/* LEFT */}
+          <div
+            className={`
+              relative
 
-          <h2 className="text-[58px] font-light text-gray-800 mb-8">
-            My story
-          </h2>
+              transition-all
+              duration-[1800ms]
+              ease-[cubic-bezier(0.16,1,0.3,1)]
 
-          <p className="text-[21px] leading-[1.9] text-gray-600 mb-10">
-            Learn a little more about my journey—from discovering software
-            development to building backend systems, contributing to open
-            source, conducting AI research, and pursuing my Master's degree in
-            Advanced Computer Science at the University of Sheffield.
-          </p>
-
-          <Link
-            to="/story"
-            className="text-xl underline underline-offset-4 hover:text-black transition"
+              ${
+                showStory
+                  ? "translate-x-0 opacity-100"
+                  : "-translate-x-[100px] lg:-translate-x-[240px] opacity-0"
+              }
+            `}
           >
-            Read my story
-          </Link>
+            <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-xl border border-gray-200">
+              <img
+                src={storyImg}
+                alt="Workspace"
+                className="
+                  w-full
 
+                  h-[250px]
+                  sm:h-[330px]
+                  md:h-[390px]
+                  lg:h-[430px]
+
+                  object-cover
+                "
+              />
+            </div>
+
+            <div
+              className="
+                absolute
+
+                left-[12px]
+                sm:left-[18px]
+                md:left-[-20px]
+                lg:left-[-35px]
+
+                top-[18px]
+                sm:top-8
+
+                w-[105px]
+                h-[105px]
+
+                sm:w-[135px]
+                sm:h-[135px]
+
+                md:w-[160px]
+                md:h-[160px]
+
+                lg:w-44
+                lg:h-44
+
+                rounded-full
+                bg-white
+
+                p-[4px]
+                sm:p-[6px]
+
+                shadow-2xl
+              "
+            >
+              <img
+                src={profileImg}
+                alt="Vivin"
+                className="w-full h-full rounded-full object-cover"
+              />
+            </div>
+          </div>
+
+          {/* RIGHT */}
+          <div
+            className={`
+              transition-all
+              duration-[1800ms]
+              ease-[cubic-bezier(0.16,1,0.3,1)]
+              delay-[200ms]
+              lg:delay-[300ms]
+
+              ${
+                showStory
+                  ? "translate-x-0 opacity-100"
+                  : "translate-x-[80px] lg:translate-x-[200px] opacity-0"
+              }
+            `}
+          >
+            <h2
+              className="
+                text-[40px]
+                sm:text-[48px]
+                lg:text-[58px]
+
+                font-light
+                text-gray-800
+
+                mb-5
+                lg:mb-8
+              "
+            >
+              My story
+            </h2>
+
+            <p
+              className="
+                text-[16px]
+                sm:text-[18px]
+                lg:text-[21px]
+
+                leading-[1.7]
+                lg:leading-[1.9]
+
+                text-gray-600
+
+                mb-7
+                lg:mb-10
+              "
+            >
+              Learn a little more about my journey—from discovering software
+              development to building backend systems, contributing to open
+              source, conducting AI research, and pursuing my Master's degree
+              in Advanced Computer Science at the University of Sheffield.
+            </p>
+
+            <Link
+              to="/story"
+              className="
+                text-[17px]
+                sm:text-[18px]
+                lg:text-xl
+
+                underline
+                underline-offset-4
+
+                hover:text-black
+                transition
+              "
+            >
+              Read my story
+            </Link>
+          </div>
         </div>
-
-      </div>
-    </section>
+      </section>
     </main>
   );
 }

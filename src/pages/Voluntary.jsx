@@ -43,36 +43,48 @@ export default function Voluntary() {
   ];
 
   return (
-    <main className="min-h-screen bg-white">
-
+    <main className="min-h-screen bg-white overflow-x-hidden">
       <section
         className="
           bg-white
+
           px-4
+          sm:px-5
           md:px-6
-          pt-32
+
+          pt-[105px]
+          sm:pt-[115px]
           md:pt-40
-          pb-28
+
+          pb-20
+          sm:pb-24
+          md:pb-28
+
           overflow-hidden
         "
       >
-        {/* ================================================= */}
-        {/* SAME 1280PX ALIGNMENT AS ABOUT PAGE */}
-        {/* ================================================= */}
         <div className="max-w-[1280px] mx-auto">
-
-          {/* ================================================= */}
-          {/* PAGE TITLE */}
-          {/* ================================================= */}
-          <div className="mb-16 md:mb-20">
+          {/* =================================================
+              PAGE TITLE
+          ================================================= */}
+          <div
+            className="
+              mb-11
+              sm:mb-14
+              md:mb-20
+            "
+          >
             <h1
               className="
-                text-[52px]
-                sm:text-[60px]
+                text-[42px]
+                sm:text-[52px]
                 md:text-[68px]
+
                 font-bold
+
                 tracking-[-0.045em]
                 leading-[0.95]
+
                 text-[#111827]
               "
             >
@@ -80,67 +92,86 @@ export default function Voluntary() {
             </h1>
           </div>
 
-          {/* ================================================= */}
-          {/* VOLUNTARY WORKS */}
-          {/* ================================================= */}
+          {/* =================================================
+              VOLUNTARY WORKS
+          ================================================= */}
           <div className="w-full">
-
             {voluntaryWorks.map((work, index) => (
               <article
-                key={index}
+                key={`${work.title}-${index}`}
                 className="
                   w-full
 
                   grid
                   grid-cols-1
 
-                  gap-8
+                  gap-5
+                  sm:gap-6
 
                   border-b
                   border-[#d8d8d8]
 
-                  py-14
+                  py-10
+                  sm:py-12
 
-                  md:grid-cols-[220px_minmax(0,1fr)_220px]
-                  md:gap-12
+                  md:grid-cols-[190px_minmax(0,1fr)_190px]
+                  md:gap-8
                   md:py-16
 
                   lg:grid-cols-[240px_minmax(0,1fr)_240px]
                   lg:gap-14
                 "
               >
-
-                {/* ================================================= */}
-                {/* LEFT — LOGO */}
-                {/* STARTS ON SAME LEFT EDGE AS TITLE */}
-                {/* ================================================= */}
+                {/* =================================================
+                    LEFT — LOGO
+                ================================================= */}
                 <div
                   className="
                     flex
                     items-start
                     justify-start
+
                     md:pt-1
                   "
                 >
                   <div
                     className="
                       flex
-                      h-[150px]
-                      w-[200px]
+
+                      h-[105px]
+                      w-[150px]
+
+                      sm:h-[120px]
+                      sm:w-[170px]
+
+                      md:h-[150px]
+                      md:w-[180px]
+
+                      lg:h-[160px]
+                      lg:w-[220px]
+
                       items-center
                       justify-start
-                      bg-white
 
-                      md:h-[160px]
-                      md:w-[220px]
+                      bg-white
                     "
                   >
                     <img
                       src={work.logo}
                       alt={`${work.title} logo`}
                       className="
-                        max-h-[125px]
-                        max-w-[190px]
+                        max-h-[90px]
+                        max-w-[140px]
+
+                        sm:max-h-[105px]
+                        sm:max-w-[160px]
+
+                        md:max-h-[120px]
+                        md:max-w-[170px]
+
+                        lg:max-h-[125px]
+                        lg:max-w-[190px]
+
                         object-contain
                         object-left
                       "
@@ -148,50 +179,56 @@ export default function Voluntary() {
                   </div>
                 </div>
 
-                {/* ================================================= */}
-                {/* CENTRE — CONTENT */}
-                {/* ================================================= */}
+                {/* =================================================
+                    CENTRE — CONTENT
+                ================================================= */}
                 <div className="min-w-0 max-w-[620px]">
-
-                  {/* TITLE */}
                   <h2
                     className="
-                      mb-3
+                      mb-2
+                      sm:mb-3
 
-                      text-[27px]
+                      text-[23px]
+                      sm:text-[26px]
                       md:text-[30px]
                       lg:text-[32px]
 
                       font-semibold
+
                       leading-[1.15]
                       tracking-[-0.025em]
+
                       text-[#171717]
                     "
                   >
                     {work.title}
                   </h2>
 
-                  {/* ROLE */}
                   <p
                     className="
                       mb-1
 
-                      text-[18px]
+                      text-[16px]
+                      sm:text-[17px]
                       md:text-[19px]
 
                       font-medium
+
                       text-[#303030]
                     "
                   >
                     {work.role}
                   </p>
 
-                  {/* ORGANISATION */}
                   {work.organisation && (
                     <p
                       className="
-                        text-[16px]
+                        text-[14px]
+                        sm:text-[15px]
+                        md:text-[16px]
+
                         leading-[1.6]
+
                         text-[#707070]
                       "
                     >
@@ -199,17 +236,21 @@ export default function Voluntary() {
                     </p>
                   )}
 
-                  {/* DESCRIPTION */}
                   <p
                     className="
-                      mt-7
+                      mt-5
+                      sm:mt-6
+                      md:mt-7
 
                       max-w-[600px]
 
-                      text-[16px]
+                      text-[15px]
+                      sm:text-[16px]
                       md:text-[17px]
 
-                      leading-[1.75]
+                      leading-[1.7]
+                      md:leading-[1.75]
+
                       text-[#5b626c]
                     "
                   >
@@ -219,10 +260,13 @@ export default function Voluntary() {
                   {/* MOBILE DATE */}
                   <p
                     className="
-                      mt-6
+                      mt-5
 
-                      text-[14px]
+                      text-[13px]
+                      sm:text-[14px]
+
                       font-medium
+
                       text-[#707070]
 
                       md:hidden
@@ -232,10 +276,9 @@ export default function Voluntary() {
                   </p>
                 </div>
 
-                {/* ================================================= */}
-                {/* RIGHT — DATE */}
-                {/* ENDS ON SAME RIGHT EDGE AS PAGE */}
-                {/* ================================================= */}
+                {/* =================================================
+                    RIGHT — DATE
+                ================================================= */}
                 <div
                   className="
                     hidden
@@ -253,26 +296,25 @@ export default function Voluntary() {
                       whitespace-nowrap
 
                       text-right
-                      text-[14px]
+
+                      text-[13px]
                       lg:text-[15px]
 
                       font-medium
+
                       tracking-[-0.01em]
+
                       text-[#686868]
                     "
                   >
                     {work.date}
                   </p>
                 </div>
-
               </article>
             ))}
-
           </div>
-
         </div>
       </section>
-
     </main>
   );
-}      
+}
