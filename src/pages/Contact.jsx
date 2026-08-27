@@ -266,7 +266,7 @@ export default function Contact() {
 
                 {/* Instagram */}
                 <a
-                  href="#"
+                  href="https://www.instagram.com/vivin.x_/"
                   className="group flex items-center gap-[20px] w-fit"
                 >
                   <div
@@ -529,4 +529,4 @@ export default function Contact() {
       </section>
     </div>
   );
-}
+} 
