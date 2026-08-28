@@ -616,9 +616,7 @@ export default function Contact() {
           sm:pt-[50px]
           lg:pt-[58px]
 
-          pb-16
-          sm:pb-20
-          lg:pb-28
+          pb-[80px] sm:pb-[96px] lg:pb-28
 
           scroll-mt-[90px]
           md:scroll-mt-[120px]
