@@ -8,7 +8,6 @@ export default function Navbar() {
   const location = useLocation();
 
   const [isLeaving, setIsLeaving] = useState(false);
-  const [isEntering, setIsEntering] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -22,36 +21,40 @@ export default function Navbar() {
   const handleNavigation = (e, path) => {
     e.preventDefault();
 
-    if (isAnimating) return;
-
     setMobileOpen(false);
 
+    // If already on this route, just scroll to the top.
     if (location.pathname === path) {
       window.scrollTo({
         top: 0,
         left: 0,
         behavior: "smooth",
       });
+
       return;
     }
+
+    // Prevent multiple route transitions at the same time.
+    if (isAnimating) return;
 
     setIsAnimating(true);
     setIsLeaving(true);
 
     setTimeout(() => {
-      window.scrollTo(0, 0);
       navigate(path);
 
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto",
+      });
+
+      // Bring navbar back after route has changed.
       setIsLeaving(false);
-      setIsEntering(true);
 
       setTimeout(() => {
-        setIsEntering(false);
-
-        setTimeout(() => {
-          setIsAnimating(false);
-        }, 450);
-      }, 40);
+        setIsAnimating(false);
+      }, 450);
     }, 450);
   };
 
@@ -71,7 +74,7 @@ export default function Navbar() {
         ease-[cubic-bezier(0.76,0,0.24,1)]
 
         ${
-          isLeaving || isEntering
+          isLeaving
             ? "-translate-y-full"
             : "translate-y-0"
         }
@@ -99,6 +102,7 @@ export default function Navbar() {
         <Link
           to="/"
           onClick={(e) => handleNavigation(e, "/")}
+          aria-label="Go to home page"
           className="flex items-center shrink-0"
         >
           <div
