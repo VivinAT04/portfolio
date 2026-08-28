@@ -99,15 +99,42 @@ export default function Navbar() {
         "
       >
         {/* LOGO */}
-        <a
-          href="/"
-          onClick={(e) => {
-            e.preventDefault();
+        <button
+          type="button"
+          onClick={() => {
             setMobileOpen(false);
-            window.location.assign("/");
+
+            if (window.location.pathname === "/") {
+              const home = document.getElementById("home");
+
+              if (home) {
+                home.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              } else {
+                window.scrollTo({
+                  top: 0,
+                  left: 0,
+                  behavior: "smooth",
+                });
+              }
+
+              return;
+            }
+
+            window.location.href = "/";
           }}
           aria-label="Go to home page"
-          className="flex items-center shrink-0"
+          className="
+            relative
+            z-[10000]
+            flex
+            items-center
+            shrink-0
+            cursor-pointer
+            pointer-events-auto
+          "
         >
           <div
             className="
@@ -152,10 +179,11 @@ export default function Navbar() {
 
                 rounded-full
                 object-cover
+                pointer-events-none
               "
             />
           </div>
-        </a>
+        </button>
 
         {/* DESKTOP / TABLET NAVIGATION */}
         <div
