@@ -83,8 +83,8 @@ export default function HeroTransition() {
           relative
           mt-[78px]
 
-          h-[520px]
-          sm:h-[600px]
+          h-[300px]
+          sm:h-[440px]
 
           md:mt-[60px]
           md:h-[760px]
@@ -103,21 +103,23 @@ export default function HeroTransition() {
         }}
       >
         {/* =========================================================
-            PHONE — STATIC RESEARCHER / CODER
+            MOBILE — STATIC
         ========================================================= */}
         <div className="relative h-full md:hidden overflow-hidden bg-white">
-          {/* STATIC CENTER CANVAS */}
+          {/* IMAGE COMPOSITION */}
           <div
             className="
               absolute
-              inset-y-0
               left-1/2
-              w-[650px]
+              bottom-0
+              w-[390px]
+              sm:w-[500px]
+              h-full
               -translate-x-1/2
               pointer-events-none
             "
           >
-            {/* LEFT RESEARCHER BACKGROUND */}
+            {/* LEFT BACKGROUND */}
             <div
               className="
                 absolute
@@ -131,16 +133,17 @@ export default function HeroTransition() {
                 alt=""
                 className="
                   absolute
-                  left-[10px]
+                  left-[8px]
                   bottom-[-5px]
-                  w-[390px]
+                  w-[255px]
+                  sm:w-[320px]
                   max-w-none
                   opacity-90
                 "
               />
             </div>
 
-            {/* RIGHT CODER BACKGROUND */}
+            {/* RIGHT BACKGROUND */}
             <div
               className="
                 absolute
@@ -154,16 +157,17 @@ export default function HeroTransition() {
                 alt=""
                 className="
                   absolute
-                  right-[-5px]
+                  right-[5px]
                   bottom-[-5px]
-                  w-[420px]
+                  w-[270px]
+                  sm:w-[340px]
                   max-w-none
                   opacity-90
                 "
               />
             </div>
 
-            {/* LEFT HALF OF PERSON */}
+            {/* LEFT PERSON */}
             <div
               className="
                 absolute
@@ -179,15 +183,16 @@ export default function HeroTransition() {
                 className="
                   absolute
                   left-1/2
-                  bottom-[-15px]
-                  w-[590px]
+                  bottom-[0px]
+                  w-[350px]
+                  sm:w-[450px]
                   max-w-none
                   -translate-x-1/2
                 "
               />
             </div>
 
-            {/* RIGHT HALF OF PERSON */}
+            {/* RIGHT PERSON */}
             <div
               className="
                 absolute
@@ -203,8 +208,9 @@ export default function HeroTransition() {
                 className="
                   absolute
                   left-1/2
-                  bottom-[-15px]
-                  w-[590px]
+                  bottom-[0px]
+                  w-[350px]
+                  sm:w-[450px]
                   max-w-none
                   -translate-x-1/2
                 "
@@ -212,64 +218,56 @@ export default function HeroTransition() {
             </div>
           </div>
 
-          {/* MOBILE LABELS */}
+          {/* MOBILE TITLES */}
           <div className="absolute inset-0 z-30 pointer-events-none">
-            {/* RESEARCHER */}
-            <div
+            <h1
               className="
                 absolute
-                left-5
-                sm:left-8
-                top-[245px]
-                sm:top-[175px]
-              "
-            >
-              <h1
-                className="
-                  text-[31px]
-                  sm:text-[38px]
-                  font-bold
-                  leading-none
-                  tracking-[-0.055em]
-                  text-[#353535]
-                  whitespace-nowrap
-                "
-              >
-                researcher
-              </h1>
-            </div>
+                left-[14px]
+                top-[140px]
+                sm:left-[22px]
+                sm:top-[160px]
 
-            {/* CODER */}
-            <div
-              className="
-                absolute
-                right-5
-                sm:right-8
-                top-[245px]
-                sm:top-[175px]
-                text-right
+                text-[20px]
+                sm:text-[30px]
+
+                font-bold
+                leading-none
+                tracking-[-0.055em]
+
+                text-[#363636]
+                whitespace-nowrap
               "
             >
-              <h1
-                className="
-                  text-[31px]
-                  sm:text-[38px]
-                  font-bold
-                  leading-none
-                  tracking-[-0.055em]
-                  text-[#353535]
-                  whitespace-nowrap
-                "
-              >
-                {"< coder >"}
-              </h1>
-            </div>
+              researcher
+            </h1>
+
+            <h1
+              className="
+                absolute
+                right-[14px]
+                top-[140px]
+                sm:right-[22px]
+                sm:top-[160px]
+
+                text-[20px]
+                sm:text-[30px]
+
+                font-bold
+                leading-none
+                tracking-[-0.055em]
+
+                text-[#363636]
+                whitespace-nowrap
+              "
+            >
+              {"<coder>"}
+            </h1>
           </div>
         </div>
 
         {/* =========================================================
-            TABLET + DESKTOP
-            KEEP EXISTING INTERACTIVE TRANSITION
+            TABLET + DESKTOP — EXISTING INTERACTIVE HERO
         ========================================================= */}
         <div className="hidden md:block h-full">
           <div className="absolute inset-0 z-0 pointer-events-none">
@@ -398,7 +396,6 @@ export default function HeroTransition() {
             className="
               relative
               z-40
-
               grid
               grid-cols-[1fr_440px_1fr]
               lg:grid-cols-[1fr_620px_1fr]
@@ -406,7 +403,6 @@ export default function HeroTransition() {
               h-full
               max-w-[1280px]
               mx-auto
-
               px-6
               pt-10
               lg:pt-14
@@ -429,11 +425,9 @@ export default function HeroTransition() {
                   text-[40px]
                   lg:text-[54px]
                   xl:text-[60px]
-
                   font-bold
                   leading-none
                   tracking-[-0.045em]
-
                   text-[#3b3b3b]
                   whitespace-nowrap
                 "
@@ -444,13 +438,10 @@ export default function HeroTransition() {
               <p
                 className="
                   mt-4
-
                   max-w-[280px]
                   lg:max-w-[380px]
-
                   text-[14px]
                   lg:text-[17px]
-
                   leading-[1.55]
                   text-[#8a8a8a]
                 "
@@ -468,7 +459,6 @@ export default function HeroTransition() {
                 flex-col
                 justify-center
                 items-end
-
                 transition-opacity
                 duration-300
               "
@@ -479,11 +469,9 @@ export default function HeroTransition() {
                   text-[40px]
                   lg:text-[54px]
                   xl:text-[60px]
-
                   font-bold
                   leading-none
                   tracking-[-0.045em]
-
                   text-right
                   text-[#3b3b3b]
                   whitespace-nowrap
@@ -495,13 +483,10 @@ export default function HeroTransition() {
               <p
                 className="
                   mt-4
-
                   max-w-[270px]
                   lg:max-w-[350px]
-
                   text-[14px]
                   lg:text-[17px]
-
                   leading-[1.55]
                   text-right
                   text-[#8a8a8a]
@@ -523,14 +508,11 @@ export default function HeroTransition() {
           bg-[#f7f7f7]
           border-y
           border-gray-200
-
           px-4
           sm:px-6
           lg:px-8
-
-          pt-10
+          pt-8
           sm:pt-12
-
           pb-14
           sm:pb-20
           lg:pb-24
@@ -542,11 +524,9 @@ export default function HeroTransition() {
             className="
               flex
               items-center
-
-              gap-4
+              gap-3
               sm:gap-6
               lg:gap-10
-
               mb-8
               sm:mb-10
               lg:mb-12
@@ -556,15 +536,13 @@ export default function HeroTransition() {
 
             <h2
               className="
-                text-[11px]
+                text-[10px]
                 sm:text-[13px]
                 md:text-[15px]
                 lg:text-[18px]
-
-                tracking-[0.2em]
+                tracking-[0.18em]
                 sm:tracking-[0.3em]
                 lg:tracking-[0.45em]
-
                 font-bold
                 text-gray-600
                 whitespace-nowrap
@@ -576,20 +554,16 @@ export default function HeroTransition() {
             <div className="h-px bg-gray-300 flex-1" />
           </div>
 
-          {/* =========================================================
-              CARDS
-          ========================================================= */}
+          {/* CARDS */}
           <div
             className="
               grid
               grid-cols-1
               md:grid-cols-2
               lg:grid-cols-3
-
               gap-5
               sm:gap-6
               lg:gap-8
-
               items-stretch
             "
           >
@@ -602,12 +576,10 @@ export default function HeroTransition() {
                   className="
                     group
                     relative
-
-                    h-[300px]
+                    h-[285px]
                     sm:h-[310px]
                     md:h-[320px]
                     lg:h-[330px]
-
                     cursor-pointer
                     [perspective:1200px]
                   "
@@ -639,24 +611,17 @@ export default function HeroTransition() {
                       className="
                         absolute
                         inset-0
-
                         bg-white
-
-                        rounded-xl
+                        rounded-[18px]
                         sm:rounded-2xl
-
                         border
                         border-gray-200
-
-                        shadow-sm
-
+                        shadow-[0_4px_15px_rgba(0,0,0,0.07)]
                         p-5
                         sm:p-6
                         lg:p-8
-
                         flex
                         flex-col
-
                         [backface-visibility:hidden]
                       "
                     >
@@ -664,11 +629,9 @@ export default function HeroTransition() {
                         className="
                           flex
                           items-center
-
                           gap-3
                           sm:gap-4
-
-                          mb-6
+                          mb-5
                           sm:mb-7
                           lg:mb-9
                         "
@@ -677,24 +640,17 @@ export default function HeroTransition() {
                           className="
                             w-11
                             h-11
-
                             sm:w-12
                             sm:h-12
-
                             lg:w-14
                             lg:h-14
-
                             shrink-0
-
                             rounded-xl
                             sm:rounded-2xl
-
                             bg-gray-100
-
                             flex
                             items-center
                             justify-center
-
                             text-[22px]
                             sm:text-2xl
                             lg:text-3xl
@@ -708,13 +664,10 @@ export default function HeroTransition() {
                             text-[10px]
                             sm:text-[11px]
                             lg:text-xs
-
                             font-bold
-
                             tracking-[0.18em]
                             sm:tracking-[0.22em]
                             lg:tracking-[0.25em]
-
                             text-gray-500
                           "
                         >
@@ -724,15 +677,12 @@ export default function HeroTransition() {
 
                       <h3
                         className="
-                          text-[20px]
+                          text-[19px]
                           sm:text-[21px]
                           lg:text-2xl
-
                           font-black
                           leading-[1.25]
-
                           text-gray-900
-
                           mb-4
                           lg:mb-5
                         "
@@ -745,7 +695,6 @@ export default function HeroTransition() {
                           text-[14px]
                           sm:text-[15px]
                           lg:text-[17px]
-
                           leading-[1.65]
                           text-gray-600
                         "
@@ -757,10 +706,8 @@ export default function HeroTransition() {
                         className="
                           mt-auto
                           pt-5
-
                           lg:hidden
-
-                          text-[11px]
+                          text-[10px]
                           font-bold
                           tracking-[0.14em]
                           text-gray-400
@@ -775,25 +722,18 @@ export default function HeroTransition() {
                       className="
                         absolute
                         inset-0
-
                         bg-white
-
-                        rounded-xl
+                        rounded-[18px]
                         sm:rounded-2xl
-
                         border
                         border-gray-200
-
                         shadow-xl
-
                         p-5
                         sm:p-6
                         lg:p-8
-
                         flex
                         flex-col
                         justify-center
-
                         [backface-visibility:hidden]
                         [transform:rotateY(180deg)]
                       "
@@ -803,11 +743,8 @@ export default function HeroTransition() {
                           className="
                             text-[10px]
                             sm:text-[11px]
-
                             font-bold
-
                             tracking-[0.22em]
-
                             text-gray-400
                             mb-4
                           "
@@ -820,12 +757,9 @@ export default function HeroTransition() {
                             text-[24px]
                             sm:text-[27px]
                             lg:text-3xl
-
                             font-black
                             leading-[1.15]
-
                             text-gray-900
-
                             mb-5
                           "
                         >
@@ -837,7 +771,6 @@ export default function HeroTransition() {
                             text-[14px]
                             sm:text-[15px]
                             lg:text-[17px]
-
                             leading-[1.7]
                             text-gray-600
                           "
@@ -855,13 +788,10 @@ export default function HeroTransition() {
                             onClick={(e) => e.stopPropagation()}
                             className="
                               inline-flex
-
                               text-[15px]
                               lg:text-[17px]
-
                               font-semibold
                               text-gray-900
-
                               underline
                               underline-offset-4
                             "
@@ -883,9 +813,7 @@ export default function HeroTransition() {
                         <div
                           className="
                             lg:hidden
-
                             mt-5
-
                             text-[11px]
                             font-bold
                             tracking-[0.12em]
