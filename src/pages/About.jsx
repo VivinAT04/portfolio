@@ -1028,11 +1028,11 @@ export default function About() {
                 <div
                   className="
                     absolute
-                    left-[0px]
-                    top-[112px]
+                    left-[-8px]
+                    top-[102px]
 
-                    w-[165px]
-                    h-[110px]
+                    w-[195px]
+                    h-[130px]
 
                     z-10
                     rotate-[-5deg]
