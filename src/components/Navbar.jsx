@@ -99,9 +99,13 @@ export default function Navbar() {
         "
       >
         {/* LOGO */}
-        <Link
-          to="/"
-          onClick={(e) => handleNavigation(e, "/")}
+        <a
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            setMobileOpen(false);
+            window.location.assign("/");
+          }}
           aria-label="Go to home page"
           className="flex items-center shrink-0"
         >
@@ -151,7 +155,7 @@ export default function Navbar() {
               "
             />
           </div>
-        </Link>
+        </a>
 
         {/* DESKTOP / TABLET NAVIGATION */}
         <div
