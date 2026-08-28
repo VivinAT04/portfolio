@@ -112,8 +112,7 @@ export default function HeroTransition() {
               absolute
               left-1/2
               bottom-0
-              w-[390px]
-              sm:w-[500px]
+              w-[440px] sm:w-[500px]
               h-full
               -translate-x-1/2
               pointer-events-none

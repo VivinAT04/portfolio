@@ -299,9 +299,12 @@ export default function About() {
               "
             >
               {imageCards.map((item, index) => (
-                <div
+                <Link
                   key={item.alt}
+                  to="/story"
+                  aria-label={`Open story from ${item.alt}`}
                   className={`
+                    block
                     w-full
                     bg-white
                     rounded-[18px] sm:rounded-[10px]
@@ -312,6 +315,10 @@ export default function About() {
                     transition-all
                     duration-[900ms] md:duration-[1100ms]
                     ease-[cubic-bezier(0.22,1,0.36,1)]
+                    cursor-pointer
+                    hover:-translate-y-[3px]
+                    hover:shadow-[0_8px_24px_rgba(0,0,0,0.16)]
+                    active:scale-[0.98]
                     ${
                       animateAbout
                         ? "opacity-100 translate-x-0"
@@ -336,10 +343,17 @@ export default function About() {
                     <img
                       src={item.src}
                       alt={item.alt}
-                      className={`w-full h-full ${item.objectClass}`}
+                      className={`
+                        w-full
+                        h-full
+                        ${item.objectClass}
+                        transition-transform
+                        duration-500
+                        hover:scale-[1.03]
+                      `}
                     />
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -922,7 +936,6 @@ export default function About() {
           overflow-hidden
         "
       >
-        {/* PHONE */}
         <div
           className="
             md:hidden
@@ -992,18 +1005,15 @@ export default function About() {
               </Link>
             </div>
 
-            {/* MOBILE COLLAGE — CENTERED AS ONE GROUP */}
             <div
               className={`
                 relative
                 mt-14
                 h-[320px]
                 w-full
-
                 transition-all
                 duration-[1600ms]
                 ease-[cubic-bezier(0.16,1,0.3,1)]
-
                 ${
                   showFeatured
                     ? "translate-y-0 opacity-100"
@@ -1017,23 +1027,18 @@ export default function About() {
                   left-1/2
                   top-0
                   -translate-x-1/2
-
                   w-[315px]
                   h-[300px]
-
                   max-w-full
                 "
               >
-                {/* LEFT */}
                 <div
                   className="
                     absolute
                     left-[0px]
                     top-[112px]
-
                     w-[165px]
                     h-[110px]
-
                     z-10
                     rotate-[-5deg]
                   "
@@ -1050,17 +1055,14 @@ export default function About() {
                   />
                 </div>
 
-                {/* CENTER */}
                 <div
                   className="
                     absolute
                     left-1/2
                     top-[18px]
                     -translate-x-1/2
-
                     w-[170px]
                     h-[260px]
-
                     z-20
                     rotate-[-5deg]
                   "
@@ -1078,16 +1080,13 @@ export default function About() {
                   />
                 </div>
 
-                {/* RIGHT */}
                 <div
                   className="
                     absolute
                     right-[0px]
                     top-[58px]
-
                     w-[115px]
                     h-[205px]
-
                     bg-white
                     shadow-[0_12px_32px_rgba(0,0,0,0.15)]
                     rotate-[6deg]
@@ -1111,7 +1110,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* TABLET + DESKTOP */}
         <div
           className="
             hidden
@@ -1480,11 +1478,15 @@ export default function About() {
               </Link>
             </div>
 
-            <div
+            <Link
+              to="/story"
+              aria-label="Read my story"
               className={`
+                block
                 relative
                 mt-20
                 sm:mt-24
+                cursor-pointer
                 transition-all
                 duration-[1600ms]
                 ease-[cubic-bezier(0.16,1,0.3,1)]
@@ -1504,6 +1506,9 @@ export default function About() {
                   shadow-[0_2px_10px_rgba(0,0,0,0.10)]
                   border
                   border-gray-200
+                  transition-transform
+                  duration-500
+                  active:scale-[0.98]
                 "
               >
                 <img
@@ -1550,7 +1555,7 @@ export default function About() {
                   "
                 />
               </div>
-            </div>
+            </Link>
           </div>
         </div>
 
@@ -1567,9 +1572,13 @@ export default function About() {
             py-28
           "
         >
-          <div
+          <Link
+            to="/story"
+            aria-label="Read my story"
             className={`
+              block
               relative
+              cursor-pointer
               transition-all
               duration-[1800ms]
               ease-[cubic-bezier(0.16,1,0.3,1)]
@@ -1580,7 +1589,7 @@ export default function About() {
               }
             `}
           >
-            <div className="rounded-2xl overflow-hidden shadow-xl border border-gray-200">
+            <div className="rounded-2xl overflow-hidden shadow-xl border border-gray-200 transition-transform duration-500 hover:scale-[1.01]">
               <img
                 src={storyImg}
                 alt="Workspace"
@@ -1611,7 +1620,7 @@ export default function About() {
                 className="w-full h-full rounded-full object-cover"
               />
             </div>
-          </div>
+          </Link>
 
           <div
             className={`
