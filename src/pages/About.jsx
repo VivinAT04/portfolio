@@ -299,9 +299,12 @@ export default function About() {
               "
             >
               {imageCards.map((item, index) => (
-                <div
+                <Link
                   key={item.alt}
+                  to="/story"
+                  aria-label="Read my story"
                   className={`
+                    block
                     w-full
                     bg-white
                     rounded-[18px] sm:rounded-[10px]
@@ -312,6 +315,11 @@ export default function About() {
                     transition-all
                     duration-[900ms] md:duration-[1100ms]
                     ease-[cubic-bezier(0.22,1,0.36,1)]
+                    cursor-pointer
+
+                    hover:shadow-[0_8px_24px_rgba(0,0,0,0.16)]
+                    hover:-translate-y-[3px]
+
                     ${
                       animateAbout
                         ? "opacity-100 translate-x-0"
@@ -336,10 +344,17 @@ export default function About() {
                     <img
                       src={item.src}
                       alt={item.alt}
-                      className={`w-full h-full ${item.objectClass}`}
+                      className={`
+                        w-full
+                        h-full
+                        ${item.objectClass}
+                        transition-transform
+                        duration-500
+                        hover:scale-[1.03]
+                      `}
                     />
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

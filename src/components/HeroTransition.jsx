@@ -94,7 +94,7 @@ export default function HeroTransition() {
 
           overflow-hidden
           bg-white
-        "
+         pb-14 sm:pb-20 lg:pb-24"
         onMouseMove={handleMouseMove}
         onMouseLeave={() => {
           if (window.innerWidth >= 768) {
@@ -513,8 +513,9 @@ export default function HeroTransition() {
           lg:px-8
           pt-8
           sm:pt-12
-          pb-14
-          sm:pb-20
+          pb-[105px]
+          sm:pb-[110px]
+          md:pb-20
           lg:pb-24
         "
       >

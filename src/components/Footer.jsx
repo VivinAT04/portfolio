@@ -124,37 +124,34 @@ export default function Footer() {
 
       {/* =========================================================
           MOBILE FOOTER
-          COPYRIGHT ONLY
       ========================================================= */}
       <div
         className="
           md:hidden
-
-          h-[72px]
-
+          h-[74px]
           px-4
-
           flex
           items-center
           justify-center
         "
       >
-        <p
+        <Link
+          to="/"
           className="
             m-0
-
             text-[13px]
             leading-none
             font-light
-
             text-[#858585]
-
             text-center
             whitespace-nowrap
+            transition-colors
+            duration-300
+            hover:text-[#333333]
           "
         >
           © 2026 Vivin Anitha Thambidurai
-        </p>
+        </Link>
       </div>
 
       {/* =========================================================
@@ -172,7 +169,6 @@ export default function Footer() {
           lg:px-12
 
           min-h-[92px]
-
           py-[24px]
 
           items-center
@@ -187,7 +183,8 @@ export default function Footer() {
             gap-8
           "
         >
-          <p
+          <Link
+            to="/"
             className="
               m-0
 
@@ -200,10 +197,15 @@ export default function Footer() {
               text-[#858585]
 
               whitespace-nowrap
+
+              transition-colors
+              duration-300
+
+              hover:text-[#333333]
             "
           >
             © 2026 Vivin Anitha Thambidurai
-          </p>
+          </Link>
 
           <nav
             className="
