@@ -12,7 +12,6 @@ const experiences = [
     imageClass: "object-cover",
     description:
       "I work as a Student Ambassador at the University of Sheffield, supporting recruitment and engagement activities across Engineering and Computer Science. I represent the university at postgraduate events, deliver presentations, support prospective students exploring technical programmes, and collaborate with academic and recruitment teams. The role has strengthened my communication, public speaking, teamwork, and ability to explain technical and academic information to diverse audiences.",
-    side: "left",
   },
   {
     company: "TiiQu",
@@ -24,7 +23,6 @@ const experiences = [
     imageClass: "object-contain p-2",
     description:
       "I work as a Volunteer API Engineer at TiiQu, contributing to an AI-powered Truth Library for Environmental Research by building reliable backend data engineering solutions. My work focuses on designing automated data ingestion pipelines that collect and process thousands of scientific records from multiple external APIs, while ensuring data quality through validation, transformation, deduplication, and monitoring.",
-    side: "right",
   },
   {
     company: "Apache Airflow",
@@ -36,7 +34,6 @@ const experiences = [
     imageClass: "object-contain p-2",
     description:
       "I contribute to the Apache Airflow open-source project by investigating workflow orchestration issues, understanding backfill DAG versioning behaviour, and proposing improvements through GitHub discussions. This experience helps me strengthen my understanding of large-scale Python codebases, testing, debugging, and collaborative open-source engineering practices.",
-    side: "left",
   },
   {
     company: "National Institute of Technology Calicut",
@@ -48,33 +45,28 @@ const experiences = [
     imageClass: "object-contain p-2",
     description:
       "During my internship at UAS Technologies, I worked as both a Software Engineering Intern and Team Lead, contributing to the development and maintenance of backend software systems. I collaborated with a team of developers to analyze complex technical issues, resolve integration defects across multiple services, and improve the reliability of distributed applications.",
-    side: "right",
   },
 ];
 
 export default function Experience() {
-  const dotRef = useRef(null);
   const sectionRef = useRef(null);
+  const desktopDotRef = useRef(null);
+  const mobileDotRef = useRef(null);
 
   useEffect(() => {
     let animationFrameId = null;
 
-    const updateDot = () => {
+    const updateDots = () => {
       const section = sectionRef.current;
 
-      if (!section || !dotRef.current) return;
+      if (!section) return;
 
       const rect = section.getBoundingClientRect();
       const sectionHeight = section.offsetHeight;
-      const mobile = window.innerWidth < 768;
-
-      const startY = mobile ? 120 : 260;
-      const endY = mobile
-        ? Math.max(sectionHeight - 120, startY)
-        : Math.max(sectionHeight - 260, startY);
+      const viewportHeight = window.innerHeight;
 
       const scrollDistance = Math.max(
-        sectionHeight - window.innerHeight,
+        sectionHeight - viewportHeight,
         1
       );
 
@@ -83,33 +75,60 @@ export default function Experience() {
         1
       );
 
-      const y = startY + progress * (endY - startY);
+      /* DESKTOP DOT */
+      if (desktopDotRef.current) {
+        const startY = 410;
+        const endY = 2065;
 
-      dotRef.current.style.transform = mobile
-        ? `translate3d(-50%, ${y}px, 0)`
-        : `translate3d(-50%, ${y}px, 0)`;
+        const y = startY + progress * (endY - startY);
+
+        desktopDotRef.current.style.transform =
+          `translate3d(-50%, ${y}px, 0)`;
+      }
+
+      /* MOBILE DOT */
+      if (mobileDotRef.current) {
+        const mobileContainer =
+          mobileDotRef.current.parentElement;
+
+        if (mobileContainer) {
+          const mobileHeight = mobileContainer.offsetHeight;
+
+          const startY = 80;
+          const endY = Math.max(
+            mobileHeight - 100,
+            startY
+          );
+
+          const y =
+            startY + progress * (endY - startY);
+
+          mobileDotRef.current.style.transform =
+            `translate3d(-50%, ${y}px, 0)`;
+        }
+      }
     };
 
     const handleScroll = () => {
       if (animationFrameId) return;
 
       animationFrameId = requestAnimationFrame(() => {
-        updateDot();
+        updateDots();
         animationFrameId = null;
       });
     };
 
-    updateDot();
+    updateDots();
 
     window.addEventListener("scroll", handleScroll, {
       passive: true,
     });
 
-    window.addEventListener("resize", updateDot);
+    window.addEventListener("resize", updateDots);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", updateDot);
+      window.removeEventListener("resize", updateDots);
 
       if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
@@ -125,41 +144,60 @@ export default function Experience() {
         relative
         bg-white
         overflow-hidden
-
-        pt-[110px]
-        sm:pt-[120px]
-        md:pt-[150px]
-
-        pb-20
-        sm:pb-24
-        md:pb-32
+        pt-0
+        pb-0
       "
     >
       {/* =====================================================
-          MOBILE / TABLET TIMELINE
+          MOBILE + TABLET
       ====================================================== */}
-      <div className="relative md:hidden px-4 sm:px-6">
-        {/* TIMELINE LINE */}
+      <div
+        className="
+          relative
+          lg:hidden
+
+          px-4
+          sm:px-6
+          md:px-8
+
+          pt-[95px]
+          sm:pt-[110px]
+          md:pt-[125px]
+
+          pb-16
+          sm:pb-20
+          md:pb-24
+        "
+      >
+        {/* MOBILE TIMELINE LINE */}
         <div
           className="
             absolute
-            left-[27px]
-            sm:left-[35px]
+
+            left-[26px]
+            sm:left-[34px]
+            md:left-[42px]
+
             top-0
             bottom-0
 
             w-[3px]
+            md:w-[4px]
+
             bg-black
           "
         />
 
-        {/* MOVING DOT */}
+        {/* MOBILE MOVING DOT */}
         <div
-          ref={dotRef}
+          ref={mobileDotRef}
           className="
             absolute
-            left-[27px]
-            sm:left-[35px]
+
+            left-[26px]
+            sm:left-[34px]
+            md:left-[42px]
+
             top-0
 
             z-40
@@ -170,56 +208,50 @@ export default function Experience() {
             sm:w-[20px]
             sm:h-[20px]
 
+            md:w-[22px]
+            md:h-[22px]
+
             rounded-full
             bg-black
 
             will-change-transform
           "
           style={{
-            transform: "translate3d(-50%, 120px, 0)",
+            transform: "translate3d(-50%, 80px, 0)",
           }}
         />
 
-        <div className="space-y-14 sm:space-y-16">
+        <div
+          className="
+            space-y-12
+            sm:space-y-14
+            md:space-y-16
+          "
+        >
           {experiences.map((experience, index) => (
             <article
               key={experience.company}
               className="
                 relative
 
-                pl-[48px]
-                sm:pl-[58px]
+                pl-[52px]
+                sm:pl-[64px]
+                md:pl-[80px]
               "
             >
-              {/* STATIC TIMELINE NODE */}
-              <div
-                className="
-                  absolute
-
-                  left-[14px]
-                  sm:left-[19px]
-
-                  top-[36px]
-
-                  w-[12px]
-                  h-[12px]
-
-                  rounded-full
-                  bg-black
-
-                  z-20
-                "
-              />
-
               {/* DATE */}
               <p
                 className="
                   mb-3
+                  sm:mb-4
 
-                  text-[13px]
-                  sm:text-[14px]
+                  text-[12px]
+                  sm:text-[13px]
+                  md:text-[14px]
 
                   font-medium
+                  tracking-[-0.01em]
+
                   text-gray-500
                 "
               >
@@ -231,16 +263,18 @@ export default function Experience() {
                 className="
                   w-full
 
-                  rounded-[20px]
-                  sm:rounded-[24px]
+                  rounded-[18px]
+                  sm:rounded-[22px]
+                  md:rounded-[26px]
 
                   border
                   border-gray-200
 
                   bg-white
 
-                  p-5
-                  sm:p-7
+                  p-4
+                  sm:p-6
+                  md:p-8
 
                   shadow-md
                 "
@@ -250,28 +284,34 @@ export default function Experience() {
                   className="
                     flex
                     flex-col
-
-                    xs:flex-row
+                    sm:flex-row
 
                     items-start
 
                     gap-4
                     sm:gap-5
+                    md:gap-6
                   "
                 >
+                  {/* LOGO */}
                   <div
                     className="
-                      w-[68px]
-                      h-[68px]
+                      w-[64px]
+                      h-[64px]
 
-                      sm:w-[78px]
-                      sm:h-[78px]
+                      sm:w-[76px]
+                      sm:h-[76px]
+
+                      md:w-[88px]
+                      md:h-[88px]
 
                       flex-shrink-0
+
                       overflow-hidden
 
-                      rounded-[18px]
-                      sm:rounded-[20px]
+                      rounded-[16px]
+                      sm:rounded-[19px]
+                      md:rounded-[22px]
 
                       bg-gray-100
                     "
@@ -283,14 +323,20 @@ export default function Experience() {
                     />
                   </div>
 
+                  {/* TITLE */}
                   <div className="min-w-0">
                     <h2
                       className="
-                        text-[22px]
-                        sm:text-[26px]
+                        text-[21px]
+                        sm:text-[25px]
+                        md:text-[30px]
 
                         font-bold
-                        leading-[1.15]
+
+                        leading-[1.12]
+
+                        tracking-[-0.025em]
+
                         text-black
                       "
                     >
@@ -301,10 +347,14 @@ export default function Experience() {
                       className="
                         mt-2
 
-                        text-[15px]
-                        sm:text-[16px]
+                        text-[14px]
+                        sm:text-[15px]
+                        md:text-[17px]
 
                         font-semibold
+
+                        leading-[1.4]
+
                         text-gray-700
                       "
                     >
@@ -316,8 +366,11 @@ export default function Experience() {
                         className={`
                           mt-1
 
-                          text-[13px]
-                          sm:text-[14px]
+                          text-[12px]
+                          sm:text-[13px]
+                          md:text-[15px]
+
+                          leading-[1.45]
 
                           text-gray-500
 
@@ -338,17 +391,17 @@ export default function Experience() {
                 <p
                   className="
                     mt-5
+                    sm:mt-6
+                    md:mt-7
 
                     text-[14px]
                     sm:text-[15px]
+                    md:text-[16px]
 
                     leading-[1.7]
-                    sm:leading-[1.75]
+                    md:leading-[1.75]
 
                     text-gray-700
-
-                    text-left
-                    sm:text-justify
                   "
                 >
                   {experience.description}
@@ -360,25 +413,28 @@ export default function Experience() {
       </div>
 
       {/* =====================================================
-          DESKTOP TIMELINE
+          DESKTOP
       ====================================================== */}
       <div
         className="
           hidden
-          md:block
+          lg:block
 
           relative
 
-          min-h-[2410px]
+          h-[2380px]
         "
       >
-        {/* CENTER LINE */}
+        {/* FULL TIMELINE LINE */}
         <div
           className="
             absolute
+
             left-1/2
+
             top-0
-            h-full
+            bottom-0
+
             w-[5px]
 
             -translate-x-1/2
@@ -389,9 +445,10 @@ export default function Experience() {
 
         {/* MOVING DOT */}
         <div
-          ref={dotRef}
+          ref={desktopDotRef}
           className="
             absolute
+
             left-1/2
             top-0
 
@@ -401,12 +458,14 @@ export default function Experience() {
             w-8
 
             rounded-full
+
             bg-black
 
             will-change-transform
           "
           style={{
-            transform: "translate3d(-50%, 260px, 0)",
+            transform:
+              "translate3d(-50%, 410px, 0)",
           }}
         />
 
@@ -418,8 +477,7 @@ export default function Experience() {
             absolute
 
             left-[24px]
-            lg:left-[50px]
-            xl:left-[90px]
+            xl:left-[45px]
 
             top-[170px]
 
@@ -431,44 +489,36 @@ export default function Experience() {
         >
           <div
             className="
-              h-[450px]
-              lg:h-[480px]
+              h-[480px]
 
-              w-[450px]
-              lg:w-[540px]
-              xl:w-[620px]
+              w-[515px]
+              xl:w-[590px]
 
-              rounded-[24px]
-              lg:rounded-[30px]
+              rounded-[30px]
 
               border
               border-gray-200
 
               bg-white
 
-              p-7
-              lg:p-9
+              p-9
               xl:p-10
 
               shadow-lg
             "
           >
             <div className="flex h-full flex-col">
-              <div className="flex items-start gap-5 lg:gap-7">
+              <div className="flex items-start gap-7">
                 <div
                   className="
-                    h-20
-                    w-20
-
-                    lg:h-24
-                    lg:w-24
+                    h-24
+                    w-24
 
                     flex-shrink-0
 
                     overflow-hidden
 
-                    rounded-2xl
-                    lg:rounded-3xl
+                    rounded-3xl
 
                     bg-gray-100
                   "
@@ -483,23 +533,24 @@ export default function Experience() {
                 <div>
                   <h2
                     className="
-                      text-[25px]
-                      lg:text-[29px]
+                      text-[29px]
                       xl:text-[34px]
 
                       font-bold
+
                       leading-tight
+
                       text-black
                     "
                   >
                     The University of Sheffield
                   </h2>
 
-                  <p className="mt-2 text-[16px] lg:text-lg font-semibold text-gray-700">
+                  <p className="mt-2 text-lg font-semibold text-gray-700">
                     Student Ambassador
                   </p>
 
-                  <p className="mt-1 text-[14px] lg:text-base text-gray-500">
+                  <p className="mt-1 text-base text-gray-500">
                     Faculty of Engineering
                   </p>
                 </div>
@@ -507,43 +558,38 @@ export default function Experience() {
 
               <p
                 className="
-                  mt-6
-                  lg:mt-7
+                  mt-7
 
-                  text-[14px]
-                  lg:text-[15px]
+                  text-[15px]
                   xl:text-[17px]
 
-                  leading-[1.65]
-                  lg:leading-[1.75]
+                  leading-[1.75]
 
                   text-gray-700
+
                   text-justify
                 "
               >
                 I work as a Student Ambassador at the University of Sheffield,
                 supporting recruitment and engagement activities across
-                Engineering and Computer Science. I represent the university
-                at postgraduate events, deliver presentations, support
-                prospective students exploring technical programmes, and
-                collaborate with academic and recruitment teams. The role has
-                strengthened my communication, public speaking, teamwork, and
-                ability to explain technical and academic information to
-                diverse audiences.
+                Engineering and Computer Science. I represent the university at
+                postgraduate events, deliver presentations, support prospective
+                students exploring technical programmes, and collaborate with
+                academic and recruitment teams. The role has strengthened my
+                communication, public speaking, teamwork, and ability to explain
+                technical and academic information to diverse audiences.
               </p>
             </div>
           </div>
 
           <p
             className="
-              ml-[90px]
-              lg:ml-[150px]
-              xl:ml-[300px]
+              ml-[175px]
+              xl:ml-[325px]
 
               whitespace-nowrap
 
-              text-[16px]
-              lg:text-lg
+              text-lg
               xl:text-xl
 
               text-gray-500
@@ -561,8 +607,7 @@ export default function Experience() {
             absolute
 
             right-[24px]
-            lg:right-[50px]
-            xl:right-[90px]
+            xl:right-[45px]
 
             top-[730px]
 
@@ -574,14 +619,12 @@ export default function Experience() {
         >
           <p
             className="
-              mr-[90px]
-              lg:mr-[150px]
-              xl:mr-[300px]
+              mr-[175px]
+              xl:mr-[325px]
 
               whitespace-nowrap
 
-              text-[16px]
-              lg:text-lg
+              text-lg
               xl:text-xl
 
               text-gray-500
@@ -592,45 +635,37 @@ export default function Experience() {
 
           <div
             className="
-              h-[400px]
-              lg:h-[420px]
+              h-[420px]
               xl:h-[430px]
 
-              w-[450px]
-              lg:w-[540px]
-              xl:w-[620px]
+              w-[515px]
+              xl:w-[590px]
 
-              rounded-[24px]
-              lg:rounded-[30px]
+              rounded-[30px]
 
               border
               border-gray-200
 
               bg-white
 
-              p-7
-              lg:p-9
+              p-9
               xl:p-10
 
               shadow-lg
             "
           >
             <div className="flex h-full flex-col">
-              <div className="flex items-start gap-5 lg:gap-7">
+              <div className="flex items-start gap-7">
                 <div
                   className="
-                    h-20
-                    w-20
-
-                    lg:h-24
-                    lg:w-24
+                    h-24
+                    w-24
 
                     flex-shrink-0
 
                     overflow-hidden
 
-                    rounded-2xl
-                    lg:rounded-3xl
+                    rounded-3xl
 
                     bg-gray-100
                   "
@@ -643,15 +678,24 @@ export default function Experience() {
                 </div>
 
                 <div>
-                  <h2 className="text-[28px] lg:text-[32px] xl:text-4xl font-bold text-black">
+                  <h2
+                    className="
+                      text-[32px]
+                      xl:text-4xl
+
+                      font-bold
+
+                      text-black
+                    "
+                  >
                     TiiQu
                   </h2>
 
-                  <p className="mt-2 text-[16px] lg:text-lg font-semibold text-gray-700">
+                  <p className="mt-2 text-lg font-semibold text-gray-700">
                     Volunteer API Engineer
                   </p>
 
-                  <p className="mt-1 text-[13px] lg:text-base italic text-gray-500">
+                  <p className="mt-1 text-base italic text-gray-500">
                     AI-powered Truth Library for Environmental Research
                   </p>
                 </div>
@@ -659,27 +703,26 @@ export default function Experience() {
 
               <p
                 className="
-                  mt-6
-                  lg:mt-8
+                  mt-8
 
-                  text-[14px]
-                  lg:text-[15px]
+                  text-[15px]
                   xl:text-[17px]
 
-                  leading-[1.65]
+                  leading-[1.7]
                   xl:leading-8
 
                   text-gray-700
+
                   text-justify
                 "
               >
-                I work as a Volunteer API Engineer at TiiQu, contributing to
-                an AI-powered Truth Library for Environmental Research by
-                building reliable backend data engineering solutions. My work
-                focuses on designing automated data ingestion pipelines that
-                collect and process thousands of scientific records from
-                multiple external APIs, while ensuring data quality through
-                validation, transformation, deduplication, and monitoring.
+                I work as a Volunteer API Engineer at TiiQu, contributing to an
+                AI-powered Truth Library for Environmental Research by building
+                reliable backend data engineering solutions. My work focuses on
+                designing automated data ingestion pipelines that collect and
+                process thousands of scientific records from multiple external
+                APIs, while ensuring data quality through validation,
+                transformation, deduplication, and monitoring.
               </p>
             </div>
           </div>
@@ -693,8 +736,7 @@ export default function Experience() {
             absolute
 
             left-[24px]
-            lg:left-[50px]
-            xl:left-[90px]
+            xl:left-[45px]
 
             top-[1290px]
 
@@ -706,45 +748,37 @@ export default function Experience() {
         >
           <div
             className="
-              h-[400px]
-              lg:h-[420px]
+              h-[420px]
               xl:h-[430px]
 
-              w-[450px]
-              lg:w-[540px]
-              xl:w-[620px]
+              w-[515px]
+              xl:w-[590px]
 
-              rounded-[24px]
-              lg:rounded-[30px]
+              rounded-[30px]
 
               border
               border-gray-200
 
               bg-white
 
-              p-7
-              lg:p-9
+              p-9
               xl:p-10
 
               shadow-lg
             "
           >
             <div className="flex h-full flex-col">
-              <div className="flex items-start gap-5 lg:gap-7">
+              <div className="flex items-start gap-7">
                 <div
                   className="
-                    h-20
-                    w-20
-
-                    lg:h-24
-                    lg:w-24
+                    h-24
+                    w-24
 
                     flex-shrink-0
 
                     overflow-hidden
 
-                    rounded-2xl
-                    lg:rounded-3xl
+                    rounded-3xl
 
                     bg-gray-100
                   "
@@ -757,11 +791,20 @@ export default function Experience() {
                 </div>
 
                 <div>
-                  <h2 className="text-[27px] lg:text-[32px] xl:text-4xl font-bold text-black">
+                  <h2
+                    className="
+                      text-[32px]
+                      xl:text-4xl
+
+                      font-bold
+
+                      text-black
+                    "
+                  >
                     Apache Airflow
                   </h2>
 
-                  <p className="mt-2 text-[16px] lg:text-lg font-semibold text-gray-700">
+                  <p className="mt-2 text-lg font-semibold text-gray-700">
                     Open Source Contributor
                   </p>
                 </div>
@@ -769,17 +812,16 @@ export default function Experience() {
 
               <p
                 className="
-                  mt-6
-                  lg:mt-8
+                  mt-8
 
-                  text-[14px]
-                  lg:text-[15px]
+                  text-[15px]
                   xl:text-[17px]
 
-                  leading-[1.65]
+                  leading-[1.7]
                   xl:leading-8
 
                   text-gray-700
+
                   text-justify
                 "
               >
@@ -788,22 +830,19 @@ export default function Experience() {
                 backfill DAG versioning behaviour, and proposing improvements
                 through GitHub discussions. This experience helps me strengthen
                 my understanding of large-scale Python codebases, testing,
-                debugging, and collaborative open-source engineering
-                practices.
+                debugging, and collaborative open-source engineering practices.
               </p>
             </div>
           </div>
 
           <p
             className="
-              ml-[90px]
-              lg:ml-[150px]
-              xl:ml-[300px]
+              ml-[175px]
+              xl:ml-[325px]
 
               whitespace-nowrap
 
-              text-[16px]
-              lg:text-lg
+              text-lg
               xl:text-xl
 
               text-gray-500
@@ -821,8 +860,7 @@ export default function Experience() {
             absolute
 
             right-[24px]
-            lg:right-[50px]
-            xl:right-[90px]
+            xl:right-[45px]
 
             top-[1850px]
 
@@ -834,14 +872,12 @@ export default function Experience() {
         >
           <p
             className="
-              mr-[90px]
-              lg:mr-[150px]
-              xl:mr-[300px]
+              mr-[175px]
+              xl:mr-[325px]
 
               whitespace-nowrap
 
-              text-[16px]
-              lg:text-lg
+              text-lg
               xl:text-xl
 
               text-gray-500
@@ -852,45 +888,37 @@ export default function Experience() {
 
           <div
             className="
-              h-[400px]
-              lg:h-[420px]
+              h-[420px]
               xl:h-[430px]
 
-              w-[450px]
-              lg:w-[540px]
-              xl:w-[620px]
+              w-[515px]
+              xl:w-[590px]
 
-              rounded-[24px]
-              lg:rounded-[30px]
+              rounded-[30px]
 
               border
               border-gray-200
 
               bg-white
 
-              p-7
-              lg:p-9
+              p-9
               xl:p-10
 
               shadow-lg
             "
           >
             <div className="flex h-full flex-col">
-              <div className="flex items-start gap-5 lg:gap-7">
+              <div className="flex items-start gap-7">
                 <div
                   className="
-                    h-20
-                    w-20
-
-                    lg:h-24
-                    lg:w-24
+                    h-24
+                    w-24
 
                     flex-shrink-0
 
                     overflow-hidden
 
-                    rounded-2xl
-                    lg:rounded-3xl
+                    rounded-3xl
 
                     bg-gray-100
                   "
@@ -905,23 +933,24 @@ export default function Experience() {
                 <div>
                   <h2
                     className="
-                      text-[22px]
-                      lg:text-[27px]
+                      text-[27px]
                       xl:text-[34px]
 
                       font-bold
+
                       leading-tight
+
                       text-black
                     "
                   >
                     National Institute of Technology Calicut
                   </h2>
 
-                  <p className="mt-2 text-[15px] lg:text-lg font-semibold text-gray-700">
+                  <p className="mt-2 text-lg font-semibold text-gray-700">
                     Software Engineering Intern &amp; Team Lead
                   </p>
 
-                  <p className="mt-1 text-[14px] lg:text-base text-gray-500">
+                  <p className="mt-1 text-base text-gray-500">
                     UAS Technologies
                   </p>
                 </div>
@@ -929,17 +958,16 @@ export default function Experience() {
 
               <p
                 className="
-                  mt-6
-                  lg:mt-8
+                  mt-8
 
-                  text-[14px]
-                  lg:text-[15px]
+                  text-[15px]
                   xl:text-[17px]
 
-                  leading-[1.65]
+                  leading-[1.7]
                   xl:leading-8
 
                   text-gray-700
+
                   text-justify
                 "
               >
