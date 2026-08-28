@@ -50,8 +50,13 @@ const experiences = [
 
 export default function Experience() {
   const sectionRef = useRef(null);
+
   const desktopDotRef = useRef(null);
+
+  const mobileContainerRef = useRef(null);
   const mobileDotRef = useRef(null);
+  const firstMobileCardRef = useRef(null);
+  const lastMobileCardRef = useRef(null);
 
   useEffect(() => {
     let animationFrameId = null;
@@ -65,47 +70,61 @@ export default function Experience() {
       const sectionHeight = section.offsetHeight;
       const viewportHeight = window.innerHeight;
 
-      const scrollDistance = Math.max(
-        sectionHeight - viewportHeight,
-        1
-      );
+      const scrollDistance = Math.max(sectionHeight - viewportHeight, 1);
 
       const progress = Math.min(
         Math.max(-rect.top / scrollDistance, 0),
         1
       );
 
-      /* DESKTOP DOT */
+      /* =====================================================
+          DESKTOP DOT
+      ====================================================== */
       if (desktopDotRef.current) {
         const startY = 410;
         const endY = 2065;
 
         const y = startY + progress * (endY - startY);
 
-        desktopDotRef.current.style.transform =
-          `translate3d(-50%, ${y}px, 0)`;
+        desktopDotRef.current.style.transform = `translate3d(-50%, ${y}px, 0)`;
       }
 
-      /* MOBILE DOT */
-      if (mobileDotRef.current) {
-        const mobileContainer =
-          mobileDotRef.current.parentElement;
+      /* =====================================================
+          PHONE + TABLET DOT
 
-        if (mobileContainer) {
-          const mobileHeight = mobileContainer.offsetHeight;
+          START:
+          middle of first card
 
-          const startY = 80;
-          const endY = Math.max(
-            mobileHeight - 100,
-            startY
-          );
+          END:
+          middle of final card
+      ====================================================== */
+      if (
+        mobileDotRef.current &&
+        mobileContainerRef.current &&
+        firstMobileCardRef.current &&
+        lastMobileCardRef.current
+      ) {
+        const container = mobileContainerRef.current;
+        const firstCard = firstMobileCardRef.current;
+        const lastCard = lastMobileCardRef.current;
 
-          const y =
-            startY + progress * (endY - startY);
+        const containerRect = container.getBoundingClientRect();
+        const firstRect = firstCard.getBoundingClientRect();
+        const lastRect = lastCard.getBoundingClientRect();
 
-          mobileDotRef.current.style.transform =
-            `translate3d(-50%, ${y}px, 0)`;
-        }
+        const startY =
+          firstRect.top -
+          containerRect.top +
+          firstRect.height / 2;
+
+        const endY =
+          lastRect.top -
+          containerRect.top +
+          lastRect.height / 2;
+
+        const y = startY + progress * (endY - startY);
+
+        mobileDotRef.current.style.transform = `translate3d(-50%, ${y}px, 0)`;
       }
     };
 
@@ -118,6 +137,8 @@ export default function Experience() {
       });
     };
 
+    const timer = setTimeout(updateDots, 50);
+
     updateDots();
 
     window.addEventListener("scroll", handleScroll, {
@@ -127,6 +148,8 @@ export default function Experience() {
     window.addEventListener("resize", updateDots);
 
     return () => {
+      clearTimeout(timer);
+
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", updateDots);
 
@@ -152,6 +175,7 @@ export default function Experience() {
           MOBILE + TABLET
       ====================================================== */}
       <div
+        ref={mobileContainerRef}
         className="
           relative
           lg:hidden
@@ -169,7 +193,9 @@ export default function Experience() {
           md:pb-24
         "
       >
-        {/* MOBILE TIMELINE LINE */}
+        {/* =====================================================
+            MOBILE TIMELINE LINE
+        ====================================================== */}
         <div
           className="
             absolute
@@ -188,7 +214,9 @@ export default function Experience() {
           "
         />
 
-        {/* MOBILE MOVING DOT */}
+        {/* =====================================================
+            MOBILE MOVING DOT
+        ====================================================== */}
         <div
           ref={mobileDotRef}
           className="
@@ -217,7 +245,7 @@ export default function Experience() {
             will-change-transform
           "
           style={{
-            transform: "translate3d(-50%, 80px, 0)",
+            transform: "translate3d(-50%, 250px, 0)",
           }}
         />
 
@@ -260,6 +288,13 @@ export default function Experience() {
 
               {/* CARD */}
               <div
+                ref={
+                  index === 0
+                    ? firstMobileCardRef
+                    : index === experiences.length - 1
+                      ? lastMobileCardRef
+                      : null
+                }
                 className="
                   w-full
 
@@ -374,11 +409,7 @@ export default function Experience() {
 
                           text-gray-500
 
-                          ${
-                            index === 1
-                              ? "italic"
-                              : ""
-                          }
+                          ${index === 1 ? "italic" : ""}
                         `}
                       >
                         {experience.subtitle}
@@ -419,9 +450,7 @@ export default function Experience() {
         className="
           hidden
           lg:block
-
           relative
-
           h-[2380px]
         "
       >
@@ -464,8 +493,7 @@ export default function Experience() {
             will-change-transform
           "
           style={{
-            transform:
-              "translate3d(-50%, 410px, 0)",
+            transform: "translate3d(-50%, 410px, 0)",
           }}
         />
 
@@ -678,16 +706,7 @@ export default function Experience() {
                 </div>
 
                 <div>
-                  <h2
-                    className="
-                      text-[32px]
-                      xl:text-4xl
-
-                      font-bold
-
-                      text-black
-                    "
-                  >
+                  <h2 className="text-[32px] xl:text-4xl font-bold text-black">
                     TiiQu
                   </h2>
 
@@ -791,16 +810,7 @@ export default function Experience() {
                 </div>
 
                 <div>
-                  <h2
-                    className="
-                      text-[32px]
-                      xl:text-4xl
-
-                      font-bold
-
-                      text-black
-                    "
-                  >
+                  <h2 className="text-[32px] xl:text-4xl font-bold text-black">
                     Apache Airflow
                   </h2>
 

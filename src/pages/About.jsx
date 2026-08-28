@@ -153,51 +153,31 @@ export default function About() {
         id="about"
         className="
           bg-white
-          px-4
-          sm:px-5
-          md:px-6
-          pt-[90px]
-          sm:pt-[100px]
-          md:pt-32
-          pb-8
-          md:pb-10
+          px-4 sm:px-5 md:px-6
+          pt-[90px] sm:pt-[100px] md:pt-32
+          pb-6 sm:pb-8 md:pb-10
           overflow-hidden
         "
       >
         <div className="max-w-[1280px] mx-auto">
-          {/* MAIN ABOUT HERO */}
           <div
             className="
               relative
-              mt-3
-              sm:mt-5
-              md:mt-10
-              min-h-0
-              md:min-h-[560px]
+              mt-1 sm:mt-5 md:mt-10
+              min-h-0 md:min-h-[560px]
               overflow-visible
             "
           >
             <div className="grid md:grid-cols-[0.95fr_1.05fr] h-full">
-              {/* LEFT CONTENT */}
               <div
                 className={`
-                  relative
-                  z-20
-
-                  pt-8
-                  sm:pt-10
-                  md:pt-20
-
-                  pb-8
-                  sm:pb-10
-                  md:pb-16
-
+                  relative z-20
+                  pt-6 sm:pt-10 md:pt-20
+                  pb-0 sm:pb-6 md:pb-16
                   transition-all
                   duration-[900ms]
                   ease-[cubic-bezier(0.22,1,0.36,1)]
-                  delay-[200ms]
-                  md:delay-[450ms]
-
+                  delay-[200ms] md:delay-[450ms]
                   ${
                     animateAbout
                       ? "opacity-100 translate-x-0"
@@ -207,18 +187,12 @@ export default function About() {
               >
                 <h1
                   className="
-                    text-[54px]
-                    sm:text-[66px]
-                    md:text-[96px]
-                    lg:text-[104px]
-
+                    text-[54px] sm:text-[66px] md:text-[96px] lg:text-[104px]
                     font-black
                     tracking-[-0.065em]
                     leading-[0.85]
                     text-[#282828]
-
-                    mb-5
-                    md:mb-7
+                    mb-5 md:mb-7
                   "
                 >
                   about.
@@ -226,20 +200,12 @@ export default function About() {
 
                 <p
                   className="
-                    text-[20px]
-                    sm:text-[22px]
-                    md:text-[27px]
-
-                    leading-[1.4]
-                    md:leading-[1.35]
-
+                    text-[20px] sm:text-[22px] md:text-[27px]
+                    leading-[1.4] md:leading-[1.35]
                     font-light
                     text-[#8a8a8a]
-
                     max-w-[500px]
-
-                    mb-5
-                    md:mb-8
+                    mb-5 md:mb-8
                   "
                 >
                   I'm a postgraduate at the University of Sheffield, United
@@ -248,25 +214,19 @@ export default function About() {
 
                 <p
                   className="
-                    text-[15px]
-                    sm:text-[16px]
-                    md:text-[18px]
-
+                    text-[15px] sm:text-[16px] md:text-[18px]
                     leading-[1.7]
                     text-[#4c4c4c]
-                    font-normal
-
                     max-w-[500px]
                   "
                 >
                   Since 2021, I've enjoyed turning complex problems into simple,
-                  elegant software solutions. When I'm not developing
-                  something, you'll find me exploring my cooking skills,
-                  reading books, or working out in the gym.
+                  elegant software solutions. When I'm not developing something,
+                  you'll find me exploring my cooking skills, reading books, or
+                  working out in the gym.
                 </p>
               </div>
 
-              {/* DESKTOP PORTRAIT */}
               <div className="relative hidden md:block">
                 <img
                   src={aboutImg}
@@ -275,19 +235,13 @@ export default function About() {
                     absolute
                     left-[48%]
                     bottom-[-74px]
-
-                    w-[650px]
-                    lg:w-[780px]
-                    xl:w-[820px]
-
+                    w-[650px] lg:w-[780px] xl:w-[820px]
                     max-w-none
                     object-contain
                     z-10
-
                     transition-all
                     duration-[1100ms]
                     ease-[cubic-bezier(0.22,1,0.36,1)]
-
                     ${
                       animateAbout
                         ? "opacity-100 -translate-x-1/2"
@@ -298,13 +252,13 @@ export default function About() {
               </div>
             </div>
 
-            {/* MOBILE PORTRAIT */}
+            {/* MOBILE PHOTO */}
             <div
               className="
                 md:hidden
                 relative
-                h-[330px]
-                sm:h-[390px]
+                h-[300px] sm:h-[370px]
+                -mt-[54px] sm:-mt-[24px]
                 overflow-hidden
               "
             >
@@ -313,22 +267,14 @@ export default function About() {
                 alt="Vivin"
                 className={`
                   absolute
-
-                  bottom-[-40px]
-                  sm:bottom-[-50px]
-
                   left-1/2
-
-                  w-[390px]
-                  sm:w-[470px]
-
+                  bottom-[-35px] sm:bottom-[-45px]
+                  w-[390px] sm:w-[470px]
                   max-w-none
                   object-contain
-
                   transition-all
                   duration-[1000ms]
                   ease-[cubic-bezier(0.22,1,0.36,1)]
-
                   ${
                     animateAbout
                       ? "opacity-100 -translate-x-1/2"
@@ -338,23 +284,19 @@ export default function About() {
               />
             </div>
 
-            {/* HORIZONTAL LINE */}
             <div className="absolute left-0 right-0 bottom-0 h-px bg-[#d9d9d9] z-20" />
           </div>
 
-          {/* BOTTOM IMAGE STRIP */}
-          <div className="pt-7 sm:pt-8 md:pt-10 overflow-hidden">
+          {/* IMAGE CARDS */}
+          <div className="pt-5 sm:pt-8 md:pt-10 overflow-hidden">
             <div
               className="
                 grid
                 grid-cols-2
-                sm:grid-cols-3
-                lg:grid-cols-6
-
-                gap-2.5
-                sm:gap-3
-                md:gap-4
-
+                gap-x-[14px]
+                gap-y-[16px]
+                sm:grid-cols-3 sm:gap-3
+                lg:grid-cols-6 md:gap-4
                 w-full
               "
             >
@@ -362,33 +304,19 @@ export default function About() {
                 <div
                   key={item.alt}
                   className={`
-                    min-w-0
+                    w-full
                     bg-white
-
-                    rounded-[8px]
-                    md:rounded-[10px]
-
-                    border
-                    border-[#d4d4d4]
-
-                    p-[4px]
-                    md:p-[5px]
-
-                    shadow-[0_2px_8px_rgba(0,0,0,0.10)]
-
+                    rounded-[18px] sm:rounded-[10px]
+                    border border-[#e4e4e4]
+                    p-[6px] sm:p-[4px] md:p-[5px]
+                    shadow-[0_6px_18px_rgba(0,0,0,0.12)]
+                    sm:shadow-[0_2px_8px_rgba(0,0,0,0.10)]
                     transition-all
-                    duration-[900ms]
-                    md:duration-[1100ms]
-
+                    duration-[900ms] md:duration-[1100ms]
                     ease-[cubic-bezier(0.22,1,0.36,1)]
-
-                    hover:-translate-y-2
-                    md:hover:-translate-y-5
-                    hover:shadow-lg
-
                     ${
                       animateAbout
-                        ? "opacity-100 translate-x-0 -translate-y-1 md:-translate-y-2"
+                        ? "opacity-100 translate-x-0"
                         : "opacity-0 -translate-x-[35px]"
                     }
                   `}
@@ -398,12 +326,13 @@ export default function About() {
                 >
                   <div
                     className="
-                      h-[82px]
+                      w-full
+                      aspect-[1.42/1]
+                      sm:aspect-auto
                       sm:h-[100px]
                       md:h-[118px]
                       overflow-hidden
-                      rounded-[6px]
-                      md:rounded-[7px]
+                      rounded-[13px] sm:rounded-[7px]
                     "
                   >
                     <img
@@ -428,64 +357,40 @@ export default function About() {
           border-t
           border-gray-200
           bg-[#f5f5f5]
-
-          px-4
-          sm:px-5
-          md:px-6
-
-          py-14
-          sm:py-16
-          lg:py-20
-
           overflow-hidden
         "
       >
-        <div className="max-w-[1280px] mx-auto">
-          <div
-            className="
-              grid
-              grid-cols-1
-              lg:grid-cols-[1fr_560px_1fr]
-
-              items-center
-
-              gap-10
-              lg:gap-8
-            "
-          >
-            {/* LEFT */}
-            <div className="justify-self-start w-full">
+        {/* PHONE + TABLET */}
+        <div
+          className="
+            lg:hidden
+            px-5 sm:px-8
+            pt-16 sm:pt-20
+            pb-0
+          "
+        >
+          <div className="max-w-[620px] mx-auto text-center">
+            <div>
               <h2
                 className="
-                  text-[32px]
-                  sm:text-[36px]
-                  lg:text-[44px]
-
+                  text-[40px] sm:text-[48px] md:text-[54px]
                   font-light
-                  leading-none
-                  text-[#3f4652]
-
-                  mb-5
-                  lg:mb-8
+                  tracking-[-0.035em]
+                  leading-[1.05]
+                  text-[#3f3f3f]
                 "
               >
                 Part Engineer
               </h2>
 
-              <div className="w-12 sm:w-14 lg:w-16 h-[2px] bg-[#3f4652] mb-5 lg:mb-8" />
-
               <ul
                 className="
-                  space-y-2.5
-                  sm:space-y-3
-                  lg:space-y-4
-
-                  text-[16px]
-                  sm:text-[17px]
-                  lg:text-[18px]
-
-                  leading-relaxed
-                  text-[#5b6470]
+                  mt-10 sm:mt-12
+                  space-y-5 sm:space-y-6
+                  text-[20px] sm:text-[23px] md:text-[25px]
+                  font-light
+                  leading-[1.45]
+                  text-[#454545]
                 "
               >
                 <li>Software Development</li>
@@ -496,79 +401,27 @@ export default function About() {
               </ul>
             </div>
 
-            {/* CENTER */}
-            <div
-              className="
-                flex
-                items-center
-                justify-center
-
-                order-first
-                lg:order-none
-              "
-            >
-              <img
-                src={circleImg}
-                alt="Coder and Researcher"
-                className={`
-                  w-[300px]
-                  sm:w-[390px]
-                  md:w-[470px]
-                  lg:w-full
-
-                  max-w-[560px]
-
-                  h-auto
-                  object-contain
-                  drop-shadow-2xl
-
-                  transition-all
-                  duration-[1400ms]
-                  ease-[cubic-bezier(0.16,1,0.3,1)]
-                  will-change-transform
-
-                  ${
-                    showCircle
-                      ? "translate-y-0 opacity-100"
-                      : "translate-y-[250px] lg:translate-y-[650px] opacity-0"
-                  }
-                `}
-              />
-            </div>
-
-            {/* RIGHT */}
-            <div className="justify-self-start lg:justify-self-end text-left w-full">
+            <div className="mt-20 sm:mt-24">
               <h2
                 className="
-                  text-[32px]
-                  sm:text-[36px]
-                  lg:text-[44px]
-
+                  text-[40px] sm:text-[48px] md:text-[54px]
                   font-light
-                  leading-none
-                  text-[#3f4652]
-
-                  mb-5
-                  lg:mb-8
+                  tracking-[-0.035em]
+                  leading-[1.05]
+                  text-[#3f3f3f]
                 "
               >
                 Part Researcher
               </h2>
 
-              <div className="w-12 sm:w-14 lg:w-16 h-[2px] bg-[#3f4652] mb-5 lg:mb-8" />
-
               <ul
                 className="
-                  space-y-2.5
-                  sm:space-y-3
-                  lg:space-y-4
-
-                  text-[16px]
-                  sm:text-[17px]
-                  lg:text-[18px]
-
-                  leading-relaxed
-                  text-[#5b6470]
+                  mt-10 sm:mt-12
+                  space-y-5 sm:space-y-6
+                  text-[20px] sm:text-[23px] md:text-[25px]
+                  font-light
+                  leading-[1.45]
+                  text-[#454545]
                 "
               >
                 <li>Machine Learning</li>
@@ -577,6 +430,106 @@ export default function About() {
                 <li>Signal Processing</li>
                 <li>Scientific Research</li>
               </ul>
+            </div>
+
+            <div
+              className={`
+                mt-24 sm:mt-28
+                flex
+                justify-center
+                items-end
+                transition-all
+                duration-[1400ms]
+                ease-[cubic-bezier(0.16,1,0.3,1)]
+                ${
+                  showCircle
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-[180px] opacity-0"
+                }
+              `}
+            >
+              <img
+                src={circleImg}
+                alt="Coder and Researcher"
+                className="
+                  w-[330px]
+                  sm:w-[430px]
+                  md:w-[520px]
+                  max-w-full
+                  h-auto
+                  object-contain
+                  drop-shadow-2xl
+                "
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* DESKTOP */}
+        <div className="hidden lg:block px-6 py-20">
+          <div className="max-w-[1280px] mx-auto">
+            <div
+              className="
+                grid
+                grid-cols-[1fr_560px_1fr]
+                items-center
+                gap-8
+              "
+            >
+              <div className="justify-self-start w-full">
+                <h2 className="text-[44px] font-light leading-none text-[#3f4652] mb-8">
+                  Part Engineer
+                </h2>
+
+                <div className="w-16 h-[2px] bg-[#3f4652] mb-8" />
+
+                <ul className="space-y-4 text-[18px] leading-relaxed text-[#5b6470]">
+                  <li>Software Development</li>
+                  <li>Backend Engineering</li>
+                  <li>Python Programming</li>
+                  <li>Cloud Computing</li>
+                  <li>System Design</li>
+                </ul>
+              </div>
+
+              <div className="flex items-center justify-center">
+                <img
+                  src={circleImg}
+                  alt="Coder and Researcher"
+                  className={`
+                    w-full
+                    max-w-[560px]
+                    h-auto
+                    object-contain
+                    drop-shadow-2xl
+                    transition-all
+                    duration-[1400ms]
+                    ease-[cubic-bezier(0.16,1,0.3,1)]
+                    will-change-transform
+                    ${
+                      showCircle
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-[650px] opacity-0"
+                    }
+                  `}
+                />
+              </div>
+
+              <div className="justify-self-end text-left w-full">
+                <h2 className="text-[44px] font-light leading-none text-[#3f4652] mb-8">
+                  Part Researcher
+                </h2>
+
+                <div className="w-16 h-[2px] bg-[#3f4652] mb-8" />
+
+                <ul className="space-y-4 text-[18px] leading-relaxed text-[#5b6470]">
+                  <li>Machine Learning</li>
+                  <li>Artificial Intelligence</li>
+                  <li>Brain Computer Interfaces</li>
+                  <li>Signal Processing</li>
+                  <li>Scientific Research</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -589,109 +542,44 @@ export default function About() {
         ref={randomFactsRef}
         className="
           border-t
+          border-gray-200
           bg-white
-
-          px-4
-          sm:px-5
-          md:px-6
-
-          py-14
-          sm:py-16
-          lg:py-20
-
           overflow-hidden
         "
       >
-        <div className="max-w-[1280px] mx-auto">
-          <div
-            className="
-              grid
-              grid-cols-1
-              lg:grid-cols-[620px_1fr]
-
-              items-center
-
-              gap-4
-              sm:gap-8
-              lg:gap-16
-            "
-          >
-            {/* OCTOPUS */}
+        {/* PHONE + TABLET — REFERENCE STYLE */}
+        <div
+          className="
+            lg:hidden
+            px-6
+            sm:px-10
+            pt-20
+            sm:pt-24
+            pb-0
+          "
+        >
+          <div className="max-w-[680px] mx-auto text-center">
             <div
               className={`
-                flex
-                items-center
-                justify-center
-                lg:justify-start
-
-                transition-all
-                duration-[1800ms]
-                lg:duration-[5000ms]
-
-                ease-[cubic-bezier(0.16,1,0.3,1)]
-                will-change-transform
-
-                ${
-                  showRandomFacts
-                    ? "translate-x-0 opacity-100"
-                    : "-translate-x-[120px] lg:-translate-x-[300px] opacity-0"
-                }
-              `}
-            >
-              <img
-                src={octoImg}
-                alt="Octopus coming out of a monitor"
-                className="
-                  w-[330px]
-                  sm:w-[430px]
-                  md:w-[520px]
-
-                  lg:w-[760px]
-                  xl:w-[800px]
-
-                  max-w-none
-                  h-auto
-                  object-contain
-
-                  lg:-ml-[90px]
-
-                  translate-y-[20px]
-                  lg:translate-y-[70px]
-                "
-              />
-            </div>
-
-            {/* FACTS */}
-            <div
-              className={`
-                justify-self-start
-                lg:justify-self-end
-
                 transition-all
                 duration-[1100ms]
                 ease-[cubic-bezier(0.16,1,0.3,1)]
-                delay-[200ms]
-                lg:delay-[450ms]
-
                 ${
                   showRandomFacts
-                    ? "translate-x-0 opacity-100"
-                    : "-translate-x-[60px] lg:-translate-x-[120px] opacity-0"
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-[70px] opacity-0"
                 }
               `}
             >
               <h2
                 className="
-                  text-[36px]
-                  sm:text-[40px]
-                  lg:text-[46px]
-
+                  text-[44px]
+                  sm:text-[52px]
+                  md:text-[58px]
                   font-light
-                  leading-none
+                  leading-[1.05]
+                  tracking-[-0.035em]
                   text-[#3f3f3f]
-
-                  mb-6
-                  lg:mb-8
                 "
               >
                 Random facts
@@ -699,19 +587,16 @@ export default function About() {
 
               <ul
                 className="
-                  space-y-[10px]
-                  sm:space-y-[12px]
-                  lg:space-y-[14px]
-
-                  text-[16px]
-                  sm:text-[17px]
-                  lg:text-[19px]
-
-                  leading-[1.5]
-                  lg:leading-[1.45]
-
-                  font-normal
-                  text-[#555555]
+                  mt-10
+                  sm:mt-12
+                  space-y-5
+                  sm:space-y-6
+                  text-[19px]
+                  sm:text-[22px]
+                  md:text-[24px]
+                  font-light
+                  leading-[1.45]
+                  text-[#454545]
                 "
               >
                 <li>
@@ -720,7 +605,7 @@ export default function About() {
                     href="https://www.linkedin.com/in/vivinthambidurai"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline underline-offset-2 hover:text-black"
+                    className="underline underline-offset-4"
                   >
                     social media
                   </a>
@@ -735,6 +620,124 @@ export default function About() {
                 <li>I love to cook (and eat)</li>
               </ul>
             </div>
+
+            <div
+              className={`
+                mt-20
+                sm:mt-24
+                flex
+                justify-center
+                items-end
+                transition-all
+                duration-[1600ms]
+                ease-[cubic-bezier(0.16,1,0.3,1)]
+                ${
+                  showRandomFacts
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-[130px] opacity-0"
+                }
+              `}
+            >
+              <img
+                src={octoImg}
+                alt="Octopus coming out of a monitor"
+                className="
+                  w-[390px]
+                  sm:w-[520px]
+                  md:w-[620px]
+                  max-w-none
+                  h-auto
+                  object-contain
+                  translate-y-[8px]
+                "
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* DESKTOP */}
+        <div className="hidden lg:block px-6 py-20">
+          <div className="max-w-[1280px] mx-auto">
+            <div
+              className="
+                grid
+                grid-cols-[620px_1fr]
+                items-center
+                gap-16
+              "
+            >
+              <div
+                className={`
+                  flex
+                  items-center
+                  justify-start
+                  transition-all
+                  duration-[5000ms]
+                  ease-[cubic-bezier(0.16,1,0.3,1)]
+                  will-change-transform
+                  ${
+                    showRandomFacts
+                      ? "translate-x-0 opacity-100"
+                      : "-translate-x-[300px] opacity-0"
+                  }
+                `}
+              >
+                <img
+                  src={octoImg}
+                  alt="Octopus coming out of a monitor"
+                  className="
+                    w-[760px]
+                    xl:w-[800px]
+                    max-w-none
+                    h-auto
+                    object-contain
+                    -ml-[90px]
+                    translate-y-[70px]
+                  "
+                />
+              </div>
+
+              <div
+                className={`
+                  justify-self-end
+                  transition-all
+                  duration-[1100ms]
+                  ease-[cubic-bezier(0.16,1,0.3,1)]
+                  delay-[450ms]
+                  ${
+                    showRandomFacts
+                      ? "translate-x-0 opacity-100"
+                      : "-translate-x-[120px] opacity-0"
+                  }
+                `}
+              >
+                <h2 className="text-[46px] font-light leading-none text-[#3f3f3f] mb-8">
+                  Random facts
+                </h2>
+
+                <ul className="space-y-[14px] text-[19px] leading-[1.45] text-[#555555]">
+                  <li>
+                    I'm slightly addicted to{" "}
+                    <a
+                      href="https://www.linkedin.com/in/vivinthambidurai"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline underline-offset-2 hover:text-black"
+                    >
+                      social media
+                    </a>
+                  </li>
+
+                  <li>Building things from scratch is my thing</li>
+                  <li>Can't say no to a triple chocolate muffin</li>
+                  <li>Complex problems are oddly satisfying</li>
+                  <li>Always curious about how things work</li>
+                  <li>Learning goes beyond coursework</li>
+                  <li>Coffee keeps me going</li>
+                  <li>I love to cook (and eat)</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -747,39 +750,23 @@ export default function About() {
         className="
           border-t
           bg-[#f5f5f5]
-
-          px-4
-          sm:px-5
-          md:px-6
-
-          py-16
-          sm:py-20
-          lg:py-28
-
+          px-4 sm:px-5 md:px-6
+          py-16 sm:py-20 lg:py-28
           overflow-hidden
         "
       >
         <div className="max-w-[1280px] mx-auto">
           <div className="grid md:grid-cols-[110px_1fr] lg:grid-cols-[180px_1fr] gap-3 md:gap-6 items-end">
-            {/* LEFT LABELS */}
             <div
               className="
-                hidden
-                md:flex
+                hidden md:flex
                 flex-col
                 justify-between
-
-                h-[360px]
-                lg:h-[430px]
-
-                pb-20
-                lg:pb-24
-
+                h-[360px] lg:h-[430px]
+                pb-20 lg:pb-24
                 text-gray-500
                 font-bold
-
-                text-[14px]
-                lg:text-lg
+                text-[14px] lg:text-lg
               "
             >
               <span>Jedi</span>
@@ -791,24 +778,16 @@ export default function About() {
             <div className="min-w-0">
               <h2
                 className="
-                  text-[36px]
-                  sm:text-[40px]
-                  lg:text-[44px]
-
+                  text-[36px] sm:text-[40px] lg:text-[44px]
                   font-light
                   text-gray-700
-
-                  text-left
-                  md:text-right
-
-                  mb-7
-                  lg:mb-8
+                  text-left md:text-right
+                  mb-7 lg:mb-8
                 "
               >
                 My skills
               </h2>
 
-              {/* MOBILE SKILLS */}
               <div className="md:hidden space-y-5">
                 {skills.map((item) => (
                   <div key={item.skill}>
@@ -828,7 +807,6 @@ export default function About() {
                           ${item.color}
                           h-full
                           rounded-full
-
                           transition-all
                           duration-[1400ms]
                           ease-[cubic-bezier(0.16,1,0.3,1)]
@@ -843,22 +821,15 @@ export default function About() {
                 ))}
               </div>
 
-              {/* TABLET / DESKTOP SKILLS */}
               <div
                 className="
-                  hidden
-                  md:block
-
+                  hidden md:block
                   relative
-                  h-[360px]
-                  lg:h-[430px]
-
-                  border-l
-                  border-b
+                  h-[360px] lg:h-[430px]
+                  border-l border-b
                   border-gray-300
                 "
               >
-                {/* GRID */}
                 <div className="absolute inset-0 flex flex-col justify-between pb-20 lg:pb-24">
                   <div className="border-t border-gray-200" />
                   <div className="border-t border-gray-200" />
@@ -866,21 +837,14 @@ export default function About() {
                   <div className="border-t border-gray-200" />
                 </div>
 
-                {/* BARS */}
                 <div
                   className="
-                    relative
-                    z-10
+                    relative z-10
                     h-full
-
                     flex
                     items-end
-
-                    gap-2
-                    lg:gap-8
-
-                    px-2
-                    lg:px-8
+                    gap-2 lg:gap-8
+                    px-2 lg:px-8
                   "
                 >
                   {skills.map((item) => (
@@ -888,24 +852,17 @@ export default function About() {
                       key={item.skill}
                       className={`
                         ${item.color}
-
                         flex-1
                         min-w-0
                         max-w-[180px]
-
                         rounded-t-lg
                         shadow-md
-
                         flex
                         flex-col
                         justify-end
                         items-center
-
-                        pb-5
-                        lg:pb-8
-
+                        pb-5 lg:pb-8
                         text-white
-
                         transition-all
                         duration-[1600ms]
                         ease-[cubic-bezier(0.16,1,0.3,1)]
@@ -919,16 +876,12 @@ export default function About() {
                     >
                       <div
                         className={`
-                          text-[28px]
-                          lg:text-[54px]
-
+                          text-[28px] lg:text-[54px]
                           font-bold
                           leading-none
                           drop-shadow
-
                           transition-opacity
                           duration-500
-
                           ${showSkills ? "opacity-100" : "opacity-0"}
                         `}
                         style={{
@@ -941,17 +894,11 @@ export default function About() {
 
                       <p
                         className={`
-                          mt-3
-                          lg:mt-5
-
-                          text-[11px]
-                          lg:text-lg
-
+                          mt-3 lg:mt-5
+                          text-[11px] lg:text-lg
                           font-bold
-
                           transition-opacity
                           duration-500
-
                           ${showSkills ? "opacity-100" : "opacity-0"}
                         `}
                         style={{
@@ -978,45 +925,200 @@ export default function About() {
           border-y
           border-gray-300
           bg-white
-
-          px-4
-          sm:px-5
-          md:px-6
-
-          py-16
-          sm:py-20
-          lg:py-32
-
           overflow-hidden
         "
       >
+        {/* PHONE */}
         <div
           className="
-            max-w-[1280px]
-            mx-auto
-
-            grid
-            grid-cols-1
-            md:grid-cols-[0.9fr_1.1fr]
-
-            gap-10
-            md:gap-8
-            lg:gap-16
-
-            items-center
+            md:hidden
+            px-6
+            pt-20
+            pb-12
           "
         >
-          {/* LEFT */}
+          <div className="max-w-[620px] mx-auto">
+            <div
+              className={`
+                transition-all
+                duration-[1300ms]
+                ease-[cubic-bezier(0.16,1,0.3,1)]
+                ${
+                  showFeatured
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-[70px] opacity-0"
+                }
+              `}
+            >
+              <h2
+                className="
+                  text-[44px]
+                  leading-[1.12]
+                  font-light
+                  tracking-[-0.035em]
+                  text-[#333333]
+                  max-w-[340px]
+                "
+              >
+                Featured here &amp;
+                <br />
+                there
+              </h2>
+
+              <p
+                className="
+                  mt-10
+                  text-[20px]
+                  leading-[1.7]
+                  font-light
+                  text-[#4a4a4a]
+                "
+              >
+                My work has been recognised through research publications,
+                international websites, university representation, and selected
+                student features. These milestones reflect my journey as a
+                software engineer, researcher, and MSc Advanced Computer Science
+                student.
+              </p>
+
+              <Link
+                to="/featured"
+                className="
+                  inline-block
+                  mt-10
+                  text-[20px]
+                  font-light
+                  text-[#2f2f2f]
+                  underline
+                  underline-offset-[6px]
+                  decoration-[1px]
+                "
+              >
+                View featured work
+              </Link>
+            </div>
+
+            {/* MOBILE COLLAGE - FIXED / CENTERED */}
+            <div
+              className={`
+                relative
+                mt-14
+                h-[320px]
+                w-full
+                transition-all
+                duration-[1600ms]
+                ease-[cubic-bezier(0.16,1,0.3,1)]
+                ${
+                  showFeatured
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-[100px] opacity-0"
+                }
+              `}
+            >
+              {/* LEFT CARD */}
+              <div
+                className="
+                  absolute
+                  left-[-32px]
+                  top-[115px]
+                  w-[190px]
+                  h-[120px]
+                  z-10
+                  rotate-[-4deg]
+                "
+              >
+                <img
+                  src={horiImg}
+                  alt="Researcher and coder"
+                  className="
+                    w-full
+                    h-full
+                    object-contain
+                    drop-shadow-[0_10px_20px_rgba(0,0,0,0.13)]
+                  "
+                />
+              </div>
+
+              {/* CENTER */}
+              <div
+                className="
+                  absolute
+                  left-1/2
+                  top-[25px]
+                  -translate-x-1/2
+                  w-[180px]
+                  h-[260px]
+                  z-20
+                  rotate-[-5deg]
+                "
+              >
+                <img
+                  src={prospectImg}
+                  alt="Prospects magazine"
+                  className="
+                    w-full
+                    h-full
+                    object-contain
+                    scale-[1.06]
+                    drop-shadow-[0_12px_22px_rgba(0,0,0,0.18)]
+                  "
+                />
+              </div>
+
+              {/* RIGHT PHOTO */}
+              <div
+                className="
+                  absolute
+                  right-[56px]
+                  top-[65px]
+                  w-[125px]
+                  h-[210px]
+                  bg-white
+                  shadow-[0_12px_32px_rgba(0,0,0,0.15)]
+                  rotate-[6deg]
+                  overflow-hidden
+                  z-30
+                "
+              >
+                <img
+                  src={ambassadorImg}
+                  alt="University of Sheffield"
+                  className="
+                    w-full
+                    h-full
+                    object-cover
+                    object-center
+                  "
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* TABLET + DESKTOP */}
+        <div
+          className="
+            hidden
+            md:grid
+            max-w-[1280px]
+            mx-auto
+            grid-cols-[0.9fr_1.1fr]
+            gap-8
+            lg:gap-16
+            items-center
+            px-6
+            py-20
+            lg:py-32
+          "
+        >
           <div
             className={`
               flex
               flex-col
               justify-center
-
               transition-all
               duration-[1600ms]
               ease-[cubic-bezier(0.16,1,0.3,1)]
-
               ${
                 showFeatured
                   ? "translate-x-0 opacity-100"
@@ -1026,17 +1128,12 @@ export default function About() {
           >
             <h2
               className="
-                text-[36px]
-                sm:text-[40px]
-                lg:text-[52px]
-
+                text-[40px] lg:text-[52px]
                 font-light
                 leading-[1.05]
                 tracking-[-0.035em]
                 text-[#333333]
-
-                mb-6
-                lg:mb-8
+                mb-6 lg:mb-8
               "
             >
               Featured here & there
@@ -1045,16 +1142,10 @@ export default function About() {
             <p
               className="
                 max-w-[520px]
-
-                text-[16px]
-                sm:text-[17px]
-                lg:text-[20px]
-
+                text-[17px] lg:text-[20px]
                 leading-[1.65]
                 text-[#555555]
-
-                mb-7
-                lg:mb-10
+                mb-7 lg:mb-10
               "
             >
               My work has been recognised through research publications,
@@ -1070,13 +1161,9 @@ export default function About() {
                 inline-flex
                 w-fit
                 items-center
-
-                text-[16px]
-                lg:text-[18px]
-
+                text-[16px] lg:text-[18px]
                 font-normal
                 text-[#333333]
-
                 border-b
                 border-[#333333]
                 pb-1
@@ -1086,25 +1173,17 @@ export default function About() {
             </Link>
           </div>
 
-          {/* COLLAGE */}
           <div
             className={`
               relative
-
-              h-[300px]
-              sm:h-[370px]
-              md:h-[400px]
+              h-[400px]
               lg:h-[440px]
-
               min-w-0
-
               transition-all
               duration-[2000ms]
               lg:duration-[2800ms]
-
               ease-[cubic-bezier(0.16,1,0.3,1)]
               delay-[200ms]
-
               ${
                 showFeatured
                   ? "opacity-100 translate-x-0"
@@ -1112,28 +1191,13 @@ export default function About() {
               }
             `}
           >
-            {/* HORIZONTAL */}
             <div
               className="
                 absolute
-
-                left-[-15px]
-                sm:left-[5%]
-                md:left-0
-
-                top-[95px]
-                sm:top-[110px]
-                lg:top-[125px]
-
-                w-[190px]
-                sm:w-[250px]
-                md:w-[250px]
-                lg:w-[340px]
-
-                h-[155px]
-                sm:h-[200px]
-                lg:h-[245px]
-
+                left-0
+                top-[110px] lg:top-[125px]
+                w-[250px] lg:w-[340px]
+                h-[200px] lg:h-[245px]
                 rotate-[-5deg]
                 z-10
               "
@@ -1145,29 +1209,13 @@ export default function About() {
               />
             </div>
 
-            {/* PROSPECT */}
             <div
               className="
                 absolute
-
-                left-[30%]
-                sm:left-[34%]
-                md:left-[170px]
-                lg:left-[250px]
-
-                top-[15px]
-                sm:top-[20px]
-                lg:top-[25px]
-
-                w-[145px]
-                sm:w-[190px]
-                md:w-[200px]
-                lg:w-[250px]
-
-                h-[240px]
-                sm:h-[300px]
-                lg:h-[365px]
-
+                left-[170px] lg:left-[250px]
+                top-[20px] lg:top-[25px]
+                w-[200px] lg:w-[250px]
+                h-[300px] lg:h-[365px]
                 rotate-[-6deg]
                 z-20
               "
@@ -1179,33 +1227,15 @@ export default function About() {
               />
             </div>
 
-            {/* UNIVERSITY */}
             <div
               className="
                 absolute
-
-                right-[-10px]
-                sm:right-[2%]
-                md:right-0
-
-                top-[55px]
-                sm:top-[60px]
-                lg:top-[70px]
-
-                w-[125px]
-                sm:w-[165px]
-                md:w-[170px]
-                lg:w-[230px]
-
-                h-[215px]
-                sm:h-[285px]
-                md:h-[300px]
-                lg:h-[350px]
-
+                right-0
+                top-[60px] lg:top-[70px]
+                w-[170px] lg:w-[230px]
+                h-[300px] lg:h-[350px]
                 bg-white
-
                 shadow-[0_12px_32px_rgba(0,0,0,0.15)]
-
                 rotate-[7deg]
                 overflow-hidden
                 z-30
@@ -1214,10 +1244,7 @@ export default function About() {
               <img
                 src={ambassadorImg}
                 alt="University of Sheffield"
-                className="w-full h-full object-cover"
-                style={{
-                  objectPosition: "center center",
-                }}
+                className="w-full h-full object-cover object-center"
               />
             </div>
           </div>
@@ -1232,15 +1259,8 @@ export default function About() {
         className="
           border-t
           bg-[#f5f5f5]
-
-          px-4
-          sm:px-5
-          md:px-6
-
-          py-16
-          sm:py-20
-          lg:py-32
-
+          px-4 sm:px-5 md:px-6
+          py-16 sm:py-20 lg:py-32
           overflow-hidden
         "
       >
@@ -1248,29 +1268,21 @@ export default function About() {
           className="
             max-w-[1280px]
             mx-auto
-
             grid
             grid-cols-1
             md:grid-cols-2
-
-            gap-9
-            md:gap-10
-            lg:gap-16
-
+            gap-9 md:gap-10 lg:gap-16
             items-center
           "
         >
-          {/* IMAGE */}
           <div
             className={`
               rounded-xl
               overflow-hidden
               shadow-sm
-
               transition-all
               duration-[1700ms]
               ease-[cubic-bezier(0.16,1,0.3,1)]
-
               ${
                 showVolunteer
                   ? "translate-x-0 opacity-100"
@@ -1283,28 +1295,22 @@ export default function About() {
               alt="Volunteer Work"
               className="
                 w-full
-
                 h-[230px]
                 sm:h-[280px]
                 md:h-[300px]
                 lg:h-80
-
                 object-cover
               "
             />
           </div>
 
-          {/* CONTENT */}
           <div
             className={`
-              md:pl-4
-              lg:pl-12
-
+              md:pl-4 lg:pl-12
               transition-all
               duration-[1700ms]
               ease-[cubic-bezier(0.16,1,0.3,1)]
               delay-[200ms]
-
               ${
                 showVolunteer
                   ? "translate-x-0 opacity-100"
@@ -1318,14 +1324,11 @@ export default function About() {
                 sm:text-[44px]
                 md:text-[48px]
                 lg:text-[56px]
-
                 font-light
                 tracking-[-0.03em]
                 leading-[1.05]
                 text-[#2f2f2f]
-
-                mb-5
-                lg:mb-7
+                mb-5 lg:mb-7
               "
             >
               Voluntary works
@@ -1333,17 +1336,11 @@ export default function About() {
 
             <p
               className="
-                text-[16px]
-                sm:text-[17px]
-                lg:text-[18px]
-
+                text-[16px] sm:text-[17px] lg:text-[18px]
                 leading-[1.7]
                 text-[#525965]
-
                 max-w-[560px]
-
-                mb-6
-                lg:mb-8
+                mb-6 lg:mb-8
               "
             >
               I have contributed as a Python programming mentor, robotics lab
@@ -1356,16 +1353,11 @@ export default function About() {
               className="
                 inline-block
                 w-fit
-
-                text-[16px]
-                lg:text-[17px]
-
+                text-[16px] lg:text-[17px]
                 text-[#2f2f2f]
-
                 border-b
                 border-[#2f2f2f]
                 pb-1
-
                 hover:opacity-60
                 transition-opacity
               "
@@ -1383,63 +1375,193 @@ export default function About() {
         ref={storySectionRef}
         className="
           border-t
+          border-gray-200
           bg-white
-
-          px-4
-          sm:px-5
-          md:px-6
-
-          py-16
-          sm:py-20
-          lg:py-28
-
           overflow-hidden
         "
       >
+        {/* PHONE — REFERENCE STYLE */}
         <div
           className="
-            max-w-[1280px]
-            mx-auto
-
-            grid
-            grid-cols-1
-            lg:grid-cols-[1.15fr_0.9fr]
-
-            gap-10
-            sm:gap-12
-            lg:gap-20
-
-            items-center
+            lg:hidden
+            px-6
+            sm:px-10
+            pt-20
+            sm:pt-24
+            pb-20
           "
         >
-          {/* LEFT */}
+          <div className="max-w-[680px] mx-auto">
+            <div
+              className={`
+                transition-all
+                duration-[1300ms]
+                ease-[cubic-bezier(0.16,1,0.3,1)]
+                ${
+                  showStory
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-[70px] opacity-0"
+                }
+              `}
+            >
+              <h2
+                className="
+                  text-[46px]
+                  sm:text-[54px]
+                  md:text-[60px]
+                  font-light
+                  tracking-[-0.035em]
+                  leading-[1.05]
+                  text-[#343434]
+                "
+              >
+                My story
+              </h2>
+
+              <p
+                className="
+                  mt-10
+                  text-[20px]
+                  sm:text-[23px]
+                  md:text-[25px]
+                  font-light
+                  leading-[1.7]
+                  text-[#454545]
+                "
+              >
+                Learn a little more about my journey—from discovering software
+                development to building backend systems, contributing to open
+                source, conducting AI research, and pursuing my Master's degree
+                in Advanced Computer Science at the University of Sheffield.
+              </p>
+
+              <Link
+                to="/story"
+                className="
+                  inline-block
+                  mt-10
+                  text-[20px]
+                  sm:text-[22px]
+                  font-light
+                  text-[#2f2f2f]
+                  underline
+                  underline-offset-[6px]
+                  decoration-[1px]
+                "
+              >
+                Read my story
+              </Link>
+            </div>
+
+            {/* STORY IMAGE BELOW TEXT */}
+            <div
+              className={`
+                relative
+                mt-20
+                sm:mt-24
+                transition-all
+                duration-[1600ms]
+                ease-[cubic-bezier(0.16,1,0.3,1)]
+                ${
+                  showStory
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-[100px] opacity-0"
+                }
+              `}
+            >
+              <div
+                className="
+                  ml-auto
+                  w-[88%]
+                  rounded-[3px]
+                  overflow-hidden
+                  shadow-[0_2px_10px_rgba(0,0,0,0.10)]
+                  border
+                  border-gray-200
+                "
+              >
+                <img
+                  src={storyImg}
+                  alt="Workspace"
+                  className="
+                    w-full
+                    h-[250px]
+                    sm:h-[340px]
+                    md:h-[410px]
+                    object-cover
+                  "
+                />
+              </div>
+
+              <div
+                className="
+                  absolute
+                  left-0
+                  top-[20px]
+                  sm:top-[30px]
+                  w-[115px]
+                  h-[115px]
+                  sm:w-[145px]
+                  sm:h-[145px]
+                  md:w-[165px]
+                  md:h-[165px]
+                  rounded-full
+                  bg-white
+                  p-[5px]
+                  shadow-xl
+                  border
+                  border-gray-200
+                "
+              >
+                <img
+                  src={profileImg}
+                  alt="Vivin"
+                  className="
+                    w-full
+                    h-full
+                    rounded-full
+                    object-cover
+                  "
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* DESKTOP */}
+        <div
+          className="
+            hidden
+            lg:grid
+            max-w-[1280px]
+            mx-auto
+            grid-cols-[1.15fr_0.9fr]
+            gap-20
+            items-center
+            px-6
+            py-28
+          "
+        >
           <div
             className={`
               relative
-
               transition-all
               duration-[1800ms]
               ease-[cubic-bezier(0.16,1,0.3,1)]
-
               ${
                 showStory
                   ? "translate-x-0 opacity-100"
-                  : "-translate-x-[100px] lg:-translate-x-[240px] opacity-0"
+                  : "-translate-x-[240px] opacity-0"
               }
             `}
           >
-            <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-xl border border-gray-200">
+            <div className="rounded-2xl overflow-hidden shadow-xl border border-gray-200">
               <img
                 src={storyImg}
                 alt="Workspace"
                 className="
                   w-full
-
-                  h-[250px]
-                  sm:h-[330px]
-                  md:h-[390px]
-                  lg:h-[430px]
-
+                  h-[430px]
                   object-cover
                 "
               />
@@ -1448,33 +1570,13 @@ export default function About() {
             <div
               className="
                 absolute
-
-                left-[12px]
-                sm:left-[18px]
-                md:left-[-20px]
-                lg:left-[-35px]
-
-                top-[18px]
-                sm:top-8
-
-                w-[105px]
-                h-[105px]
-
-                sm:w-[135px]
-                sm:h-[135px]
-
-                md:w-[160px]
-                md:h-[160px]
-
-                lg:w-44
-                lg:h-44
-
+                left-[-35px]
+                top-8
+                w-44
+                h-44
                 rounded-full
                 bg-white
-
-                p-[4px]
-                sm:p-[6px]
-
+                p-[6px]
                 shadow-2xl
               "
             >
@@ -1486,69 +1588,36 @@ export default function About() {
             </div>
           </div>
 
-          {/* RIGHT */}
           <div
             className={`
               transition-all
               duration-[1800ms]
               ease-[cubic-bezier(0.16,1,0.3,1)]
-              delay-[200ms]
-              lg:delay-[300ms]
-
+              delay-[300ms]
               ${
                 showStory
                   ? "translate-x-0 opacity-100"
-                  : "translate-x-[80px] lg:translate-x-[200px] opacity-0"
+                  : "translate-x-[200px] opacity-0"
               }
             `}
           >
-            <h2
-              className="
-                text-[40px]
-                sm:text-[48px]
-                lg:text-[58px]
-
-                font-light
-                text-gray-800
-
-                mb-5
-                lg:mb-8
-              "
-            >
+            <h2 className="text-[58px] font-light text-gray-800 mb-8">
               My story
             </h2>
 
-            <p
-              className="
-                text-[16px]
-                sm:text-[18px]
-                lg:text-[21px]
-
-                leading-[1.7]
-                lg:leading-[1.9]
-
-                text-gray-600
-
-                mb-7
-                lg:mb-10
-              "
-            >
+            <p className="text-[21px] leading-[1.9] text-gray-600 mb-10">
               Learn a little more about my journey—from discovering software
               development to building backend systems, contributing to open
-              source, conducting AI research, and pursuing my Master's degree
-              in Advanced Computer Science at the University of Sheffield.
+              source, conducting AI research, and pursuing my Master's degree in
+              Advanced Computer Science at the University of Sheffield.
             </p>
 
             <Link
               to="/story"
               className="
-                text-[17px]
-                sm:text-[18px]
-                lg:text-xl
-
+                text-xl
                 underline
                 underline-offset-4
-
                 hover:text-black
                 transition
               "

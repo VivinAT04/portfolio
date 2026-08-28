@@ -216,18 +216,24 @@ export default function Featured() {
             <article
               key={feature.title}
               className="
+                relative
+
                 grid
-                grid-cols-1
+                grid-cols-[1fr_auto]
+                sm:grid-cols-[1fr_auto]
 
                 md:grid-cols-[190px_minmax(0,1fr)_80px]
                 lg:grid-cols-[270px_minmax(0,1fr)_120px]
 
-                gap-5
-                sm:gap-6
+                gap-x-4
+                gap-y-5
+                sm:gap-x-6
+                sm:gap-y-6
                 md:gap-8
                 lg:gap-16
 
-                items-center
+                items-start
+                md:items-center
 
                 py-9
                 sm:py-10
@@ -242,6 +248,9 @@ export default function Featured() {
               {/* LEFT — LOGO */}
               <div
                 className="
+                  col-start-1
+                  row-start-1
+
                   w-full
 
                   md:w-[180px]
@@ -300,8 +309,67 @@ export default function Featured() {
                 />
               </div>
 
+              {/* PHONE — VIEW BESIDE LOGO */}
+              <div
+                className="
+                  col-start-2
+                  row-start-1
+
+                  flex
+                  items-center
+                  justify-end
+                  self-center
+
+                  md:hidden
+
+                  pr-1
+                "
+              >
+                <a
+                  href={feature.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`View ${feature.title}`}
+                  className="
+                    inline-flex
+                    items-center
+                    gap-2
+
+                    text-[15px]
+                    sm:text-[16px]
+
+                    font-medium
+                    text-[#303030]
+
+                    border-b
+                    border-[#303030]
+
+                    pb-1
+
+                    hover:opacity-50
+                    transition-opacity
+                    duration-300
+                  "
+                >
+                  View
+                  <span className="text-[17px]">↗</span>
+                </a>
+              </div>
+
               {/* CENTER */}
-              <div className="max-w-[660px] min-w-0">
+              <div
+                className="
+                  col-span-2
+                  row-start-2
+
+                  md:col-span-1
+                  md:col-start-2
+                  md:row-start-1
+
+                  max-w-[660px]
+                  min-w-0
+                "
+              >
                 <h2
                   className="
                     text-[22px]
@@ -342,8 +410,19 @@ export default function Featured() {
                 </p>
               </div>
 
-              {/* RIGHT — VIEW */}
-              <div className="md:text-right">
+              {/* DESKTOP — VIEW */}
+              <div
+                className="
+                  hidden
+                  md:block
+
+                  md:col-start-3
+                  md:row-start-1
+
+                  md:text-right
+                  md:self-center
+                "
+              >
                 <a
                   href={feature.link}
                   target="_blank"
@@ -355,8 +434,7 @@ export default function Featured() {
 
                     gap-2
 
-                    text-[15px]
-                    sm:text-[16px]
+                    text-[16px]
                     lg:text-[17px]
 
                     font-medium
