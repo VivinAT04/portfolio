@@ -299,12 +299,9 @@ export default function About() {
               "
             >
               {imageCards.map((item, index) => (
-                <Link
+                <div
                   key={item.alt}
-                  to="/story"
-                  aria-label="Read my story"
                   className={`
-                    block
                     w-full
                     bg-white
                     rounded-[18px] sm:rounded-[10px]
@@ -315,11 +312,6 @@ export default function About() {
                     transition-all
                     duration-[900ms] md:duration-[1100ms]
                     ease-[cubic-bezier(0.22,1,0.36,1)]
-                    cursor-pointer
-
-                    hover:shadow-[0_8px_24px_rgba(0,0,0,0.16)]
-                    hover:-translate-y-[3px]
-
                     ${
                       animateAbout
                         ? "opacity-100 translate-x-0"
@@ -344,17 +336,10 @@ export default function About() {
                     <img
                       src={item.src}
                       alt={item.alt}
-                      className={`
-                        w-full
-                        h-full
-                        ${item.objectClass}
-                        transition-transform
-                        duration-500
-                        hover:scale-[1.03]
-                      `}
+                      className={`w-full h-full ${item.objectClass}`}
                     />
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           </div>
@@ -1036,18 +1021,18 @@ export default function About() {
                   w-[315px]
                   h-[300px]
 
-                  max-w-none
+                  max-w-full
                 "
               >
                 {/* LEFT */}
                 <div
                   className="
                     absolute
-                    left-[-8px]
-                    top-[102px]
+                    left-[0px]
+                    top-[112px]
 
-                    w-[195px]
-                    h-[130px]
+                    w-[165px]
+                    h-[110px]
 
                     z-10
                     rotate-[-5deg]
