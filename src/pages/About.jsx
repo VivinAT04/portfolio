@@ -252,7 +252,6 @@ export default function About() {
               </div>
             </div>
 
-            {/* MOBILE PHOTO */}
             <div
               className="
                 md:hidden
@@ -287,7 +286,6 @@ export default function About() {
             <div className="absolute left-0 right-0 bottom-0 h-px bg-[#d9d9d9] z-20" />
           </div>
 
-          {/* IMAGE CARDS */}
           <div className="pt-5 sm:pt-8 md:pt-10 overflow-hidden">
             <div
               className="
@@ -360,7 +358,6 @@ export default function About() {
           overflow-hidden
         "
       >
-        {/* PHONE + TABLET */}
         <div
           className="
             lg:hidden
@@ -465,7 +462,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* DESKTOP */}
         <div className="hidden lg:block px-6 py-20">
           <div className="max-w-[1280px] mx-auto">
             <div
@@ -547,7 +543,6 @@ export default function About() {
           overflow-hidden
         "
       >
-        {/* PHONE + TABLET — REFERENCE STYLE */}
         <div
           className="
             lg:hidden
@@ -655,7 +650,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* DESKTOP */}
         <div className="hidden lg:block px-6 py-20">
           <div className="max-w-[1280px] mx-auto">
             <div
@@ -998,16 +992,18 @@ export default function About() {
               </Link>
             </div>
 
-            {/* MOBILE COLLAGE - FIXED / CENTERED */}
+            {/* MOBILE COLLAGE — CENTERED AS ONE GROUP */}
             <div
               className={`
                 relative
                 mt-14
                 h-[320px]
                 w-full
+
                 transition-all
                 duration-[1600ms]
                 ease-[cubic-bezier(0.16,1,0.3,1)]
+
                 ${
                   showFeatured
                     ? "translate-y-0 opacity-100"
@@ -1015,81 +1011,101 @@ export default function About() {
                 }
               `}
             >
-              {/* LEFT CARD */}
-              <div
-                className="
-                  absolute
-                  left-[-32px]
-                  top-[115px]
-                  w-[190px]
-                  h-[120px]
-                  z-10
-                  rotate-[-4deg]
-                "
-              >
-                <img
-                  src={horiImg}
-                  alt="Researcher and coder"
-                  className="
-                    w-full
-                    h-full
-                    object-contain
-                    drop-shadow-[0_10px_20px_rgba(0,0,0,0.13)]
-                  "
-                />
-              </div>
-
-              {/* CENTER */}
               <div
                 className="
                   absolute
                   left-1/2
-                  top-[25px]
+                  top-0
                   -translate-x-1/2
-                  w-[180px]
-                  h-[260px]
-                  z-20
-                  rotate-[-5deg]
-                "
-              >
-                <img
-                  src={prospectImg}
-                  alt="Prospects magazine"
-                  className="
-                    w-full
-                    h-full
-                    object-contain
-                    scale-[1.06]
-                    drop-shadow-[0_12px_22px_rgba(0,0,0,0.18)]
-                  "
-                />
-              </div>
 
-              {/* RIGHT PHOTO */}
-              <div
-                className="
-                  absolute
-                  right-[56px]
-                  top-[65px]
-                  w-[125px]
-                  h-[210px]
-                  bg-white
-                  shadow-[0_12px_32px_rgba(0,0,0,0.15)]
-                  rotate-[6deg]
-                  overflow-hidden
-                  z-30
+                  w-[315px]
+                  h-[300px]
+
+                  max-w-none
                 "
               >
-                <img
-                  src={ambassadorImg}
-                  alt="University of Sheffield"
+                {/* LEFT */}
+                <div
                   className="
-                    w-full
-                    h-full
-                    object-cover
-                    object-center
+                    absolute
+                    left-[0px]
+                    top-[112px]
+
+                    w-[165px]
+                    h-[110px]
+
+                    z-10
+                    rotate-[-5deg]
                   "
-                />
+                >
+                  <img
+                    src={horiImg}
+                    alt="Researcher and coder"
+                    className="
+                      w-full
+                      h-full
+                      object-contain
+                      drop-shadow-[0_10px_20px_rgba(0,0,0,0.13)]
+                    "
+                  />
+                </div>
+
+                {/* CENTER */}
+                <div
+                  className="
+                    absolute
+                    left-1/2
+                    top-[18px]
+                    -translate-x-1/2
+
+                    w-[170px]
+                    h-[260px]
+
+                    z-20
+                    rotate-[-5deg]
+                  "
+                >
+                  <img
+                    src={prospectImg}
+                    alt="Prospects magazine"
+                    className="
+                      w-full
+                      h-full
+                      object-contain
+                      scale-[1.06]
+                      drop-shadow-[0_12px_22px_rgba(0,0,0,0.18)]
+                    "
+                  />
+                </div>
+
+                {/* RIGHT */}
+                <div
+                  className="
+                    absolute
+                    right-[0px]
+                    top-[58px]
+
+                    w-[115px]
+                    h-[205px]
+
+                    bg-white
+                    shadow-[0_12px_32px_rgba(0,0,0,0.15)]
+                    rotate-[6deg]
+                    overflow-hidden
+                    z-30
+                  "
+                >
+                  <img
+                    src={ambassadorImg}
+                    alt="University of Sheffield"
+                    className="
+                      w-full
+                      h-full
+                      object-cover
+                      object-center
+                    "
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -1205,7 +1221,12 @@ export default function About() {
               <img
                 src={horiImg}
                 alt="Researcher and coder"
-                className="w-full h-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.13)]"
+                className="
+                  w-full
+                  h-full
+                  object-contain
+                  drop-shadow-[0_10px_20px_rgba(0,0,0,0.13)]
+                "
               />
             </div>
 
@@ -1223,7 +1244,14 @@ export default function About() {
               <img
                 src={prospectImg}
                 alt="Prospects magazine"
-                className="w-full h-full object-contain scale-[1.08] lg:scale-[1.12] drop-shadow-[0_12px_22px_rgba(0,0,0,0.18)]"
+                className="
+                  w-full
+                  h-full
+                  object-contain
+                  scale-[1.08]
+                  lg:scale-[1.12]
+                  drop-shadow-[0_12px_22px_rgba(0,0,0,0.18)]
+                "
               />
             </div>
 
@@ -1380,7 +1408,6 @@ export default function About() {
           overflow-hidden
         "
       >
-        {/* PHONE — REFERENCE STYLE */}
         <div
           className="
             lg:hidden
@@ -1453,7 +1480,6 @@ export default function About() {
               </Link>
             </div>
 
-            {/* STORY IMAGE BELOW TEXT */}
             <div
               className={`
                 relative
@@ -1528,7 +1554,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* DESKTOP */}
         <div
           className="
             hidden
