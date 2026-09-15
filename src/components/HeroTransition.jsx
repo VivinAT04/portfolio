@@ -18,18 +18,18 @@ const cards = [
     link: "https://modelcontextprotocol.io/docs/getting-started/intro",
     linkText: "Read official docs",
   },
-{
-  icon: "🎯",
-  label: "CURRENT GOAL",
-  title: "AWS Cloud Practitioner",
-  description:
-    "Building a strong foundation in AWS cloud concepts, core services, security, architecture, pricing and cloud operations while preparing for the AWS Certified Cloud Practitioner certification.",
-  backTitle: "Certification Goal",
-  backText:
-    "I am currently preparing for the AWS Certified Cloud Practitioner exam to strengthen my understanding of AWS and build a solid foundation for cloud and backend engineering.",
-  link: "https://aws.amazon.com/certification/certified-cloud-practitioner/",
-  linkText: "View AWS Certification",
-},
+  {
+    icon: "🎯",
+    label: "CURRENT GOAL",
+    title: "AWS Cloud Practitioner",
+    description:
+      "Building a strong foundation in AWS cloud concepts, core services, security, architecture, pricing and cloud operations while preparing for the AWS Certified Cloud Practitioner certification.",
+    backTitle: "Certification Goal",
+    backText:
+      "I am currently preparing for the AWS Certified Cloud Practitioner exam to strengthen my understanding of AWS and build a solid foundation for cloud and backend engineering.",
+    link: "https://aws.amazon.com/certification/certified-cloud-practitioner/",
+    linkText: "View AWS Certification",
+  },
   {
     icon: "💡",
     label: "THOUGHT OF THE WEEK",
@@ -46,22 +46,79 @@ const cards = [
 export default function HeroTransition() {
   const [split, setSplit] = useState(50);
   const [flippedCard, setFlippedCard] = useState(null);
+  const [mobileDragging, setMobileDragging] = useState(false);
 
-  const handleMouseMove = (e) => {
-    if (window.innerWidth < 768) return;
+  /* =========================================================
+     SHARED SPLIT CALCULATION
+  ========================================================= */
 
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
+  const updateSplit = (clientX, element) => {
+    const rect = element.getBoundingClientRect();
+    const x = clientX - rect.left;
     const percentage = (x / rect.width) * 100;
 
     setSplit(Math.min(100, Math.max(0, percentage)));
   };
+
+  /* =========================================================
+     MOUSE / CURSOR
+     Works on desktop AND Chrome mobile preview
+  ========================================================= */
+
+  const handleMouseMove = (e) => {
+    updateSplit(e.clientX, e.currentTarget);
+  };
+
+  const handleMouseLeave = () => {
+    setSplit(50);
+  };
+
+  /* =========================================================
+     REAL MOBILE TOUCH
+  ========================================================= */
+
+  const handleTouchStart = (e) => {
+    if (window.innerWidth >= 768) return;
+
+    setMobileDragging(true);
+
+    const touch = e.touches[0];
+
+    if (touch) {
+      updateSplit(touch.clientX, e.currentTarget);
+    }
+  };
+
+  const handleTouchMove = (e) => {
+    if (window.innerWidth >= 768) return;
+
+    const touch = e.touches[0];
+
+    if (touch) {
+      updateSplit(touch.clientX, e.currentTarget);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (window.innerWidth >= 768) return;
+
+    setMobileDragging(false);
+    setSplit(50);
+  };
+
+  /* =========================================================
+     CARD FLIP
+  ========================================================= */
 
   const handleCardFlip = (index) => {
     if (window.innerWidth >= 1024) return;
 
     setFlippedCard((current) => (current === index ? null : index));
   };
+
+  /* =========================================================
+     MOVEMENT VALUES
+  ========================================================= */
 
   const leftTextOpacity =
     split > 50 ? 1 : Math.max(0, 1 - (50 - split) / 15);
@@ -72,11 +129,15 @@ export default function HeroTransition() {
   const personMove = (split - 50) * 2.2;
   const bgMove = (split - 50) * 1.4;
 
+  const mobilePersonMove = (split - 50) * 0.7;
+  const mobileBgMove = (split - 50) * 0.35;
+
   return (
     <>
       {/* =========================================================
           HERO
       ========================================================= */}
+
       <section
         id="home"
         className="
@@ -94,138 +155,224 @@ export default function HeroTransition() {
 
           overflow-hidden
           bg-white
-         pb-0 md:pb-20 lg:pb-24"
+
+          pb-0
+          md:pb-20
+          lg:pb-24
+        "
         onMouseMove={handleMouseMove}
-        onMouseLeave={() => {
-          if (window.innerWidth >= 768) {
-            setSplit(50);
-          }
-        }}
+        onMouseLeave={handleMouseLeave}
       >
         {/* =========================================================
-            MOBILE — STATIC
+            MOBILE — CURSOR + TOUCH INTERACTIVE
         ========================================================= */}
-        <div className="relative h-full md:hidden overflow-hidden bg-white">
+
+        <div
+          className="
+            relative
+            h-full
+            md:hidden
+            overflow-hidden
+            bg-white
+            select-none
+            touch-pan-y
+          "
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchEnd}
+        >
           {/* IMAGE COMPOSITION */}
+
           <div
             className="
               absolute
               left-1/2
               bottom-0
-              w-[440px] sm:w-[500px]
+
+              w-[440px]
+              sm:w-[500px]
+
               h-full
+
               -translate-x-1/2
+
               pointer-events-none
             "
           >
             {/* LEFT BACKGROUND */}
+
             <div
               className="
                 absolute
                 inset-0
                 overflow-hidden
-                [clip-path:inset(0_50%_0_0)]
               "
+              style={{
+                clipPath: `inset(0 ${100 - split}% 0 0)`,
+              }}
             >
               <img
                 src={researcherBg}
                 alt=""
-                className="
+                draggable="false"
+                className={`
                   absolute
+
                   left-[8px]
                   bottom-[-5px]
+
                   w-[255px]
                   sm:w-[320px]
+
                   max-w-none
                   opacity-90
-                "
+
+                  ${
+                    mobileDragging
+                      ? "transition-none"
+                      : "transition-transform duration-300 ease-out"
+                  }
+                `}
+                style={{
+                  transform: `translateX(${mobileBgMove}px)`,
+                }}
               />
             </div>
 
             {/* RIGHT BACKGROUND */}
+
             <div
               className="
                 absolute
                 inset-0
                 overflow-hidden
-                [clip-path:inset(0_0_0_50%)]
               "
+              style={{
+                clipPath: `inset(0 0 0 ${split}%)`,
+              }}
             >
               <img
                 src={coderBg}
                 alt=""
-                className="
+                draggable="false"
+                className={`
                   absolute
+
                   right-[5px]
                   bottom-[-5px]
+
                   w-[270px]
                   sm:w-[340px]
+
                   max-w-none
                   opacity-90
-                "
+
+                  ${
+                    mobileDragging
+                      ? "transition-none"
+                      : "transition-transform duration-300 ease-out"
+                  }
+                `}
+                style={{
+                  transform: `translateX(${mobileBgMove}px)`,
+                }}
               />
             </div>
 
             {/* LEFT PERSON */}
+
             <div
               className="
                 absolute
                 inset-0
                 z-10
                 overflow-hidden
-                [clip-path:inset(0_50%_0_0)]
               "
+              style={{
+                clipPath: `inset(0 ${100 - split}% 0 0)`,
+              }}
             >
               <img
                 src={researcherImg}
                 alt="Researcher"
-                className="
+                draggable="false"
+                className={`
                   absolute
+
                   left-1/2
                   bottom-[0px]
+
                   w-[350px]
                   sm:w-[450px]
+
                   max-w-none
-                  -translate-x-1/2
-                  translate-y-[58px] md:translate-y-0
-                "
+
+                  ${
+                    mobileDragging
+                      ? "transition-none"
+                      : "transition-transform duration-300 ease-out"
+                  }
+                `}
+                style={{
+                  transform: `translateX(calc(-50% + ${mobilePersonMove}px)) translateY(58px)`,
+                }}
               />
             </div>
 
             {/* RIGHT PERSON */}
+
             <div
               className="
                 absolute
                 inset-0
                 z-10
                 overflow-hidden
-                [clip-path:inset(0_0_0_50%)]
               "
+              style={{
+                clipPath: `inset(0 0 0 ${split}%)`,
+              }}
             >
               <img
                 src={coderImg}
                 alt="Coder"
-                className="
+                draggable="false"
+                className={`
                   absolute
+
                   left-1/2
                   bottom-[0px]
+
                   w-[350px]
                   sm:w-[450px]
+
                   max-w-none
-                  -translate-x-1/2
-                  translate-y-[58px] md:translate-y-0
-                "
+
+                  ${
+                    mobileDragging
+                      ? "transition-none"
+                      : "transition-transform duration-300 ease-out"
+                  }
+                `}
+                style={{
+                  transform: `translateX(calc(-50% + ${mobilePersonMove}px)) translateY(58px)`,
+                }}
               />
             </div>
           </div>
 
-          {/* MOBILE TITLES */}
+          {/* =====================================================
+              MOBILE TITLES
+          ===================================================== */}
+
           <div className="absolute inset-0 z-30 pointer-events-none">
             <h1
-              className="
+              className={`
                 absolute
+
                 left-[14px]
                 top-[140px]
+
                 sm:left-[22px]
                 sm:top-[160px]
 
@@ -238,16 +385,27 @@ export default function HeroTransition() {
 
                 text-[#363636]
                 whitespace-nowrap
-              "
+
+                ${
+                  mobileDragging
+                    ? "transition-none"
+                    : "transition-opacity duration-300"
+                }
+              `}
+              style={{
+                opacity: leftTextOpacity,
+              }}
             >
               researcher
             </h1>
 
             <h1
-              className="
+              className={`
                 absolute
+
                 right-[14px]
                 top-[140px]
+
                 sm:right-[22px]
                 sm:top-[160px]
 
@@ -260,7 +418,16 @@ export default function HeroTransition() {
 
                 text-[#363636]
                 whitespace-nowrap
-              "
+
+                ${
+                  mobileDragging
+                    ? "transition-none"
+                    : "transition-opacity duration-300"
+                }
+              `}
+              style={{
+                opacity: rightTextOpacity,
+              }}
             >
               {"<coder>"}
             </h1>
@@ -268,8 +435,9 @@ export default function HeroTransition() {
         </div>
 
         {/* =========================================================
-            TABLET + DESKTOP — EXISTING INTERACTIVE HERO
+            TABLET + DESKTOP — INTERACTIVE HERO
         ========================================================= */}
+
         <div className="hidden md:block h-full">
           <div className="absolute inset-0 z-0 pointer-events-none">
             <div
@@ -277,14 +445,19 @@ export default function HeroTransition() {
                 absolute
                 bottom-0
                 left-1/2
+
                 h-full
+
                 w-[1000px]
                 lg:w-[1300px]
+
                 -translate-x-1/2
+
                 overflow-visible
               "
             >
               {/* LEFT BACKGROUND */}
+
               <div
                 className="absolute inset-0 z-10 overflow-visible"
                 style={{
@@ -296,8 +469,10 @@ export default function HeroTransition() {
                   alt=""
                   className="
                     absolute
+
                     bottom-[-35px]
                     left-[70px]
+
                     w-[430px]
                     max-w-none
 
@@ -312,6 +487,7 @@ export default function HeroTransition() {
               </div>
 
               {/* RIGHT BACKGROUND */}
+
               <div
                 className="absolute inset-0 z-10 overflow-visible"
                 style={{
@@ -323,8 +499,10 @@ export default function HeroTransition() {
                   alt=""
                   className="
                     absolute
+
                     bottom-[-30px]
                     right-[30px]
+
                     w-[500px]
                     max-w-none
 
@@ -339,6 +517,7 @@ export default function HeroTransition() {
               </div>
 
               {/* LEFT PERSON */}
+
               <div
                 className="absolute inset-0 z-20 overflow-visible"
                 style={{
@@ -350,8 +529,10 @@ export default function HeroTransition() {
                   alt="Researcher"
                   className="
                     absolute
+
                     bottom-[-25px]
                     left-1/2
+
                     w-[650px]
                     max-w-none
 
@@ -365,6 +546,7 @@ export default function HeroTransition() {
               </div>
 
               {/* RIGHT PERSON */}
+
               <div
                 className="absolute inset-0 z-20 overflow-visible"
                 style={{
@@ -376,8 +558,10 @@ export default function HeroTransition() {
                   alt="Coder"
                   className="
                     absolute
+
                     bottom-[-25px]
                     left-1/2
+
                     w-[650px]
                     max-w-none
 
@@ -392,43 +576,55 @@ export default function HeroTransition() {
             </div>
           </div>
 
-          {/* DESKTOP TEXT */}
+          {/* =====================================================
+              DESKTOP TEXT
+          ===================================================== */}
+
           <div
             className="
               relative
               z-40
+
               grid
               grid-cols-[1fr_440px_1fr]
               lg:grid-cols-[1fr_620px_1fr]
 
               h-full
+
               max-w-[1280px]
               mx-auto
+
               px-6
               pt-10
               lg:pt-14
             "
           >
             {/* LEFT */}
+
             <div
               className="
                 flex
                 flex-col
                 justify-center
                 items-start
+
                 transition-opacity
                 duration-300
               "
-              style={{ opacity: leftTextOpacity }}
+              style={{
+                opacity: leftTextOpacity,
+              }}
             >
               <h1
                 className="
                   text-[40px]
                   lg:text-[54px]
                   xl:text-[60px]
+
                   font-bold
                   leading-none
                   tracking-[-0.045em]
+
                   text-[#3b3b3b]
                   whitespace-nowrap
                 "
@@ -439,11 +635,15 @@ export default function HeroTransition() {
               <p
                 className="
                   mt-4
+
                   max-w-[280px]
                   lg:max-w-[380px]
+
                   text-[14px]
                   lg:text-[17px]
+
                   leading-[1.55]
+
                   text-[#8a8a8a]
                 "
               >
@@ -454,27 +654,34 @@ export default function HeroTransition() {
             <div />
 
             {/* RIGHT */}
+
             <div
               className="
                 flex
                 flex-col
                 justify-center
                 items-end
+
                 transition-opacity
                 duration-300
               "
-              style={{ opacity: rightTextOpacity }}
+              style={{
+                opacity: rightTextOpacity,
+              }}
             >
               <h1
                 className="
                   text-[40px]
                   lg:text-[54px]
                   xl:text-[60px]
+
                   font-bold
                   leading-none
                   tracking-[-0.045em]
+
                   text-right
                   text-[#3b3b3b]
+
                   whitespace-nowrap
                 "
               >
@@ -484,11 +691,15 @@ export default function HeroTransition() {
               <p
                 className="
                   mt-4
+
                   max-w-[270px]
                   lg:max-w-[350px]
+
                   text-[14px]
                   lg:text-[17px]
+
                   leading-[1.55]
+
                   text-right
                   text-[#8a8a8a]
                 "
@@ -504,16 +715,21 @@ export default function HeroTransition() {
       {/* =========================================================
           CURRENTLY EXPLORING
       ========================================================= */}
+
       <section
         className="
           bg-[#f7f7f7]
+
           border-y
           border-gray-200
+
           px-4
           sm:px-6
           lg:px-8
+
           pt-8
           sm:pt-12
+
           pb-[105px]
           sm:pb-[110px]
           md:pb-20
@@ -522,13 +738,16 @@ export default function HeroTransition() {
       >
         <div className="max-w-[1280px] mx-auto">
           {/* TITLE */}
+
           <div
             className="
               flex
               items-center
+
               gap-3
               sm:gap-6
               lg:gap-10
+
               mb-8
               sm:mb-10
               lg:mb-12
@@ -542,11 +761,14 @@ export default function HeroTransition() {
                 sm:text-[13px]
                 md:text-[15px]
                 lg:text-[18px]
+
                 tracking-[0.18em]
                 sm:tracking-[0.3em]
                 lg:tracking-[0.45em]
+
                 font-bold
                 text-gray-600
+
                 whitespace-nowrap
               "
             >
@@ -556,16 +778,21 @@ export default function HeroTransition() {
             <div className="h-px bg-gray-300 flex-1" />
           </div>
 
-          {/* CARDS */}
+          {/* =====================================================
+              CARDS
+          ===================================================== */}
+
           <div
             className="
               grid
               grid-cols-1
               md:grid-cols-2
               lg:grid-cols-3
+
               gap-5
               sm:gap-6
               lg:gap-8
+
               items-stretch
             "
           >
@@ -578,11 +805,14 @@ export default function HeroTransition() {
                   className="
                     group
                     relative
+
                     h-[285px]
                     sm:h-[310px]
                     md:h-[320px]
                     lg:h-[330px]
+
                     cursor-pointer
+
                     [perspective:1200px]
                   "
                   onClick={() => handleCardFlip(index)}
@@ -590,11 +820,13 @@ export default function HeroTransition() {
                   <div
                     className={`
                       relative
+
                       h-full
                       w-full
 
                       transition-transform
                       duration-700
+
                       ease-[cubic-bezier(0.16,1,0.3,1)]
 
                       [transform-style:preserve-3d]
@@ -609,21 +841,29 @@ export default function HeroTransition() {
                     `}
                   >
                     {/* FRONT */}
+
                     <div
                       className="
                         absolute
                         inset-0
+
                         bg-white
+
                         rounded-[18px]
                         sm:rounded-2xl
+
                         border
                         border-gray-200
+
                         shadow-[0_4px_15px_rgba(0,0,0,0.07)]
+
                         p-5
                         sm:p-6
                         lg:p-8
+
                         flex
                         flex-col
+
                         [backface-visibility:hidden]
                       "
                     >
@@ -631,8 +871,10 @@ export default function HeroTransition() {
                         className="
                           flex
                           items-center
+
                           gap-3
                           sm:gap-4
+
                           mb-5
                           sm:mb-7
                           lg:mb-9
@@ -642,17 +884,24 @@ export default function HeroTransition() {
                           className="
                             w-11
                             h-11
+
                             sm:w-12
                             sm:h-12
+
                             lg:w-14
                             lg:h-14
+
                             shrink-0
+
                             rounded-xl
                             sm:rounded-2xl
+
                             bg-gray-100
+
                             flex
                             items-center
                             justify-center
+
                             text-[22px]
                             sm:text-2xl
                             lg:text-3xl
@@ -666,10 +915,13 @@ export default function HeroTransition() {
                             text-[10px]
                             sm:text-[11px]
                             lg:text-xs
+
                             font-bold
+
                             tracking-[0.18em]
                             sm:tracking-[0.22em]
                             lg:tracking-[0.25em]
+
                             text-gray-500
                           "
                         >
@@ -682,9 +934,13 @@ export default function HeroTransition() {
                           text-[19px]
                           sm:text-[21px]
                           lg:text-2xl
+
                           font-black
+
                           leading-[1.25]
+
                           text-gray-900
+
                           mb-4
                           lg:mb-5
                         "
@@ -697,7 +953,9 @@ export default function HeroTransition() {
                           text-[14px]
                           sm:text-[15px]
                           lg:text-[17px]
+
                           leading-[1.65]
+
                           text-gray-600
                         "
                       >
@@ -708,10 +966,14 @@ export default function HeroTransition() {
                         className="
                           mt-auto
                           pt-5
+
                           lg:hidden
+
                           text-[10px]
                           font-bold
+
                           tracking-[0.14em]
+
                           text-gray-400
                         "
                       >
@@ -720,22 +982,30 @@ export default function HeroTransition() {
                     </div>
 
                     {/* BACK */}
+
                     <div
                       className="
                         absolute
                         inset-0
+
                         bg-white
+
                         rounded-[18px]
                         sm:rounded-2xl
+
                         border
                         border-gray-200
+
                         shadow-xl
+
                         p-5
                         sm:p-6
                         lg:p-8
+
                         flex
                         flex-col
                         justify-center
+
                         [backface-visibility:hidden]
                         [transform:rotateY(180deg)]
                       "
@@ -745,9 +1015,13 @@ export default function HeroTransition() {
                           className="
                             text-[10px]
                             sm:text-[11px]
+
                             font-bold
+
                             tracking-[0.22em]
+
                             text-gray-400
+
                             mb-4
                           "
                         >
@@ -759,9 +1033,13 @@ export default function HeroTransition() {
                             text-[24px]
                             sm:text-[27px]
                             lg:text-3xl
+
                             font-black
+
                             leading-[1.15]
+
                             text-gray-900
+
                             mb-5
                           "
                         >
@@ -773,7 +1051,9 @@ export default function HeroTransition() {
                             text-[14px]
                             sm:text-[15px]
                             lg:text-[17px]
+
                             leading-[1.7]
+
                             text-gray-600
                           "
                         >
@@ -790,10 +1070,14 @@ export default function HeroTransition() {
                             onClick={(e) => e.stopPropagation()}
                             className="
                               inline-flex
+
                               text-[15px]
                               lg:text-[17px]
+
                               font-semibold
+
                               text-gray-900
+
                               underline
                               underline-offset-4
                             "
@@ -815,10 +1099,14 @@ export default function HeroTransition() {
                         <div
                           className="
                             lg:hidden
+
                             mt-5
+
                             text-[11px]
                             font-bold
+
                             tracking-[0.12em]
+
                             text-gray-400
                           "
                         >
