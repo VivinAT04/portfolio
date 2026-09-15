@@ -16,6 +16,7 @@ export default function Contact() {
 
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [showContactHero, setShowContactHero] = useState(false);
 
   useEffect(() => {
@@ -43,6 +44,24 @@ export default function Contact() {
   const sendEmail = async (e) => {
     e.preventDefault();
 
+    const form = e.currentTarget;
+    const email = form.elements.email.value.trim();
+
+    // Requires:
+    // text + @ + domain + extension
+    // Examples:
+    // name@gmail.com
+    // name@sheffield.ac.uk
+    // name@company.io
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+      setEmailError("Please enter a valid email address.");
+      setStatus("");
+      return;
+    }
+
+    setEmailError("");
     setSending(true);
     setStatus("");
 
@@ -57,6 +76,8 @@ export default function Contact() {
       );
 
       setStatus("success");
+      setEmailError("");
+
       formRef.current.reset();
     } catch (error) {
       console.error("EmailJS error:", error);
@@ -88,7 +109,6 @@ export default function Contact() {
           className="
             max-w-[1280px]
             mx-auto
-
             px-4
             sm:px-5
             md:px-6
@@ -98,10 +118,8 @@ export default function Contact() {
           <div
             className="
               relative
-
               min-h-0
               lg:min-h-[745px]
-
               pt-[96px]
               sm:pt-[105px]
               md:pt-[120px]
@@ -113,10 +131,8 @@ export default function Contact() {
               className={`
                 relative
                 z-20
-
                 lg:pt-[135px]
                 lg:ml-[-40px]
-
                 max-w-[610px]
 
                 transition-all
@@ -244,11 +260,9 @@ export default function Contact() {
                     group
                     flex
                     items-center
-
                     gap-[10px]
                     sm:gap-[14px]
                     lg:gap-[20px]
-
                     w-fit
                   "
                 >
@@ -266,6 +280,7 @@ export default function Contact() {
                       lg:w-[70px]
                       lg:h-[70px]
 
+                      shrink-0
                       rounded-full
                       bg-[#169bd5]
 
@@ -289,16 +304,19 @@ export default function Contact() {
                   </div>
 
                   <span
+                    style={{
+                      display: "inline-block",
+                      visibility: "visible",
+                      opacity: 1,
+                      color: "#169bd5",
+                    }}
                     className="
-                      hidden
-                      xs:inline
-
                       text-[14px]
                       sm:text-[16px]
                       lg:text-[20px]
 
                       font-[600]
-                      text-[#169bd5]
+                      whitespace-nowrap
                     "
                   >
                     LinkedIn
@@ -616,7 +634,9 @@ export default function Contact() {
           sm:pt-[50px]
           lg:pt-[58px]
 
-          pb-[80px] sm:pb-[96px] lg:pb-28
+          pb-[80px]
+          sm:pb-[96px]
+          lg:pb-28
 
           scroll-mt-[90px]
           md:scroll-mt-[120px]
@@ -657,6 +677,7 @@ export default function Contact() {
             <form
               ref={formRef}
               onSubmit={sendEmail}
+              noValidate
               className="
                 grid
                 grid-cols-1
@@ -671,6 +692,7 @@ export default function Contact() {
                 {/* NAME */}
                 <div>
                   <label
+                    htmlFor="contact-name"
                     className="
                       block
                       mb-[7px]
@@ -687,9 +709,11 @@ export default function Contact() {
                   </label>
 
                   <input
+                    id="contact-name"
                     type="text"
                     name="name"
                     required
+                    autoComplete="name"
                     className="
                       w-full
 
@@ -718,6 +742,7 @@ export default function Contact() {
                 {/* EMAIL */}
                 <div>
                   <label
+                    htmlFor="contact-email"
                     className="
                       block
                       mb-[7px]
@@ -734,10 +759,27 @@ export default function Contact() {
                   </label>
 
                   <input
-                    type="email"
+                    id="contact-email"
+                    type="text"
                     name="email"
                     required
-                    className="
+                    autoComplete="email"
+                    inputMode="email"
+                    placeholder="name@example.com"
+                    aria-invalid={emailError ? "true" : "false"}
+                    aria-describedby={
+                      emailError ? "contact-email-error" : undefined
+                    }
+                    onChange={() => {
+                      if (emailError) {
+                        setEmailError("");
+                      }
+
+                      if (status) {
+                        setStatus("");
+                      }
+                    }}
+                    className={`
                       w-full
 
                       h-[48px]
@@ -746,7 +788,11 @@ export default function Contact() {
                       rounded-[3px]
 
                       border
-                      border-[#ababab]
+                      ${
+                        emailError
+                          ? "border-[#f25555]"
+                          : "border-[#ababab]"
+                      }
 
                       bg-white
 
@@ -757,15 +803,42 @@ export default function Contact() {
 
                       outline-none
 
-                      focus:border-[#6f6f6f]
-                    "
+                      transition-colors
+                      duration-200
+
+                      ${
+                        emailError
+                          ? "focus:border-[#f25555]"
+                          : "focus:border-[#6f6f6f]"
+                      }
+                    `}
                   />
+
+                  {emailError && (
+                    <p
+                      id="contact-email-error"
+                      className="
+                        mt-[7px]
+
+                        text-[13px]
+                        sm:text-[14px]
+
+                        leading-[1.35]
+                        font-[400]
+
+                        text-[#f25555]
+                      "
+                    >
+                      Please enter a valid email address.
+                    </p>
+                  )}
                 </div>
               </div>
 
               {/* MESSAGE */}
               <div>
                 <label
+                  htmlFor="contact-message"
                   className="
                     block
                     mb-[7px]
@@ -782,6 +855,7 @@ export default function Contact() {
                 </label>
 
                 <textarea
+                  id="contact-message"
                   name="message"
                   required
                   rows={7}

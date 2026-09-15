@@ -18,18 +18,18 @@ const cards = [
     link: "https://modelcontextprotocol.io/docs/getting-started/intro",
     linkText: "Read official docs",
   },
-  {
-    icon: "🎯",
-    label: "CURRENT GOAL",
-    title: "MLH Global Hack Week 2026",
-    description:
-      "A global online event where developers complete challenges, build projects and connect with the MLH community.",
-    backTitle: "Hackathon Goal",
-    backText:
-      "I am preparing to build, learn quickly, collaborate with developers and add a strong project to my portfolio.",
-    link: "https://ghw.mlh.com/",
-    linkText: "Visit MLH",
-  },
+{
+  icon: "🎯",
+  label: "CURRENT GOAL",
+  title: "AWS Cloud Practitioner",
+  description:
+    "Building a strong foundation in AWS cloud concepts, core services, security, architecture, pricing and cloud operations while preparing for the AWS Certified Cloud Practitioner certification.",
+  backTitle: "Certification Goal",
+  backText:
+    "I am currently preparing for the AWS Certified Cloud Practitioner exam to strengthen my understanding of AWS and build a solid foundation for cloud and backend engineering.",
+  link: "https://aws.amazon.com/certification/certified-cloud-practitioner/",
+  linkText: "View AWS Certification",
+},
   {
     icon: "💡",
     label: "THOUGHT OF THE WEEK",

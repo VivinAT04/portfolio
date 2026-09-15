@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import bciImage from "../../assets-images/bci pic.jpg";
+import desiglovImage from "../../assets-images/desiglov.png";
 
 import zivoraImage from "../../assets-images/zivora.png";
 import zivoraLogo from "../../assets-images/zivora-logo.png";
@@ -11,20 +12,29 @@ import accessLogo from "../../assets-images/access-logo.png";
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
 
+  /* =====================================================
+     CURRENTLY BUILDING
+  ===================================================== */
+
   const currentProject = {
-    title: "BCI-Controlled Intelligent Wheelchair",
+    title: "Desiglov",
     description:
-      "A brain-computer interface system that uses EEG motor imagery signals and machine learning to control an intelligent wheelchair. The project explores EEG signal processing, feature extraction, classification, explainable AI, and autonomous navigation.",
-    github: "https://github.com/VivinAT04/bci-controlled-wheelchair",
-    image: bciImage,
+      "A modern fashion e-commerce platform designed to deliver a clean, elegant, and responsive shopping experience. The project focuses on product discovery, category-based browsing, storefront design, product management, and a scalable full-stack architecture.",
+    github: "https://github.com/VivinAT04/desiglov",
+    live: "https://desiglov.vercel.app",
+    image: desiglovImage,
   };
+
+  /* =====================================================
+     PROJECTS
+  ===================================================== */
 
   const projects = [
     {
       title: "BCI Wheelchair",
       year: "2026",
       description:
-        "A brain-computer interface system that uses EEG motor imagery signals and machine learning to control an intelligent wheelchair. The project covers EEG preprocessing, feature extraction, cross-session and cross-subject classification, explainable AI, representation learning, and intelligent wheelchair navigation simulation.",
+        "A brain-computer interface system that explores human–AI interaction by using EEG motor imagery signals and machine learning to control an intelligent wheelchair. The project covers EEG preprocessing, feature extraction, cross-session and cross-subject classification, explainable AI, representation learning, and intelligent wheelchair navigation simulation.",
       technologies: [
         "Python",
         "EEG",
@@ -46,6 +56,10 @@ export default function Projects() {
         {
           label: "GitHub",
           url: "https://github.com/VivinAT04/bci-controlled-wheelchair",
+        },
+        {
+          label: "Project Presentation",
+          url: "https://docs.google.com/presentation/d/1vn9u3AOkpG9oSQm6Lp1aM0MVGVMJ00gZ/edit?usp=share_link&ouid=108162586258863337556&rtpof=true&sd=true",
         },
       ],
     },
@@ -221,6 +235,14 @@ export default function Projects() {
             transform: translateX(60px);
           }
 
+          .current-buttons {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 32px;
+          }
+
           .current-btn {
             display: inline-flex;
             align-items: center;
@@ -239,8 +261,6 @@ export default function Projects() {
             background: #111;
             color: white;
 
-            margin-top: 32px;
-
             transition:
               background 0.25s ease,
               transform 0.25s ease;
@@ -249,6 +269,16 @@ export default function Projects() {
           .current-btn:hover {
             background: #333;
             transform: translateY(-2px);
+          }
+
+          .current-btn-secondary {
+            background: #efefef;
+            color: #111;
+            border: 1px solid #dedede;
+          }
+
+          .current-btn-secondary:hover {
+            background: #e2e2e2;
           }
 
           /* =====================================================
@@ -769,12 +799,15 @@ export default function Projects() {
               hyphens: none;
             }
 
-            .current-btn {
+            .current-buttons {
               width: 100%;
-
               margin-top: 24px;
+            }
 
-              padding: 13px 22px;
+            .current-btn {
+              flex: 1;
+              min-width: 130px;
+              padding: 13px 18px;
             }
 
             .current-preview {
@@ -915,6 +948,15 @@ export default function Projects() {
               font-size: 27px;
             }
 
+            .current-buttons {
+              flex-direction: column;
+              align-items: stretch;
+            }
+
+            .current-btn {
+              width: 100%;
+            }
+
             .current-preview {
               height: 270px;
             }
@@ -940,7 +982,7 @@ export default function Projects() {
 
       <main className="projects-container">
         {/* =====================================================
-            CURRENTLY BUILDING
+            CURRENTLY BUILDING — DESIGLOV
         ===================================================== */}
 
         <div className="current-grid">
@@ -960,14 +1002,25 @@ export default function Projects() {
               </p>
             </div>
 
-            <a
-              href={currentProject.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="current-btn"
-            >
-              GitHub
-            </a>
+            <div className="current-buttons">
+              <a
+                href={currentProject.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="current-btn"
+              >
+                GitHub
+              </a>
+
+              <a
+                href={currentProject.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="current-btn current-btn-secondary"
+              >
+                Live Website
+              </a>
+            </div>
           </div>
 
           <div className="current-preview">
@@ -1034,6 +1087,10 @@ export default function Projects() {
     </div>
   );
 }
+
+/* =====================================================
+   PROJECT MODAL
+===================================================== */
 
 function ProjectModal({ project, onClose }) {
   useEffect(() => {
