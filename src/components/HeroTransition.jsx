@@ -18,18 +18,19 @@ const cards = [
     link: "https://modelcontextprotocol.io/docs/getting-started/intro",
     linkText: "Read official docs",
   },
-  {
-    icon: "🎯",
-    label: "CURRENT GOAL",
-    title: "AWS Cloud Practitioner",
-    description:
-      "Building a strong foundation in AWS cloud concepts, core services, security, architecture, pricing and cloud operations while preparing for the AWS Certified Cloud Practitioner certification.",
-    backTitle: "Certification Goal",
-    backText:
-      "I am currently preparing for the AWS Certified Cloud Practitioner exam to strengthen my understanding of AWS and build a solid foundation for cloud and backend engineering.",
-    link: "https://aws.amazon.com/certification/certified-cloud-practitioner/",
-    linkText: "View AWS Certification",
-  },
+{
+  icon: "🎯",
+  label: "CURRENT GOAL",
+  title: "Certified Professional – Automation Developer Associate",
+  description:
+    "Building practical skills in robotic process automation, workflow design, automation development, debugging, testing, and deploying reliable automated business processes.",
+  backTitle: "Certification Goal",
+  backText:
+    "I am currently preparing for the Certified Professional – Automation Developer Associate certification to strengthen my RPA and automation development skills and build production-ready automation solutions.",
+  link: "YOUR_CERTIFICATION_LINK_HERE",
+  linkText: "View Certification",
+},
+
   {
     icon: "💡",
     label: "THOUGHT OF THE WEEK",
