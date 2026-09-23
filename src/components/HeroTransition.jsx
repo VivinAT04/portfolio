@@ -23,12 +23,10 @@ const cards = [
   label: "CURRENT GOAL",
   title: "Certified Professional – Automation Developer Associate",
   description:
-    "Building practical skills in robotic process automation, workflow design, automation development, debugging, testing, and deploying reliable automated business processes.",
-  backTitle: "Certification Goal",
+    "Currently preparing for this certification while building practical skills in RPA, workflow automation, testing and debugging.",
+  backTitle: "What I'm Working On",
   backText:
-    "I am currently preparing for the Certified Professional – Automation Developer Associate certification to strengthen my RPA and automation development skills and build production-ready automation solutions.",
-  link: "YOUR_CERTIFICATION_LINK_HERE",
-  linkText: "View Certification",
+    "Developing hands-on automation skills and preparing for the Automation Developer Associate certification.",
 },
 
   {
