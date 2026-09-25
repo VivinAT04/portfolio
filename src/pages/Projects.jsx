@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import bciImage from "../../assets-images/bci pic.jpg";
 import desiglovImage from "../../assets-images/desiglov.png";
+import desiglovLogo from "../assets/images/desiglov-logo.webp";
 
 import zivoraImage from "../../assets-images/zivora.png";
 import zivoraLogo from "../../assets-images/zivora-logo.png";
@@ -11,20 +12,7 @@ import accessLogo from "../../assets-images/access-logo.png";
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
-
-  /* =====================================================
-     CURRENTLY BUILDING
-  ===================================================== */
-
-  const currentProject = {
-    title: "Desiglov",
-    description:
-      "A modern fashion e-commerce platform designed to deliver a clean, elegant, and responsive shopping experience. The project focuses on product discovery, category-based browsing, storefront design, product management, and a scalable full-stack architecture.",
-    github: "https://github.com/VivinAT04/desiglov",
-    live: "https://desiglov.vercel.app",
-    image: desiglovImage,
-  };
-
+  const [projectIndex, setProjectIndex] = useState(0);
   /* =====================================================
      PROJECTS
   ===================================================== */
@@ -121,7 +109,58 @@ export default function Projects() {
         },
       ],
     },
+    {
+      title: "Desiglov",
+      year: "2026",
+      description:
+        "A modern full-stack fashion e-commerce platform designed to deliver a clean, elegant, and responsive shopping experience. Desiglov includes product discovery, category browsing, customer accounts, wishlist and cart functionality, size-level stock management, checkout, order management, delivery tracking, administration tools, email authentication, and online payment integration.",
+      technologies: [
+        "React",
+        "Vite",
+        "JavaScript",
+        "CSS",
+        "Node.js",
+        "Express",
+        "PostgreSQL",
+        "Supabase",
+        "Razorpay",
+        "Vercel",
+        "Full-Stack Development",
+      ],
+      cardImage: desiglovLogo,
+      modalImage: desiglovImage,
+      cardType: "desiglov",
+      links: [
+        {
+          label: "GitHub",
+          url: "https://github.com/VivinAT04/desiglov",
+        },
+        {
+          label: "Live Website",
+          url: "https://www.desiglov.com",
+        },
+      ],
+    },
+
   ];
+
+  const visibleProjects = Array.from(
+    { length: 3 },
+    (_, offset) =>
+      projects[(projectIndex + offset) % projects.length]
+  );
+
+  const previousProject = () => {
+    setProjectIndex((current) =>
+      current === 0 ? projects.length - 1 : current - 1
+    );
+  };
+
+  const nextProject = () => {
+    setProjectIndex(
+      (current) => (current + 1) % projects.length
+    );
+  };
 
   return (
     <div className="projects-page">
@@ -149,139 +188,6 @@ export default function Projects() {
           }
 
           /* =====================================================
-             CURRENT PROJECT
-          ===================================================== */
-
-          .current-grid {
-            display: grid;
-            grid-template-columns: 0.86fr 1.14fr;
-            gap: 24px;
-            align-items: stretch;
-
-            background: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            border-radius: 18px;
-
-            padding: 18px;
-            margin-bottom: 72px;
-
-            box-shadow: 0 12px 38px rgba(0, 0, 0, 0.055);
-          }
-
-          .current-card {
-            padding: 30px 20px 24px 45px;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-
-            min-height: 375px;
-          }
-
-          .current-status {
-            color: #555;
-            font-weight: 700;
-            margin: 0 0 18px;
-            font-size: 14px;
-          }
-
-          .current-dot {
-            display: inline-block;
-            width: 7px;
-            height: 7px;
-            background: #66d58a;
-            border-radius: 50%;
-            margin-left: 8px;
-          }
-
-          .current-title {
-            font-size: 40px;
-            margin: 0 0 24px;
-            line-height: 1.05;
-            letter-spacing: -1.5px;
-            max-width: 470px;
-          }
-
-          .current-description {
-            color: #5f6470;
-            font-size: 17px;
-            line-height: 1.65;
-            max-width: 470px;
-            margin: 0;
-            text-align: justify;
-            text-justify: inter-word;
-            hyphens: auto;
-          }
-
-          .current-preview {
-            height: 405px;
-            border-radius: 14px;
-            overflow: hidden;
-            background: #ffffff;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            padding: 2px;
-          }
-
-          .current-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            object-position: center;
-            display: block;
-            transform: translateX(60px);
-          }
-
-          .current-buttons {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 32px;
-          }
-
-          .current-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-
-            width: fit-content;
-
-            padding: 14px 26px;
-            border-radius: 999px;
-
-            text-decoration: none;
-
-            font-weight: 800;
-            font-size: 14px;
-
-            background: #111;
-            color: white;
-
-            transition:
-              background 0.25s ease,
-              transform 0.25s ease;
-          }
-
-          .current-btn:hover {
-            background: #333;
-            transform: translateY(-2px);
-          }
-
-          .current-btn-secondary {
-            background: #efefef;
-            color: #111;
-            border: 1px solid #dedede;
-          }
-
-          .current-btn-secondary:hover {
-            background: #e2e2e2;
-          }
-
-          /* =====================================================
              PROJECTS
           ===================================================== */
 
@@ -290,11 +196,109 @@ export default function Projects() {
             margin-bottom: 58px;
           }
 
+          .projects-carousel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            width: 100%;
+          }
+
+          .projects-window {
+            width: 956px;
+            overflow: hidden;
+            padding: 10px 8px 30px;
+          }
+
           .projects-track {
             display: grid;
             grid-template-columns: repeat(3, 300px);
             justify-content: center;
             gap: 28px;
+            animation: carouselEnter 0.32s ease;
+          }
+
+          @keyframes carouselEnter {
+            from {
+              opacity: 0;
+              transform: translateX(18px);
+            }
+
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+
+          .project-arrow {
+            width: 50px;
+            height: 50px;
+            flex: 0 0 50px;
+
+            border: 1px solid #dedede;
+            border-radius: 50%;
+
+            background: #ffffff;
+            color: #111;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 0 0 4px;
+
+            font-size: 34px;
+            font-weight: 300;
+            line-height: 1;
+
+            cursor: pointer;
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+            transition:
+              background 0.25s ease,
+              color 0.25s ease,
+              transform 0.25s ease,
+              box-shadow 0.25s ease;
+          }
+
+          .project-arrow:hover {
+            background: #111;
+            color: #fff;
+            transform: scale(1.06);
+
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+          }
+
+          .project-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 7px;
+            margin-top: 0;
+          }
+
+          .project-dot {
+            width: 7px;
+            height: 7px;
+
+            padding: 0;
+            border: 0;
+            border-radius: 999px;
+
+            background: #c8c8c8;
+
+            cursor: pointer;
+
+            transition:
+              width 0.25s ease,
+              background 0.25s ease;
+          }
+
+          .project-dot.active {
+            width: 24px;
+            background: #111;
           }
 
           .project-card {
@@ -444,6 +448,32 @@ export default function Projects() {
               rgba(0, 0, 0, 0.08) 34%,
               rgba(0, 0, 0, 0) 55%,
               rgba(0, 0, 0, 0) 100%
+            );
+          }
+
+
+          /* =====================================================
+             DESIGLOV
+          ===================================================== */
+
+          .project-card.desiglov-card {
+            background: #eee3d8;
+          }
+
+          .project-card.desiglov-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            padding: 0;
+          }
+
+          .project-card.desiglov-card .card-overlay {
+            background: linear-gradient(
+              180deg,
+              rgba(0, 0, 0, 0.5) 0%,
+              rgba(0, 0, 0, 0.1) 38%,
+              rgba(0, 0, 0, 0.05) 100%
             );
           }
 
@@ -675,14 +705,6 @@ export default function Projects() {
             .project-card {
               height: 365px;
             }
-
-            .current-card {
-              padding-left: 32px;
-            }
-
-            .current-preview img {
-              transform: translateX(25px);
-            }
           }
 
           /* =====================================================
@@ -696,32 +718,6 @@ export default function Projects() {
 
             .projects-container {
               width: min(100% - 40px, 760px);
-            }
-
-            .current-grid {
-              grid-template-columns: 1fr;
-              gap: 8px;
-
-              padding: 14px;
-
-              margin-bottom: 60px;
-            }
-
-            .current-card {
-              padding: 28px 24px;
-              min-height: auto;
-            }
-
-            .current-preview {
-              height: 420px;
-            }
-
-            .current-preview img {
-              transform: none;
-            }
-
-            .current-title {
-              font-size: 36px;
             }
 
             .projects-track {
@@ -765,54 +761,6 @@ export default function Projects() {
             .section-title {
               font-size: 28px;
               margin-bottom: 18px;
-            }
-
-            .current-grid {
-              border-radius: 15px;
-              padding: 10px;
-
-              margin-bottom: 48px;
-            }
-
-            .current-card {
-              padding: 20px 14px 18px;
-            }
-
-            .current-status {
-              margin-bottom: 14px;
-              font-size: 12px;
-            }
-
-            .current-title {
-              font-size: 30px;
-              line-height: 1.08;
-              letter-spacing: -1px;
-
-              margin-bottom: 18px;
-            }
-
-            .current-description {
-              font-size: 15px;
-              line-height: 1.65;
-
-              text-align: left;
-              hyphens: none;
-            }
-
-            .current-buttons {
-              width: 100%;
-              margin-top: 24px;
-            }
-
-            .current-btn {
-              flex: 1;
-              min-width: 130px;
-              padding: 13px 18px;
-            }
-
-            .current-preview {
-              height: 310px;
-              border-radius: 12px;
             }
 
             .projects-section {
@@ -944,23 +892,6 @@ export default function Projects() {
               padding-top: 96px;
             }
 
-            .current-title {
-              font-size: 27px;
-            }
-
-            .current-buttons {
-              flex-direction: column;
-              align-items: stretch;
-            }
-
-            .current-btn {
-              width: 100%;
-            }
-
-            .current-preview {
-              height: 270px;
-            }
-
             .project-card {
               height: 330px;
             }
@@ -977,105 +908,481 @@ export default function Projects() {
               font-size: 30px;
             }
           }
+
+
+          /* =====================================================
+             PROJECT CAROUSEL RESPONSIVE OVERRIDES
+          ===================================================== */
+
+          @media (max-width: 1200px) {
+            .projects-window {
+              width: 888px;
+            }
+
+            .projects-track {
+              grid-template-columns: repeat(3, 280px);
+              gap: 24px;
+            }
+
+            .project-arrow {
+              width: 44px;
+              height: 44px;
+              flex-basis: 44px;
+              font-size: 30px;
+            }
+          }
+
+          @media (max-width: 1050px) {
+            .projects-carousel {
+              gap: 10px;
+            }
+
+            .projects-window {
+              width: calc(100% - 108px);
+            }
+
+            .projects-track {
+              grid-template-columns: repeat(3, minmax(0, 1fr));
+              gap: 18px;
+            }
+          }
+
+          @media (max-width: 700px) {
+            .projects-carousel {
+              display: grid;
+              grid-template-columns: 40px minmax(0, 1fr) 40px;
+              gap: 8px;
+            }
+
+            .projects-window {
+              width: 100%;
+              padding: 8px 2px 24px;
+            }
+
+            .projects-track {
+              display: block;
+            }
+
+            .projects-track .project-card {
+              display: none;
+            }
+
+            .projects-track .project-card:first-child {
+              display: block;
+            }
+
+            .project-arrow {
+              width: 40px;
+              height: 40px;
+              flex-basis: 40px;
+              font-size: 28px;
+            }
+
+            .project-dots {
+              margin-top: 2px;
+            }
+          }
+
+
+          /* =====================================================
+             CURRENTLY BUILDING / NEXT IDEA
+          ===================================================== */
+
+          .next-project-section {
+            margin-top: 70px;
+            margin-bottom: 30px;
+          }
+
+          .next-project-card {
+            position: relative;
+            overflow: hidden;
+
+            min-height: 300px;
+
+            padding: 54px 58px;
+
+            background: #111111;
+            color: #ffffff;
+
+            border-radius: 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 60px;
+
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+          }
+
+          .next-project-content {
+            position: relative;
+            z-index: 2;
+
+            max-width: 690px;
+          }
+
+          .next-project-label {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            margin: 0 0 24px;
+
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+
+            color: rgba(255, 255, 255, 0.58);
+          }
+
+          .next-project-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+            background: #66d58a;
+
+            box-shadow: 0 0 0 5px rgba(102, 213, 138, 0.1);
+          }
+
+          .next-project-title {
+            margin: 0 0 20px;
+
+            max-width: 620px;
+
+            font-size: 42px;
+            line-height: 1.08;
+            letter-spacing: -1.7px;
+            font-weight: 700;
+          }
+
+          .next-project-text {
+            margin: 0;
+
+            max-width: 620px;
+
+            font-size: 17px;
+            line-height: 1.7;
+
+            color: rgba(255, 255, 255, 0.67);
+          }
+
+          .next-project-action {
+            position: relative;
+            z-index: 2;
+
+            flex: 0 0 auto;
+          }
+
+          .next-project-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+
+            min-width: 175px;
+
+            padding: 16px 23px;
+
+            border-radius: 999px;
+
+            background: #ffffff;
+            color: #111111;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 800;
+
+            transition:
+              transform 0.25s ease,
+              background 0.25s ease;
+          }
+
+          .next-project-button:hover {
+            transform: translateY(-3px);
+            background: #eeeeee;
+          }
+
+          .next-project-arrow {
+            font-size: 20px;
+            line-height: 1;
+            transition: transform 0.25s ease;
+          }
+
+          .next-project-button:hover .next-project-arrow {
+            transform: translateX(4px);
+          }
+
+          .next-project-decoration {
+            position: absolute;
+
+            width: 310px;
+            height: 310px;
+
+            right: -90px;
+            top: -130px;
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+
+            pointer-events: none;
+          }
+
+          .next-project-decoration::before,
+          .next-project-decoration::after {
+            content: "";
+            position: absolute;
+
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+          }
+
+          .next-project-decoration::before {
+            inset: 45px;
+          }
+
+          .next-project-decoration::after {
+            inset: 90px;
+          }
+
+          @media (max-width: 800px) {
+            .next-project-section {
+              margin-top: 52px;
+            }
+
+            .next-project-card {
+              min-height: auto;
+
+              padding: 38px 32px;
+
+              flex-direction: column;
+              align-items: flex-start;
+
+              gap: 32px;
+
+              border-radius: 20px;
+            }
+
+            .next-project-title {
+              font-size: 34px;
+            }
+
+            .next-project-action {
+              width: 100%;
+            }
+
+            .next-project-button {
+              width: 100%;
+              box-sizing: border-box;
+            }
+          }
+
+          @media (max-width: 500px) {
+            .next-project-section {
+              margin-top: 42px;
+            }
+
+            .next-project-card {
+              padding: 30px 22px;
+              border-radius: 18px;
+            }
+
+            .next-project-label {
+              margin-bottom: 18px;
+              font-size: 11px;
+            }
+
+            .next-project-title {
+              font-size: 29px;
+              letter-spacing: -1px;
+            }
+
+            .next-project-text {
+              font-size: 15px;
+              line-height: 1.65;
+            }
+          }
+
         `}
       </style>
 
       <main className="projects-container">
-        {/* =====================================================
-            CURRENTLY BUILDING — DESIGLOV
-        ===================================================== */}
-
-        <div className="current-grid">
-          <div className="current-card">
-            <div>
-              <p className="current-status">
-                Currently Building
-                <span className="current-dot" />
-              </p>
-
-              <h1 className="current-title">
-                {currentProject.title}
-              </h1>
-
-              <p className="current-description">
-                {currentProject.description}
-              </p>
-            </div>
-
-            <div className="current-buttons">
-              <a
-                href={currentProject.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="current-btn"
-              >
-                GitHub
-              </a>
-
-              <a
-                href={currentProject.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="current-btn current-btn-secondary"
-              >
-                Live Website
-              </a>
-            </div>
-          </div>
-
-          <div className="current-preview">
-            <img
-              src={currentProject.image}
-              alt={currentProject.title}
-            />
-          </div>
-        </div>
 
         {/* =====================================================
             PROJECTS
         ===================================================== */}
+
+        <section className="next-project-section">
+          <div className="next-project-card">
+
+            <div className="next-project-decoration" />
+
+            <div className="next-project-content">
+
+              <p className="next-project-label">
+                <span className="next-project-dot" />
+                What's Next
+              </p>
+
+              <h2 className="next-project-title">
+                Thinking about what comes next.
+              </h2>
+
+              <p className="next-project-text">
+                I’m exploring new ideas and looking for interesting
+                problems worth solving. Have something in mind?
+                I’d love to hear about it.
+              </p>
+
+            </div>
+
+            <div className="next-project-action">
+              <a
+                href="/contact"
+                className="next-project-button"
+              >
+                Share an idea
+                <span className="next-project-arrow">
+                  →
+                </span>
+              </a>
+            </div>
+
+          </div>
+        </section>
+
+        {/*
+        ============================================================
+        CURRENTLY BUILDING — FUTURE PROJECT
+        ============================================================
+
+        Keep this commented until a new project is actively
+        being developed.
+
+        When a new project starts, this section can be enabled
+        and placed between "What's Next" and "Projects".
+
+        Example:
+
+        <section className="current-building-section">
+          <p>Currently Building</p>
+
+          <h2>
+            PROJECT NAME
+          </h2>
+
+          <p>
+            Short description of the project currently being built.
+          </p>
+
+          <a
+            href="GITHUB_URL"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Follow the build
+          </a>
+        </section>
+
+        ============================================================
+        */}
+
 
         <section className="projects-section">
           <h2 className="section-title">
             Projects
           </h2>
 
-          <div className="projects-track">
-            {projects.map((project) => {
-              let cardClass = "project-card";
+          <div className="projects-carousel">
 
-              if (project.cardType === "zivora") {
-                cardClass += " zivora-card";
-              }
+            <button
+              className="project-arrow"
+              onClick={previousProject}
+              type="button"
+              aria-label="Previous project"
+            >
+              ‹
+            </button>
 
-              if (project.cardType === "logo") {
-                cardClass += " logo-card";
-              }
+            <div className="projects-window">
 
-              return (
-                <button
-                  key={project.title}
-                  className={cardClass}
-                  onClick={() => setSelectedProject(project)}
-                  type="button"
-                >
-                  <img
-                    src={project.cardImage}
-                    alt={project.title}
-                  />
+              <div
+                className="projects-track"
+                key={projectIndex}
+              >
+                {visibleProjects.map((project, position) => {
+                  let cardClass = "project-card";
 
-                  <div className="card-overlay" />
+                  if (project.cardType === "zivora") {
+                    cardClass += " zivora-card";
+                  }
 
-                  <div className="card-content">
-                    <h3 className="card-title">
-                      {project.title}
-                    </h3>
-                  </div>
-                </button>
-              );
-            })}
+                  if (project.cardType === "logo") {
+                    cardClass += " logo-card";
+                  }
+
+                  if (project.cardType === "desiglov") {
+                    cardClass += " desiglov-card";
+                  }
+
+                  return (
+                    <button
+                      key={`${project.title}-${position}`}
+                      className={cardClass}
+                      onClick={() =>
+                        setSelectedProject(project)
+                      }
+                      type="button"
+                    >
+                      <img
+                        src={project.cardImage}
+                        alt={project.title}
+                      />
+
+                      <div className="card-overlay" />
+
+                      <div className="card-content">
+                        <h3 className="card-title">
+                          {project.title}
+                        </h3>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+            </div>
+
+            <button
+              className="project-arrow"
+              onClick={nextProject}
+              type="button"
+              aria-label="Next project"
+            >
+              ›
+            </button>
+
           </div>
+
+          <div className="project-dots">
+            {projects.map((project, index) => (
+              <button
+                key={project.title}
+                type="button"
+                className={`project-dot ${
+                  index === projectIndex ? "active" : ""
+                }`}
+                onClick={() => setProjectIndex(index)}
+                aria-label={`Start with ${project.title}`}
+              />
+            ))}
+          </div>
+
         </section>
+
       </main>
 
       {selectedProject && (

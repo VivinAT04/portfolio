@@ -10,3 +10,230 @@ body {
   color: #111827;
   font-family: Inter, sans-serif;
 }
+/* =========================================================
+   DESIGLOV PROJECT CARD — POLISHED WEBSITE PREVIEW
+   ========================================================= */
+
+.project-card.desiglov-card {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      #eee4da 0%,
+      #f6eee7 55%,
+      #e9ddd1 100%
+    ) !important;
+}
+
+/* Remove the normal full-card image treatment */
+.project-card.desiglov-card > img {
+  position: absolute !important;
+
+  width: 82% !important;
+  height: 76% !important;
+
+  left: 50% !important;
+  top: 57% !important;
+
+  transform: translate(-50%, -50%) !important;
+
+  object-fit: cover !important;
+  object-position: top center !important;
+
+  border-radius: 12px !important;
+
+  padding: 0 !important;
+
+  background: #f4ebe3 !important;
+
+  box-shadow:
+    0 20px 45px rgba(56, 39, 27, 0.18),
+    0 3px 10px rgba(56, 39, 27, 0.08) !important;
+
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease !important;
+}
+
+/* Softer overlay — only enough for title readability */
+.project-card.desiglov-card .card-overlay {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(20, 15, 12, 0.42) 0%,
+      rgba(20, 15, 12, 0.06) 28%,
+      transparent 48%
+    ) !important;
+
+  z-index: 2;
+}
+
+/* Keep title above everything */
+.project-card.desiglov-card .card-content {
+  z-index: 3;
+}
+
+/* Cleaner Desiglov title */
+.project-card.desiglov-card .card-title {
+  color: #ffffff !important;
+
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.28);
+
+  letter-spacing: -0.7px;
+}
+
+/* Small browser-style top decoration */
+.project-card.desiglov-card::before {
+  content: "●  ●  ●";
+
+  position: absolute;
+
+  top: 23%;
+  left: 13%;
+
+  z-index: 4;
+
+  color: rgba(62, 43, 31, 0.34);
+
+  font-size: 7px;
+  letter-spacing: 3px;
+
+  pointer-events: none;
+}
+
+/* Subtle editorial glow */
+.project-card.desiglov-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  right: -75px;
+  bottom: -70px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.32);
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+/* Hover */
+.project-card.desiglov-card:hover > img {
+  transform:
+    translate(-50%, -50%)
+    scale(1.035) !important;
+
+  box-shadow:
+    0 26px 55px rgba(56, 39, 27, 0.23),
+    0 5px 14px rgba(56, 39, 27, 0.1) !important;
+}
+
+
+/* MOBILE */
+@media (max-width: 700px) {
+
+  .project-card.desiglov-card > img {
+    width: 84% !important;
+    height: 74% !important;
+
+    top: 58% !important;
+  }
+
+  .project-card.desiglov-card::before {
+    top: 24%;
+  }
+}
+
+
+/* =========================================================
+   DESIGLOV FINAL CARD COVER
+   ========================================================= */
+
+.project-card.desiglov-card {
+  background: #f4eee8 !important;
+}
+
+.project-card.desiglov-card > img {
+  position: absolute !important;
+
+  width: 68% !important;
+  height: 68% !important;
+
+  left: 50% !important;
+  top: 56% !important;
+
+  transform: translate(-50%, -50%) !important;
+
+  object-fit: contain !important;
+  object-position: center !important;
+
+  padding: 0 !important;
+
+  background: transparent !important;
+
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+
+  transition:
+    transform 0.4s ease !important;
+}
+
+.project-card.desiglov-card:hover > img {
+  transform:
+    translate(-50%, -50%)
+    scale(1.05) !important;
+}
+
+.project-card.desiglov-card .card-overlay {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.48) 0%,
+      rgba(0, 0, 0, 0.1) 25%,
+      rgba(0, 0, 0, 0) 48%,
+      rgba(0, 0, 0, 0) 100%
+    ) !important;
+}
+
+/* Remove previous fake browser dots / decoration */
+.project-card.desiglov-card::before,
+.project-card.desiglov-card::after {
+  display: none !important;
+}
+
+@media (max-width: 700px) {
+  .project-card.desiglov-card > img {
+    width: 72% !important;
+    height: 72% !important;
+  }
+}
+
+
+/* DESIGLOV — WHITE PROJECT CARD */
+.project-card.desiglov-card {
+  background: #ffffff !important;
+}
+
+.project-card.desiglov-card > img {
+  background: transparent !important;
+}
+
+/* Keep only a light top gradient so the white title is readable */
+.project-card.desiglov-card .card-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.42) 0%,
+    rgba(0, 0, 0, 0.08) 22%,
+    rgba(0, 0, 0, 0) 42%
+  ) !important;
+}
+
