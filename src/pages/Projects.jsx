@@ -10,6 +10,9 @@ import zivoraLogo from "../../assets-images/zivora-logo.png";
 import accessImage from "../../assets-images/access.png";
 import accessLogo from "../../assets-images/access-logo.png";
 
+import appaImage from "../../assets-images/appa-front.png";
+import appaLogo from "../../assets-images/appa-logo.png";
+
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [projectIndex, setProjectIndex] = useState(0);
@@ -48,6 +51,40 @@ export default function Projects() {
         {
           label: "Project Presentation",
           url: "https://docs.google.com/presentation/d/1vn9u3AOkpG9oSQm6Lp1aM0MVGVMJ00gZ/edit?usp=share_link&ouid=108162586258863337556&rtpof=true&sd=true",
+        },
+      ],
+    },
+
+    {
+      title: "APPA Finance",
+      year: "2026",
+      description:
+        "An enterprise-style Accounts Payable automation platform combining a full-stack finance application with UiPath RPA. APPA automates invoice intake, supplier and purchase-order resolution, invoice-to-PO matching, approval routing, exception management, automation monitoring, and audit logging while keeping financial decisions separate from robot execution state.",
+      technologies: [
+        "UiPath",
+        "Orchestrator",
+        "Document Understanding",
+        "React",
+        "Vite",
+        "Node.js",
+        "Express",
+        "PostgreSQL",
+        "Supabase",
+        "REST API",
+        "JWT",
+        "Vercel",
+      ],
+      cardImage: appaLogo,
+      modalImage: appaImage,
+      cardType: "appa",
+      links: [
+        {
+          label: "GitHub",
+          url: "https://github.com/VivinAT04/appa-finance-automation",
+        },
+        {
+          label: "Live Website",
+          url: "https://appafinance.com",
         },
       ],
     },
@@ -375,6 +412,43 @@ export default function Projects() {
             letter-spacing: -1px;
             color: #ffffff;
           }
+
+          /* =====================================================
+             APPA FINANCE
+          ===================================================== */
+
+          .project-card.appa-card {
+            background: #ffffff;
+          }
+
+          .project-card.appa-card img {
+            position: absolute;
+            width: 60%;
+            height: auto;
+            max-height: 180px;
+
+            left: 50%;
+            top: 55%;
+
+            transform: translate(-50%, -50%);
+            object-fit: contain;
+            background: transparent;
+          }
+
+          .project-card.appa-card:hover img {
+            transform: translate(-50%, -50%) scale(1.05);
+          }
+
+          .project-card.appa-card .card-overlay {
+            background: linear-gradient(
+              180deg,
+              rgba(0, 0, 0, 0.50) 0%,
+              rgba(0, 0, 0, 0.10) 28%,
+              rgba(255, 255, 255, 0) 48%,
+              rgba(255, 255, 255, 0) 100%
+            );
+          }
+
 
           /* =====================================================
              ZIVORA
@@ -1318,6 +1392,10 @@ export default function Projects() {
 
                   if (project.cardType === "zivora") {
                     cardClass += " zivora-card";
+                  }
+
+                  if (project.cardType === "appa") {
+                    cardClass += " appa-card";
                   }
 
                   if (project.cardType === "logo") {
